@@ -5,6 +5,7 @@ import NewReleasesSection from '../components/sections/NewReleasesSection';
 import EbookAccessSection from '../components/sections/EbookAccessSection';
 import NewsletterSection from '../components/sections/NewsletterSection';
 import FaqSection from '../components/sections/FaqSection';
+import RandomBookSection from '../components/sections/RandomBookSection';
 
 const Home: React.FC = () => {
   return (
@@ -12,10 +13,10 @@ const Home: React.FC = () => {
       <HeroSection />
       <CategoriesSection />
       <NewReleasesSection />
+      <RandomBookSection />
       <EbookAccessSection />
       <FaqSection />
       <NewsletterSection />
-      
     </div>
   );
 };

@@ -1,0 +1,36 @@
+.barra-superior {
+    width: 100%;
+    background: rgb(23, 10, 105);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 32px;
+    font-size: 0.95rem;
+    position: sticky;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+}
+
+.bs-telefono {
+    font-weight: 500;
+}
+
+.bs-redes a {
+    margin-left: 16px;
+    display: inline-block;
+    color: white;
+}
+
+.bs-redes img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    transition: filter 0.2s;
+}
+
+.bs-redes img:hover {
+    filter: grayscale(0);
+}

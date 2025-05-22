@@ -1,39 +1,5 @@
 import React from 'react';
-
-interface BookCardProps {
-  title: string;
-  image: string;
-  rating: number;
-}
-
-const BookCard: React.FC<BookCardProps> = ({ title, image, rating }) => {
-  return (
-    <div className="book-card">
-      <div className="relative group">
-        <div className="w-full aspect-[3/4] overflow-hidden rounded-lg shadow-md">
-          <img
-            src={image}
-            alt={title}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-          />
-        </div>
-        <h3 className="mt-4 text-lg font-semibold text-gray-900 text-center">
-          {title}
-        </h3>
-        <div className="flex justify-center space-x-1 mt-2">
-          {[...Array(5)].map((_, i) => (
-            <span 
-              key={i} 
-              className={`text-xl ${i < rating ? "text-yellow-400" : "text-gray-300"}`}
-            >
-              ★
-            </span>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
+import BookCard from '../ui/BookCard';
 
 const NewReleasesSection: React.FC = () => {
   const books = [
@@ -44,33 +10,27 @@ const NewReleasesSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-12 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-3">
             New Release Books
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-600 max-w-xl mx-auto text-sm">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit
           </p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 max-w-4xl mx-auto">
           {books.map((book, index) => (
             <BookCard key={index} {...book} />
           ))}
         </div>
         
-        <div className="flex justify-center space-x-2 mb-8">
-          <button className="w-2 h-2 rounded-full bg-coral-500"></button>
-          <button className="w-2 h-2 rounded-full bg-gray-300"></button>
-          <button className="w-2 h-2 rounded-full bg-gray-300"></button>
-        </div>
-        
         <div className="text-center">
-          <a href="#" className="inline-flex items-center text-coral-500 hover:text-coral-600 font-medium">
+          <a href="#" className="inline-flex items-center text-coral-500 hover:text-coral-600 font-medium text-sm">
             View All Products
-            <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
             </svg>
           </a>

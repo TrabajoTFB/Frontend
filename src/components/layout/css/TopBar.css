@@ -1,4 +1,4 @@
-.barra-superior {
+.top-bar {
     width: 100%;
     background: rgb(23, 10, 105);
     color: white;
@@ -14,23 +14,23 @@
     box-sizing: border-box;
 }
 
-.bs-telefono {
+.bs-tlf {
     font-weight: 500;
 }
 
-.bs-redes a {
+.bs-webs a {
     margin-left: 16px;
     display: inline-block;
     color: white;
 }
 
-.bs-redes img {
+.bs-webs img {
     width: 20px;
     height: 20px;
     vertical-align: middle;
     transition: filter 0.2s;
 }
 
-.bs-redes img:hover {
+.bs-webs img:hover {
     filter: grayscale(0);
 }

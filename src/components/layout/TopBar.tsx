@@ -1,11 +1,11 @@
 import React from "react";
-import "./BarraSuperior.css";
+import "./css/TopBar.css";
 
-const BarraSuperior: React.FC = () => {
+const TopBar: React.FC = () => {
     return (
-        <div className="barra-superior">
-            <div className="bs-telefono">📞 +34 600 123 456</div>
-            <div className="bs-redes">
+        <div className="top-bar">
+            <div className="bs-tlf">📞 +34 600 123 456</div>
+            <div className="bs-webs">
                 <a href="https://facebook.com" target="_blank">
                     <img src="/facebook.svg" alt="Facebook" />
                 </a>
@@ -23,4 +23,4 @@ const BarraSuperior: React.FC = () => {
     );
 };
 
-export default BarraSuperior;
+export default TopBar;

@@ -1,15 +1,15 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import BarraNavegacion from "./components/layout/BarraNavegacion"
-import BarraSuperior from './components/layout/BarraSuperior';
+import NavBar from "./components/layout/NavBar"
+import TopBar from './components/layout/TopBar';
 import './App.css';
 
 function App() {
   return (
     <BrowserRouter>
       <div className="min-h-screen bg-white">
-        <BarraSuperior />
-        <BarraNavegacion />
+        <TopBar />
+        <NavBar />
         <main>
           <Routes>
             <Route path="/" element={<Home />} />

@@ -7,13 +7,13 @@ const HeroSection: React.FC = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="w-full md:w-1/2 space-y-4">
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-              Ipsum Dolor Si
+              Give Books a Second Life
             </h1>
             <p className="text-gray-600 text-base max-w-xl">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac.
+              Join our sustainable reading community. Discover pre-loved books that not only save you money but also help protect our environment. Every book has a story, let's keep them circulating.
             </p>
             <button className="primary-button text-sm">
-              Read more
+              Explore Books
             </button>
           </div>
           

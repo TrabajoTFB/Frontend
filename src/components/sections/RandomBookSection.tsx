@@ -2,11 +2,11 @@ import React from 'react';
 
 const RandomBookSection: React.FC = () => {
   const featuredBook = {
-    title: "Birds gonna be happy",
-    author: "Timbur Hood",
+    title: "The Power of Sustainable Reading",
+    author: "Environmental Book Club",
     image: "/images/reading.png",
     rating: 4,
-    description: "Jump start your book reading by quickly check through the popular book categories. 1000+ books are published by different authors everyday. Buy your favourite books on TreeBooks Today."
+    description: "Discover how second-hand book trading not only saves trees but also builds a community of conscious readers. Each pre-loved book in our collection has its own story to tell and is waiting for its next chapter with you."
   };
 
   return (
@@ -24,7 +24,7 @@ const RandomBookSection: React.FC = () => {
               </div>
             </div>
             <div className="md:w-2/3 p-6">
-              <p className="text-sm text-gray-500 mb-2">Featured Book of the week</p>
+              <p className="text-sm text-gray-500 mb-2">Featured Book of the Week</p>
               <h3 className="text-xl font-bold text-gray-900 mb-2">{featuredBook.title}</h3>
               <p className="text-gray-600 mb-3 text-sm">By {featuredBook.author}</p>
               <div className="flex space-x-1 mb-4">
@@ -39,7 +39,7 @@ const RandomBookSection: React.FC = () => {
               </div>
               <p className="text-gray-600 mb-6 text-sm line-clamp-3">{featuredBook.description}</p>
               <button className="bg-coral-500 text-white px-4 py-1.5 text-sm rounded-md hover:bg-coral-600 transition-colors">
-                View more
+                Learn More
               </button>
             </div>
           </div>

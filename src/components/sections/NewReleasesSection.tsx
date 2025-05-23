@@ -14,10 +14,10 @@ const NewReleasesSection: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-3">
-            New Release Books
+            Recently Added Treasures
           </h2>
           <p className="text-gray-600 max-w-xl mx-auto text-sm">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit
+            Discover our latest additions of pre-loved books. Each one carries its own history and is ready for a new chapter with you.
           </p>
         </div>
         
@@ -29,7 +29,7 @@ const NewReleasesSection: React.FC = () => {
         
         <div className="text-center">
           <a href="#" className="inline-flex items-center text-coral-500 hover:text-coral-600 font-medium text-sm">
-            View All Products
+            Browse All Books
             <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
             </svg>

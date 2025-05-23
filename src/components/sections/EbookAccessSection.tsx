@@ -17,14 +17,13 @@ const EbookAccessSection: React.FC = () => {
           
           <div className="w-full md:w-1/2">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Access, Read, Practice & Engage with Digital Content (eBook)
+              Join Our Sustainable Reading Community
             </h2>
             <p className="text-gray-600 text-base mb-6">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet,
-              libero ipsum enim pharetra hac.
+              Create an account to start your sustainable reading journey. Buy and sell pre-loved books, track your environmental impact, and connect with fellow book lovers who care about our planet.
             </p>
             <button className="primary-button text-sm px-6 py-2">
-              Login
+              Join Now
             </button>
           </div>
         </div>

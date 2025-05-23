@@ -2,11 +2,11 @@ import React from 'react';
 
 const RandomBookSection: React.FC = () => {
   const featuredBook = {
-    title: "The Power of Sustainable Reading",
-    author: "Environmental Book Club",
+    title: "El Poder de la Lectura Sostenible",
+    author: "Club de Lectura Ecológica",
     image: "/images/reading.png",
     rating: 4,
-    description: "Discover how second-hand book trading not only saves trees but also builds a community of conscious readers. Each pre-loved book in our collection has its own story to tell and is waiting for its next chapter with you."
+    description: "Descubre cómo el intercambio de libros de segunda mano no solo salva árboles, sino que también construye una comunidad de lectores conscientes. Cada libro usado en nuestra colección tiene su propia historia que contar y espera su próximo capítulo contigo."
   };
 
   return (
@@ -24,9 +24,9 @@ const RandomBookSection: React.FC = () => {
               </div>
             </div>
             <div className="md:w-2/3 p-6">
-              <p className="text-sm text-gray-500 mb-2">Featured Book of the Week</p>
+              <p className="text-sm text-gray-500 mb-2">Libro Destacado de la Semana</p>
               <h3 className="text-xl font-bold text-gray-900 mb-2">{featuredBook.title}</h3>
-              <p className="text-gray-600 mb-3 text-sm">By {featuredBook.author}</p>
+              <p className="text-gray-600 mb-3 text-sm">Por {featuredBook.author}</p>
               <div className="flex space-x-1 mb-4">
                 {[...Array(5)].map((_, i) => (
                   <span 
@@ -39,7 +39,7 @@ const RandomBookSection: React.FC = () => {
               </div>
               <p className="text-gray-600 mb-6 text-sm line-clamp-3">{featuredBook.description}</p>
               <button className="bg-coral-500 text-white px-4 py-1.5 text-sm rounded-md hover:bg-coral-600 transition-colors">
-                Learn More
+                Saber Más
               </button>
             </div>
           </div>

@@ -13,7 +13,7 @@ const BookCard: React.FC<BookCardProps> = ({ title, image, rating }) => {
         <div className="aspect-[3/4] overflow-hidden rounded-lg shadow-md">
           <img
             src={image}
-            alt={title}
+            alt={`Portada de ${title}`}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
           />
         </div>

@@ -7,13 +7,13 @@ const HeroSection: React.FC = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="w-full md:w-1/2 space-y-4">
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-              Give Books a Second Life
+              Dale una Segunda Vida a los Libros
             </h1>
             <p className="text-gray-600 text-base max-w-xl">
-              Join our sustainable reading community. Discover pre-loved books that not only save you money but also help protect our environment. Every book has a story, let's keep them circulating.
+              Únete a nuestra comunidad de lectura sostenible. Descubre libros de segunda mano que no solo te ahorran dinero, sino que también ayudan a proteger nuestro medio ambiente. Cada libro tiene una historia, sigamos manteniéndolos en circulación.
             </p>
             <button className="primary-button text-sm">
-              Explore Books
+              Explorar Libros
             </button>
           </div>
           
@@ -21,7 +21,7 @@ const HeroSection: React.FC = () => {
             <div className="relative">
               <img
                 src="/images/reading.png"
-                alt="Person reading"
+                alt="Persona leyendo"
                 className="relative z-10 w-full max-w-md mx-auto"
               />
             </div>

@@ -6,10 +6,10 @@ const TopCategoriesCard: React.FC = () => {
       <div className="aspect-square flex items-center justify-center">
         <div className="text-center text-white p-4">
           <h2 className="text-xl md:text-2xl font-bold mb-2">
-            Explore Our Top Categories
+            Explora Nuestras Categorías Principales
           </h2>
           <button className="mt-2 px-4 py-1.5 text-sm bg-white text-coral-600 rounded-full hover:bg-gray-100 transition-colors">
-            View All
+            Ver Todo
           </button>
         </div>
       </div>

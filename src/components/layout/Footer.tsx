@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
 
         <div className="max-w-sm">
           <div className="mb-4">
-            <img src="/logo.svg" alt="Logo" className="w-16 h-16" />
+            <img src="/images/logo.png" alt="Logo" className="w-16 h-16" />
           </div>
           <p className="text-sm mb-6">
             Nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -45,7 +45,7 @@ const Footer: React.FC = () => {
       <div className="border-t border-white mt-10 pt-6 text-center text-sm">
         <p>© 2025 Libroly. Todos los derechos reservados.</p>
         <p className="mt-2">
-          <a href="#">Política de privacidad</a> | <a href="#">Términos y condiciones</a>
+          <a href="/privacy-policy">Política de privacidad</a> | <a href="terms-conditions">Términos y condiciones</a>
         </p>
         </div>
 

@@ -7,16 +7,16 @@ const TopBar: React.FC = () => {
             <div className="bs-tlf">📞 +34 600 123 456</div>
             <div className="bs-webs">
                 <a href="https://facebook.com" target="_blank">
-                    <img src="/facebook.svg" alt="Facebook" />
+                    <i className="fab fa-facebook-f"></i>
                 </a>
                 <a href="https://instagram.com" target="_blank">
-                    <img src="instagram.svg" alt="Instagram" />
+                    <i className="fab fa-instagram"></i>
                 </a>
                 <a href="https://x.com" target="_blank">
-                    <img src="x.svg" alt="X" />
+                    <i className="fab fa-x-twitter"></i>
                 </a>
                 <a href="https://linkedin.com" target="_blank">
-                    <img src="linkedin.svg" alt="LinkedIn" />
+                    <i className="fab fa-linkedin-in"></i>
                 </a>
             </div>
         </div>

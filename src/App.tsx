@@ -1,7 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import NavBar from "./components/layout/NavBar"
+import NavBar from "./components/layout/NavBar";
 import TopBar from './components/layout/TopBar';
+import Footer from './components/layout/Footer';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import './App.css';
 
 function App() {
@@ -17,6 +19,7 @@ function App() {
         </main>
         
       </div>
+      <Footer />
     </BrowserRouter>
   );
 }

@@ -5,16 +5,16 @@ import TopCategoriesCard from '../ui/TopCategoriesCard';
 const CategoriesSection: React.FC = () => {
   const categories = [
     {
-      title: 'Engineering Books',
-      image: 'https://placehold.co/800x400/2c5282/ffffff?text=Engineering',
+      title: 'Libros de Ingeniería',
+      image: 'https://placehold.co/800x400/2c5282/ffffff?text=Ingenieria',
     },
     {
-      title: 'Commerce Books',
-      image: 'https://placehold.co/800x400/2c5282/ffffff?text=Commerce',
+      title: 'Libros de Comercio',
+      image: 'https://placehold.co/800x400/2c5282/ffffff?text=Comercio',
     },
     {
-      title: 'Management Books',
-      image: 'https://placehold.co/800x400/2c5282/ffffff?text=Management',
+      title: 'Libros de Gestión',
+      image: 'https://placehold.co/800x400/2c5282/ffffff?text=Gestion',
     },
   ];
 
@@ -23,13 +23,13 @@ const CategoriesSection: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
           <CategoryCard
-            title="Higher Education"
-            image="https://placehold.co/800x400/2c5282/ffffff?text=Higher+Education"
+            title="Educación Superior"
+            image="https://placehold.co/800x400/2c5282/ffffff?text=Educacion"
           />
           <TopCategoriesCard />
           <CategoryCard
-            title="Finance Books"
-            image="https://placehold.co/800x400/2c5282/ffffff?text=Finance"
+            title="Libros de Finanzas"
+            image="https://placehold.co/800x400/2c5282/ffffff?text=Finanzas"
           />
         </div>
 

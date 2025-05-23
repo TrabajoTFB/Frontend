@@ -9,7 +9,7 @@ const EbookAccessSection: React.FC = () => {
             <div className="relative max-w-[280px] mx-auto">
               <img
                 src="/images/learning.png"
-                alt="Person with books"
+                alt="Persona con libros"
                 className="w-full"
               />
             </div>
@@ -17,13 +17,13 @@ const EbookAccessSection: React.FC = () => {
           
           <div className="w-full md:w-1/2">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Join Our Sustainable Reading Community
+              Únete a Nuestra Comunidad de Lectura Sostenible
             </h2>
             <p className="text-gray-600 text-base mb-6">
-              Create an account to start your sustainable reading journey. Buy and sell pre-loved books, track your environmental impact, and connect with fellow book lovers who care about our planet.
+              Crea una cuenta para comenzar tu viaje de lectura sostenible. Compra y vende libros de segunda mano, haz seguimiento de tu impacto ambiental y conéctate con otros amantes de los libros que se preocupan por nuestro planeta.
             </p>
             <button className="primary-button text-sm px-6 py-2">
-              Join Now
+              Únete Ahora
             </button>
           </div>
         </div>

@@ -14,17 +14,17 @@ const NewsletterSection: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 relative">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
-            Subscribe to Our Newsletter
+            Suscríbete a Nuestro Boletín
           </h2>
           <p className="text-white/90 mb-8 max-w-xl mx-auto">
-            Get in touch! Sign up to our email newsletter for regular book recommendations and everything they offer!
+            ¡Mantente conectado! Suscríbete a nuestro boletín para recibir recomendaciones de libros y enterarte de todas nuestras novedades.
           </p>
           <form onSubmit={handleSubmit} className="max-w-md mx-auto flex">
             <input
               type="email"
               value={email}
               onChange={handleEmailChange}
-              placeholder="Enter your email address"
+              placeholder="Introduce tu correo electrónico"
               className="flex-1 px-6 py-3 rounded-l-full text-gray-900 bg-white border-0 focus:outline-none focus:ring-2 focus:ring-white/20"
               required
             />
@@ -32,7 +32,7 @@ const NewsletterSection: React.FC = () => {
               type="submit"
               className="px-8 py-3 bg-white text-coral-600 font-medium rounded-r-full hover:bg-gray-50 transition duration-300"
             >
-              Subscribe
+              Suscribirse
             </button>
           </form>
         </div>

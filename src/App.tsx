@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import NavBar from "./components/layout/NavBar";
 import TopBar from './components/layout/TopBar';
 import Footer from './components/layout/Footer';
+import ChatBot from './components/ui/ChatBot';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './App.css';
 
@@ -17,9 +18,9 @@ function App() {
             <Route path="/" element={<Home />} />
           </Routes>
         </main>
-        
+        <Footer />
+        <ChatBot />
       </div>
-      <Footer />
     </BrowserRouter>
   );
 }

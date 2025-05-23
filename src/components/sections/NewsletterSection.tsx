@@ -5,33 +5,35 @@ const NewsletterSection: React.FC = () => {
   const { email, handleEmailChange, handleSubmit } = useNewsletter();
 
   return (
-    <section className="bg-indigo-50 py-12">
-      <div className="max-w-4xl mx-auto px-4">
+    <section className="bg-coral-500 py-16 relative overflow-hidden">
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-white/10"></div>
+        <div className="absolute -top-4 -right-4 w-24 h-24 bg-coral-600/30 rounded-full"></div>
+        <div className="absolute bottom-0 left-0 w-32 h-32 bg-coral-600/30 rounded-full transform -translate-x-1/2 translate-y-1/2"></div>
+      </div>
+      <div className="max-w-4xl mx-auto px-4 relative">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-3">
-            Suscríbete a nuestro Newsletter
+          <h2 className="text-3xl font-bold text-white mb-4">
+            Subscribe to Our Newsletter
           </h2>
-          <p className="text-gray-600 mb-6 max-w-xl mx-auto text-sm">
-            Mantente actualizado con las últimas novedades, recomendaciones de libros
-            y ofertas especiales directamente en tu bandeja de entrada.
+          <p className="text-white/90 mb-8 max-w-xl mx-auto">
+            Get in touch! Sign up to our email newsletter for regular book recommendations and everything they offer!
           </p>
-          <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
-            <div className="flex gap-2">              
-              <input
-                type="email"
-                value={email}
-                onChange={handleEmailChange}
-                placeholder="Tu correo electrónico"
-                className="flex-1 px-3 py-1.5 text-sm rounded-lg border border-gray-300 focus:outline-none focus:border-indigo-500"
-                required
-              />
-              <button
-                type="submit"
-                className="bg-indigo-600 text-white px-4 py-1.5 text-sm rounded-lg hover:bg-indigo-700 transition duration-300"
-              >
-                Suscribirse
-              </button>
-            </div>
+          <form onSubmit={handleSubmit} className="max-w-md mx-auto flex">
+            <input
+              type="email"
+              value={email}
+              onChange={handleEmailChange}
+              placeholder="Enter your email address"
+              className="flex-1 px-6 py-3 rounded-l-full text-gray-900 bg-white border-0 focus:outline-none focus:ring-2 focus:ring-white/20"
+              required
+            />
+            <button
+              type="submit"
+              className="px-8 py-3 bg-white text-coral-600 font-medium rounded-r-full hover:bg-gray-50 transition duration-300"
+            >
+              Subscribe
+            </button>
           </form>
         </div>
       </div>

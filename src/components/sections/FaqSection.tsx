@@ -9,19 +9,18 @@ const FaqSection: React.FC = () => {
   };
 
   return (
-    <section className="bg-gradient-to-r from-purple-50 to-indigo-50 py-12">
+    <section className="bg-white py-16">
       <div className="max-w-4xl mx-auto px-4">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-3">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
             ¿Tienes preguntas?
           </h2>
-          <p className="text-gray-600 mb-6 max-w-xl mx-auto text-sm">
-            Encuentra respuestas a las preguntas más comunes sobre nuestra plataforma,
-            servicios y cómo comenzar tu viaje de lectura con nosotros.
+          <p className="text-gray-600 mb-8 max-w-xl mx-auto">
+            Hi! Si no has encontrado la respuesta a tu pregunta aquí, consulta nuestras FAQs para obtener más respuestas y házmelo saber cómo funcionan.
           </p>
           <button
             onClick={handleFaqClick}
-            className="bg-purple-600 text-white px-6 py-2 text-sm rounded-lg hover:bg-purple-700 transition duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+            className="px-8 py-3 bg-coral-500 text-white rounded-full hover:bg-coral-600 transition-colors duration-300 font-medium"
           >
             Visitar FAQ
           </button>

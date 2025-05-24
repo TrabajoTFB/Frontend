@@ -20,12 +20,12 @@ const LoginComp: React.FC = () => {
                     <form className="w-full flex flex-col items-center">
                         <input
                             type="email"
-                            placeholder="Email address"
+                            placeholder="Usuario o Email"
                             className="w-full mb-3 px-4 py-2 border rounded-full text-sm"
                         />
                         <input
                             type="password"
-                            placeholder="Password"
+                            placeholder="Contraseña"
                             className="w-full mb-4 px-4 py-2 border rounded-full text-sm"
                         />
                         <button
@@ -37,7 +37,7 @@ const LoginComp: React.FC = () => {
                     </form>
 
                     <p className="text-xs mt-3">
-                        ¿Eres nuevo? <a href="/sign_up" className="text-red-500 font-semibold hover:underline">Crear cuenta</a>
+                        ¿Eres nuevo? <a href="/signup" className="text-red-500 font-semibold hover:underline">Crear cuenta</a>
                     </p>
 
                     <p className="text-center text-xs mt-4 px-2 text-gray-500">

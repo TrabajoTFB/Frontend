@@ -1,46 +1,58 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { api } from '../../services/api';
+import type { Book } from '../../types';
 
 const RandomBookSection: React.FC = () => {
-  const featuredBook = {
-    title: "El Poder de la Lectura Sostenible",
-    author: "Club de Lectura Ecológica",
-    image: "/images/reading.png",
-    rating: 4,
-    description: "Descubre cómo el intercambio de libros de segunda mano no solo salva árboles, sino que también construye una comunidad de lectores conscientes. Cada libro usado en nuestra colección tiene su propia historia que contar y espera su próximo capítulo contigo."
-  };
+  const [book, setBook] = useState<Book | null>(null);
+
+  useEffect(() => {
+    const fetchRandomBook = async () => {
+      try {
+        const data = await api.getRandomBook();
+        setBook(data);
+      } catch (error) {
+        console.error('Error fetching random book:', error);
+      }
+    };
+
+    fetchRandomBook();
+  }, []);
+
+  if (!book) return null;
 
   return (
     <section className="py-12 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="bg-white rounded-lg overflow-hidden max-w-4xl mx-auto">
-          <div className="flex flex-col md:flex-row">
-            <div className="w-full md:w-1/3 flex justify-center md:justify-start">
-              <div className="aspect-[3/4] relative w-full max-w-[240px]">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-3">
+              Descubre un Libro al Azar
+            </h2>
+            <p className="text-gray-600 max-w-xl mx-auto text-sm">
+              ¿Te sientes con suerte? Aquí tienes una recomendación aleatoria de nuestra colección.
+            </p>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div className="flex flex-col md:flex-row">
+              <div className="md:w-1/3">
                 <img
-                  src={featuredBook.image}
-                  alt={featuredBook.title}
+                  src={book.portada || 'https://placehold.co/400x600/e2e8f0/1a1a1a.png?text=Portada'}
+                  alt={book.titulo}
                   className="w-full h-full object-cover"
                 />
               </div>
-            </div>
-            <div className="w-full md:w-2/3 p-6">
-              <p className="text-sm text-gray-500 mb-2">Libro Destacado de la Semana</p>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">{featuredBook.title}</h3>
-              <p className="text-gray-600 mb-3 text-sm">Por {featuredBook.author}</p>
-              <div className="flex space-x-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <span 
-                    key={i} 
-                    className={`text-lg ${i < featuredBook.rating ? "text-yellow-400" : "text-gray-300"}`}
-                  >
-                    ★
-                  </span>
-                ))}
+              <div className="md:w-2/3 p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{book.titulo}</h3>
+                <p className="text-gray-600 text-sm mb-4">{book.autor}</p>
+                <p className="text-gray-700 mb-4">{book.descripcion}</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-bold text-coral-500">${book.precio}</span>
+                  <button className="bg-coral-500 text-white px-6 py-2 rounded-md hover:bg-coral-600 transition-colors">
+                    Ver Detalles
+                  </button>
+                </div>
               </div>
-              <p className="text-gray-600 mb-6 text-sm line-clamp-3">{featuredBook.description}</p>
-              <button className="bg-coral-500 text-white px-4 py-1.5 text-sm rounded-md hover:bg-coral-600 transition-colors">
-                Saber Más
-              </button>
             </div>
           </div>
         </div>

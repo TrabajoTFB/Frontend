@@ -1,54 +1,102 @@
-# React + TypeScript + Vite
+# 📚 Libroly Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Plataforma de compraventa de libros de segunda mano con recomendaciones inteligentes
 
-Currently, two official plugins are available:
+## 🌟 Características Principales
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 📖 Marketplace de libros de segunda mano
+- 🤖 Sistema de recomendación basado en IA
+- 💬 ChatBot inteligente para asistencia
+- 🎯 Recomendaciones personalizadas
+- 📱 Diseño responsive y moderno
+- 🔒 Autenticación segura de usuarios
 
-## Expanding the ESLint configuration
+## 🛠️ Tecnologías
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React** - Biblioteca principal de UI
+- **TypeScript** - Tipado estático
+- **Tailwind CSS** - Framework de estilos
+- **Vite** - Build tool y dev server
+- **React Router** - Enrutamiento
+- **Axios** - Cliente HTTP
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 🚀 Comenzando
+
+### Prerrequisitos
+
+- Node.js (versión 16 o superior)
+- npm o yarn
+
+### Instalación
+
+1. Clona el repositorio
+```bash
+git clone [URL_DEL_REPOSITORIO]
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+2. Instala las dependencias
+```bash
+npm install
+# o
+yarn install
 ```
+
+3. Inicia el servidor de desarrollo
+```bash
+npm run dev
+# o
+yarn dev
+```
+
+## 📦 Estructura del Proyecto
+
+```
+src/
+├── components/        # Componentes reutilizables
+│   ├── layout/       # Componentes de estructura
+│   ├── sections/     # Secciones principales
+│   └── ui/          # Componentes de interfaz
+├── hooks/            # Custom hooks
+├── pages/            # Páginas principales
+├── services/         # Servicios y APIs
+└── types/            # Definiciones de tipos
+```
+
+## 🎯 Características en Detalle
+
+### 📚 Marketplace de Libros
+- Listado de libros disponibles
+- Filtros y búsqueda avanzada
+- Sistema de valoraciones y reseñas
+- Proceso de compra/venta simplificado
+
+### 🤖 Sistema de Recomendación IA
+- Recomendaciones basadas en historial de lectura
+- Sugerencias personalizadas por género
+- Análisis de preferencias del usuario
+- Descubrimiento de nuevos títulos
+
+### 💬 ChatBot Inteligente
+- Asistencia en tiempo real
+- Recomendaciones contextuales
+- Respuestas personalizadas
+- Ayuda con el proceso de compra/venta
+
+## 🤝 Contribuir
+
+Las contribuciones son bienvenidas. Por favor, lee las guías de contribución antes de enviar un PR.
+
+## 📝 Licencia
+
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.md) para más detalles.
+
+## ✨ Equipo
+
+- Desarrolladores Frontend
+- Desarrolladores Backend
+- Diseñadores UI/UX
+- Expertos en IA
+
+## 📧 Contacto
+
+Para preguntas y soporte, por favor contacta con [EMAIL]

@@ -62,41 +62,10 @@ src/
 └── types/            # Definiciones de tipos
 ```
 
-## 🎯 Características en Detalle
-
-### 📚 Marketplace de Libros
-- Listado de libros disponibles
-- Filtros y búsqueda avanzada
-- Sistema de valoraciones y reseñas
-- Proceso de compra/venta simplificado
-
-### 🤖 Sistema de Recomendación IA
-- Recomendaciones basadas en historial de lectura
-- Sugerencias personalizadas por género
-- Análisis de preferencias del usuario
-- Descubrimiento de nuevos títulos
-
-### 💬 ChatBot Inteligente
-- Asistencia en tiempo real
-- Recomendaciones contextuales
-- Respuestas personalizadas
-- Ayuda con el proceso de compra/venta
-
-## 🤝 Contribuir
-
-Las contribuciones son bienvenidas. Por favor, lee las guías de contribución antes de enviar un PR.
-
 ## 📝 Licencia
 
 Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.md) para más detalles.
 
 ## ✨ Equipo
 
-- Desarrolladores Frontend
-- Desarrolladores Backend
-- Diseñadores UI/UX
-- Expertos en IA
-
-## 📧 Contacto
-
-Para preguntas y soporte, por favor contacta con [EMAIL]
+- Jesús, Andrés, Martín y Pablo

@@ -14,8 +14,8 @@ const RandomBookSection: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="bg-white rounded-lg overflow-hidden max-w-4xl mx-auto">
           <div className="flex flex-col md:flex-row">
-            <div className="md:w-1/3 max-w-[240px]">
-              <div className="aspect-[3/4] relative">
+            <div className="w-full md:w-1/3 flex justify-center md:justify-start">
+              <div className="aspect-[3/4] relative w-full max-w-[240px]">
                 <img
                   src={featuredBook.image}
                   alt={featuredBook.title}
@@ -23,7 +23,7 @@ const RandomBookSection: React.FC = () => {
                 />
               </div>
             </div>
-            <div className="md:w-2/3 p-6">
+            <div className="w-full md:w-2/3 p-6">
               <p className="text-sm text-gray-500 mb-2">Libro Destacado de la Semana</p>
               <h3 className="text-xl font-bold text-gray-900 mb-2">{featuredBook.title}</h3>
               <p className="text-gray-600 mb-3 text-sm">Por {featuredBook.author}</p>

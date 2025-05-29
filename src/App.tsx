@@ -1,8 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
+import BookName from './pages/BookName';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
+<<<<<<< HEAD
 import Books from './pages/Books';
+=======
+>>>>>>> f35fe0b82ee84faf75c8d53e37e4db102087a268
 import Profile from './pages/Profile';
 import NavBar from "./components/layout/NavBar";
 import TopBar from './components/layout/TopBar';
@@ -21,6 +25,7 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/bookname" element={<BookName />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/Books" element={<Books />} />

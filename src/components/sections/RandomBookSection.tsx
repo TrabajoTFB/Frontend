@@ -32,7 +32,7 @@ const RandomBookSection: React.FC = () => {
           </div>
 
           {!book ? (
-            <div className="bg-white rounded-xl shadow-lg p-8 text-center">
+            <div className="bg-white rounded-xl p-8 text-center">
               <p className="text-gray-500">Cargando libro aleatorio...</p>
             </div>
           ) : (

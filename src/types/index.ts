@@ -1,3 +1,5 @@
+export type { BlogPost } from './blog';
+
 export interface Book {
     titulo: string;
     autor: string;

@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ProfileForm = () => {
   return (
     <form className="bg-blue-800 text-white rounded-2xl p-6 w-full max-w-md">

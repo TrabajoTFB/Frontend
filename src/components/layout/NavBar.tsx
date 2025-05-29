@@ -27,7 +27,6 @@ const NavBar: React.FC = () => {
             <ul className="nav-list hidden lg:flex gap-6">
                 <li><a href="/">Inicio</a></li>
                 <li><a href="/books">Libros</a></li>
-                <li><a href="/releases">Nuevos Lanzamientos</a></li>
                 <li><a href="/about-us">Sobre Nosotros</a></li>
                 <li><a href="/contact">Contacto</a></li>
                 <li><a href="/blog">Blog</a></li>

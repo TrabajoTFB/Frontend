@@ -14,6 +14,9 @@ export default {
         'navy': {
           900: '#1A237E',
         },
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif'],
+      },
       },
     },
   },

@@ -82,16 +82,20 @@ src/
 - Respuestas personalizadas
 - Ayuda con el proceso de compra/venta
 
+<<<<<<< HEAD
 ## 🤝 Contribuir
 
 Las contribuciones son bienvenidas. Por favor, lee las guías de contribución antes de enviar un PR.
 
+=======
+>>>>>>> origin/main
 ## 📝 Licencia
 
 Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.md) para más detalles.
 
 ## ✨ Equipo
 
+<<<<<<< HEAD
 - Desarrolladores Frontend
 - Desarrolladores Backend
 - Diseñadores UI/UX
@@ -100,3 +104,6 @@ Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.m
 ## 📧 Contacto
 
 Para preguntas y soporte, por favor contacta con [EMAIL]
+=======
+- Jesús, Andrés, Martín y Pablo
+>>>>>>> origin/main

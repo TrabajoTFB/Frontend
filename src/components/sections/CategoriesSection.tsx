@@ -35,9 +35,7 @@ const CategoriesSection: React.FC = () => {
           {genres.map((genre) => (
             <CategoryCard
               key={genre.id}
-              title={genre.nombre}
-              count={genre.cantidadLibros}
-              image={genre.imagen || `https://placehold.co/200x200/e2e8f0/1a1a1a.png?text=${genre.nombre}`}
+              genre={genre}
             />
           ))}
         </div>

@@ -42,7 +42,7 @@ const BookRecommendation: React.FC = () => {
           </h2>
 
         <div className="text-center">
-          <a href="#" className="inline-flex items-center text-coral-500 hover:text-coral-600 font-medium text-sm">
+          <a href="/books" className="inline-flex items-center text-coral-500 hover:text-coral-600 font-medium text-sm">
             Ver todos
             <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { Book } from '../../types';
 
 interface BookCardProps {
@@ -7,15 +7,26 @@ interface BookCardProps {
 
 const BookCard: React.FC<BookCardProps> = ({ libro }) => {
   const { titulo, autor, urlImgPortada, valoracion = 5, precio = 15.99 } = libro;
+  const [imageError, setImageError] = useState(false);
+
+  // Crear un placeholder personalizado con el título del libro
+  const getPlaceholderImage = () => {
+    const bgColor = 'e2e8f0'; // Gris claro
+    const textColor = '1a1a1a'; // Casi negro
+    const text = encodeURIComponent(titulo.slice(0, 20) + (titulo.length > 20 ? '...' : ''));
+    return `https://placehold.co/400x600/${bgColor}/${textColor}?text=${text}`;
+  };
   
   return (
     <div className="group">
       <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
-        <div className="aspect-[3/4] relative overflow-hidden">
+        <div className="aspect-[3/4] relative overflow-hidden bg-gray-100">
           <img
-            src={urlImgPortada || 'https://placehold.co/400x600/e2e8f0/1a1a1a.png?text=Sin+Imagen'}
+            src={!imageError ? urlImgPortada : getPlaceholderImage()}
             alt={`Portada de ${titulo}`}
+            onError={() => setImageError(true)}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity duration-300">
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">

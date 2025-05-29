@@ -13,7 +13,7 @@ const HeroSection: React.FC = () => {
               Únete a nuestra comunidad de lectura sostenible. Descubre libros de segunda mano que no solo te ahorran dinero, sino que también ayudan a proteger nuestro medio ambiente. Cada libro tiene una historia, sigamos manteniéndolos en circulación.
             </p>
             <button className="primary-button text-sm">
-              Explorar Libros
+              <a href="/books">Explorar Libros</a>
             </button>
           </div>
           

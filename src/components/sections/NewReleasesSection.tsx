@@ -20,24 +20,36 @@ const NewReleasesSection: React.FC = () => {
   }, []);
 
   return (
-    <section className="py-12 bg-gray-50">
+    <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-3">
-            Tesoros Recién Llegados
-          </h2>
-          <p className="text-gray-600 max-w-xl mx-auto text-sm">
-            Descubre nuestras últimas incorporaciones de libros de segunda mano.
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 max-w-4xl mx-auto">
-          {books.map((book) => (
-            <BookCard
-              key={book.isbn}
-              libro={book}
-            />
-          ))}
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Novedades recién llegadas
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Explora nuestras últimas adquisiciones y descubre nuevas historias para tu colección
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {books && books.length > 0 ? (
+              books.map((book) => (
+                <BookCard
+                  key={book.isbn}
+                  libro={book}
+                />
+              ))
+            ) : (
+              <p className="col-span-4 text-center text-gray-500">Cargando libros...</p>
+            )}
+          </div>
+
+          <div className="text-center mt-12">
+            <button className="bg-coral-500 text-white px-8 py-3 rounded-md hover:bg-coral-600 transition-colors">
+              Ver más novedades
+            </button>
+          </div>
         </div>
       </div>
     </section>

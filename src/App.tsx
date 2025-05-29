@@ -4,7 +4,6 @@ import Books from './pages/Books';
 import BookName from './pages/BookName';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
-import Books from './pages/Books';
 import Profile from './pages/Profile';
 import NavBar from "./components/layout/NavBar";
 import TopBar from './components/layout/TopBar';

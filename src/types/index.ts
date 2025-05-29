@@ -12,4 +12,5 @@ export interface Book {
 export interface Genre {
     id: number;
     nombre: string;
+    urlImgGenero: string;
 }

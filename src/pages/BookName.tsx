@@ -1,9 +1,15 @@
 import React from "react";
-import BookNameComp from "../components/layout/BookNameComp"
+import BookSellers from "../components/layout/BookSellers";
+import BookDetails from "../components/layout/BookDetails";
+import BookRecommendations from "../components/layout/BookRecommendations";
 
 const BookName: React.FC = () => {
     return (
-        <BookNameComp />
+        <div>
+            <BookSellers />
+            <BookDetails />
+            <BookRecommendations />
+        </div>
     );
 };
 

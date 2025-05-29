@@ -34,11 +34,8 @@ const NewReleasesSection: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 max-w-4xl mx-auto">
           {books.map((book) => (
             <BookCard
-              key={book.id}
-              title={book.titulo}
-              image={book.portada || 'https://placehold.co/400x600/e2e8f0/1a1a1a.png?text=Sin+Imagen'}
-              author={book.autor}
-              price={book.precio}
+              key={book.isbn}
+              libro={book}
             />
           ))}
         </div>

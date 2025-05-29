@@ -37,7 +37,7 @@ const RandomBookSection: React.FC = () => {
             <div className="flex flex-col md:flex-row">
               <div className="md:w-1/3">
                 <img
-                  src={book.portada || 'https://placehold.co/400x600/e2e8f0/1a1a1a.png?text=Portada'}
+                  src={book.urlImgPortada || 'https://placehold.co/400x600/e2e8f0/1a1a1a.png?text=Sin+Imagen'}
                   alt={book.titulo}
                   className="w-full h-full object-cover"
                 />
@@ -45,9 +45,17 @@ const RandomBookSection: React.FC = () => {
               <div className="md:w-2/3 p-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{book.titulo}</h3>
                 <p className="text-gray-600 text-sm mb-4">{book.autor}</p>
-                <p className="text-gray-700 mb-4">{book.descripcion}</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-coral-500">${book.precio}</span>
+                  <div className="flex space-x-1">
+                    {[...Array(5)].map((_, i) => (
+                      <span
+                        key={i}
+                        className={`text-lg ${i < (book.valoracion || 5) ? "text-yellow-400" : "text-gray-300"}`}
+                      >
+                        ★
+                      </span>
+                    ))}
+                  </div>
                   <button className="bg-coral-500 text-white px-6 py-2 rounded-md hover:bg-coral-600 transition-colors">
                     Ver Detalles
                   </button>

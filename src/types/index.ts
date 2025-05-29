@@ -1,17 +1,15 @@
 export interface Book {
-    id: number;
     titulo: string;
     autor: string;
-    descripcion: string;
-    precio: number;
-    portada?: string;
+    urlImgPortada: string;
     fechaPublicacion: string;
+    valoracion: number;
+    generoLiterario: Genre[];
+    isbn: number;
+    precio?: number;
 }
 
 export interface Genre {
     id: number;
     nombre: string;
-    descripcion: string;
-    cantidadLibros: number;
-    imagen?: string;
 }

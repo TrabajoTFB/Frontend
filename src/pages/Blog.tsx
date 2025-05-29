@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import BlogCard from '../components/ui/BlogCard';
-import NewsletterSection from '../components/sections/NewsletterSection';
 import type { BlogPost } from '../types';
 
 const Blog: React.FC = () => {

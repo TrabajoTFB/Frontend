@@ -9,10 +9,19 @@ export interface Book {
     generoLiterario: Genre[];
     isbn: number;
     precio?: number;
+    descripcion?: string;
+    paginas?: number;
+    publisher?: string;
+    idiomas?: Language[];
 }
 
 export interface Genre {
     id: number;
     nombre: string;
     urlImgGenero: string;
+}
+
+export interface Language {
+    id: number;
+    codigo: string;
 }

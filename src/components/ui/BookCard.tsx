@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import type { Book } from '../../types';
 
 interface BookCardProps {
@@ -30,16 +31,21 @@ const BookCard: React.FC<BookCardProps> = ({ libro }) => {
           />
           <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity duration-300">
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <button className="bg-coral-500 text-white px-6 py-2 rounded-md hover:bg-coral-600 transition-colors">
+              <Link 
+                to={`/book/${libro.isbn}`}
+                className="bg-coral-500 text-white px-6 py-2 rounded-md hover:bg-coral-600 transition-colors"
+              >
                 Ver detalles
-              </button>
+              </Link>
             </div>
           </div>
         </div>
         <div className="p-4">
-          <h3 className="text-lg font-semibold text-gray-900 mb-1 line-clamp-1">
-            {titulo}
-          </h3>
+          <Link to={`/book/${libro.isbn}`}>
+            <h3 className="text-lg font-semibold text-gray-900 mb-1 line-clamp-1 hover:text-coral-500 transition-colors">
+              {titulo}
+            </h3>
+          </Link>
           <p className="text-gray-600 text-sm mb-2">{autor}</p>
           <div className="flex items-center justify-between">
             <div className="flex space-x-1">

@@ -21,5 +21,10 @@ export const api = {
     getGenres: async () => {
         const response = await axios.get(`${API_URL}/genero/home`);
         return response.data;
+    },
+
+    getBookByIsbn: async (isbn: string) => {
+        const response = await axios.get(`${API_URL}/book/${isbn}`);
+        return response.data;
     }
 };

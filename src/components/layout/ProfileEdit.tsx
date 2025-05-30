@@ -1,6 +1,10 @@
-const ProfileForm = () => {
+import React from 'react';
+
+
+const ProfileEdit = ({ setIsEditing }: { setIsEditing: (val: string) => void }) => {
   return (
-    <form className="bg-blue-800 text-white rounded-2xl p-6 w-full max-w-md">
+    <form className="bg-blue-800 text-white rounded-2xl p-6 w-full h-full">
+
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label className="font-bold block mb-1">Name</label>
@@ -63,14 +67,15 @@ const ProfileForm = () => {
       </div>
         <div className='flex justify-center mt-2'>
             <button
+                onClick={() => setIsEditing("info")}
                 type="submit"
                 className="mt-6 bg-white text-black font-bold py-2 px-4 rounded-xl shadow-md hover:shadow-lg"
             >
-                Save profile
+                Guardar
             </button>
         </div>
     </form>
   );
 };
 
-export default ProfileForm;
+export default ProfileEdit;

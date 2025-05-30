@@ -1,7 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
 import Home from './pages/Home';
 import Books from './pages/Books';
 import ScrollToTop from './components/ui/ScrollToTop';
+import PrivateRoute from './components/ui/PrivateRoute';
 import BookName from './pages/BookName';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
@@ -20,9 +22,10 @@ import './App.css';
 
 function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <div className="min-h-screen bg-white">
+    <AuthProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <div className="min-h-screen bg-white">
         <TopBar />
         <NavBar />
         <main>
@@ -32,7 +35,14 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/books" element={<Books />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route 
+              path="/profile" 
+              element={
+                <PrivateRoute>
+                  <Profile />
+                </PrivateRoute>
+              } 
+            />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/contact" element={<Contact />} />
@@ -42,7 +52,8 @@ function App() {
         <Footer />
         <ChatBot />
       </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

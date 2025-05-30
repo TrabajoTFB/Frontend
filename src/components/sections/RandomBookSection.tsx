@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { api } from '../../services/api';
 import type { Book } from '../../types';
 
 const RandomBookSection: React.FC = () => {
+  const navigate = useNavigate();
   const [book, setBook] = useState<Book | null>(null);
 
   useEffect(() => {
@@ -24,7 +26,7 @@ const RandomBookSection: React.FC = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Recomendación del día
+              Te podría interesar
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               ¿Te sientes con suerte? Descubre una joya literaria seleccionada especialmente para ti
@@ -83,7 +85,10 @@ const RandomBookSection: React.FC = () => {
                       </div>
                     )}
                   </div>
-                  <button className="mt-8 bg-coral-500 text-white px-8 py-3 rounded-md hover:bg-coral-600 transition-colors">
+                  <button 
+                    onClick={() => navigate(`/book/${book.isbn}`)}
+                    className="mt-8 bg-coral-500 text-white px-8 py-3 rounded-md hover:bg-coral-600 transition-colors"
+                  >
                     Ver detalles
                   </button>
                 </div>

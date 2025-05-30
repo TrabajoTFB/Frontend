@@ -3,7 +3,11 @@ import { api } from "../../services/api";
 import type { Book, Genre } from "../../types";
 import BookCard from "../ui/BookCard";
 
-const BooksComp: React.FC = () => {
+interface BooksCompProps {
+  initialGenreId?: number;
+}
+
+const BooksComp: React.FC<BooksCompProps> = ({ initialGenreId }) => {
   const [books, setBooks] = useState<Book[]>([]);
   const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
   const [genres, setGenres] = useState<Genre[]>([]);
@@ -11,7 +15,7 @@ const BooksComp: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   // Estados para los filtros
-  const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
+  const [selectedGenres, setSelectedGenres] = useState<number[]>(initialGenreId ? [initialGenreId] : []);
   const [priceRange, setPriceRange] = useState({ min: '', max: '' });
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState<'titulo-asc' | 'titulo-desc' | 'precio-asc' | 'precio-desc'>('titulo-asc');

@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import Books from './pages/Books';
 import ScrollToTop from './components/ui/ScrollToTop';
 import BookName from './pages/BookName';
+import Cart from './pages/Cart'; 
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Profile from './pages/Profile';
@@ -31,12 +32,18 @@ function App() {
             <Route path="/book/:isbn" element={<BookName />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+<<<<<<< Updated upstream
             <Route path="/books" element={<Books />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
+=======
+            <Route path="/books" element={<Books />} /> {/* lowercase */}
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/cart" element={<Cart />} /> {/* Added cart route */}
+>>>>>>> Stashed changes
           </Routes>
         </main>
         <Footer />

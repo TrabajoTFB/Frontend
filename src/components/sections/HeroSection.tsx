@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const HeroSection: React.FC = () => {
   return (
@@ -12,9 +13,11 @@ const HeroSection: React.FC = () => {
             <p className="text-gray-600 text-base max-w-xl">
               Únete a nuestra comunidad de lectura sostenible. Descubre libros de segunda mano que no solo te ahorran dinero, sino que también ayudan a proteger nuestro medio ambiente. Cada libro tiene una historia, sigamos manteniéndolos en circulación.
             </p>
-            <button className="primary-button text-sm">
-              <a href="/books">Explorar Libros</a>
-            </button>
+            <div className="flex gap-4">
+              <Link to="/books" className="primary-button text-sm">
+                Explorar Libros
+              </Link>
+            </div>
           </div>
           
           <div className="w-full md:w-1/2">

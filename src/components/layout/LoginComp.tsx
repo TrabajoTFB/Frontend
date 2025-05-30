@@ -1,69 +1,137 @@
-import React from "react";
+import React, { useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
 
 const LoginComp: React.FC = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { login } = useAuth();
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+        remember: false
+    });
+    const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState(false);
+
+    // Get the page that the user tried to visit before being redirected to login
+    const from = location.state?.from?.pathname || '/';
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value, type, checked } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: type === 'checkbox' ? checked : value
+        }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setError(null);
+        setLoading(true);
+
+        try {
+            await login(formData.email, formData.password);
+            // Si el login es exitoso, redirigimos al usuario a la página que intentaba visitar
+            navigate(from, { replace: true });
+        } catch (err: any) {
+            setError(err.response?.data?.message || 'Email o contraseña incorrectos');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
-        <div className="flex items-center justify-center h-screen bg-white">
-            <div className="relative flex items-center justify-center">
+        <div className="min-h-[calc(100vh-96px)] flex items-center justify-center px-4 py-12">
+            <div className="w-full max-w-md">
+                <div className="bg-white shadow-lg rounded-lg px-8 py-10">
+                    <div className="text-center mb-8">
+                        <h2 className="text-3xl font-bold text-gray-900 mb-2">Bienvenido de nuevo</h2>
+                        <p className="text-gray-600">Inicia sesión para continuar</p>
+                    </div>
 
-                {/* Fondo login */}
-                <div className="absolute w-80 h-96 bg-[#FFBD12] rounded z-10"></div>
-                <img
-                    src="/images/login_bg.png"
-                    alt="login_bg"
-                    className="absolute top-2 w-44 z-20"
-                />
+                    {error && (
+                        <div className="mb-4 p-3 bg-red-50 text-red-600 rounded-md text-sm">
+                            {error}
+                        </div>
+                    )}
 
-                {/* Tarjeta de login */}
-                <div className="relative z-30 mt-36 w-80 bg-white rounded-xl border px-6 py-6 shadow-md flex flex-col items-center">
-                    <h2 className="text-xl font-bold mb-4">Login</h2>
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        <div>
+                            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                                Email
+                            </label>
+                            <input
+                                id="email"
+                                name="email"
+                                type="email"
+                                required
+                                value={formData.email}
+                                onChange={handleChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-coral-500 focus:border-coral-500"
+                                disabled={loading}
+                            />
+                        </div>
 
-                    <form className="w-full flex flex-col items-center">
-                        <input
-                            type="email"
-                            placeholder="Usuario o Email"
-                            className="w-full mb-3 px-4 py-2 border rounded-full text-sm"
-                        />
-                        <input
-                            type="password"
-                            placeholder="Contraseña"
-                            className="w-full mb-4 px-4 py-2 border rounded-full text-sm"
-                        />
+                        <div>
+                            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+                                Contraseña
+                            </label>
+                            <input
+                                id="password"
+                                name="password"
+                                type="password"
+                                required
+                                value={formData.password}
+                                onChange={handleChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-coral-500 focus:border-coral-500"
+                                disabled={loading}
+                            />
+                        </div>
+
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center">
+                                <input
+                                    id="remember"
+                                    name="remember"
+                                    type="checkbox"
+                                    checked={formData.remember}
+                                    onChange={handleChange}
+                                    className="h-4 w-4 text-coral-500 border-gray-300 rounded focus:ring-coral-500"
+                                    disabled={loading}
+                                />
+                                <label htmlFor="remember" className="ml-2 block text-sm text-gray-700">
+                                    Recordarme
+                                </label>
+                            </div>
+                            <Link to="/forgot-password" className="text-sm text-coral-600 hover:text-coral-500">
+                                ¿Olvidaste tu contraseña?
+                            </Link>
+                        </div>
+
                         <button
                             type="submit"
-                            className="w-full bg-black text-white font-semibold py-2 rounded-full text-sm hover:bg-gray-900"
+                            disabled={loading}
+                            className="w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-white bg-coral-500 hover:bg-coral-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-coral-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                            Iniciar sesión →
+                            {loading ? (
+                                <div className="flex items-center justify-center">
+                                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                                    <span className="ml-2">Iniciando sesión...</span>
+                                </div>
+                            ) : (
+                                'Iniciar sesión'
+                            )}
                         </button>
                     </form>
 
-                    <p className="text-xs mt-3">
-                        ¿Eres nuevo? <a href="/signup" className="text-red-500 font-semibold hover:underline">Crear cuenta</a>
-                    </p>
-
-                    <p className="text-center text-xs mt-4 px-2 text-gray-500">
-                        O inicia sesión con:
-                    </p>
-
-                    {/* Botones */}
-                    <div className="w-full flex flex-col gap-2 mt-4">
-                        <a
-                            href="g"
-                            className="flex items-center justify-center gap-2 bg-black text-white py-2 rounded-full text-sm hover:bg-gray-800"
-                        >
-                            ✉️ Email
-                        </a>
-                        <a
-                            href="g"
-                            className="flex items-center justify-center gap-2 bg-[#1877F2] text-white py-2 rounded-full text-sm hover:bg-blue-700"
-                        >
-                            📘 Facebook
-                        </a>
-                        <a
-                            href="g"
-                            className="flex items-center justify-center gap-2 bg-[#1DA1F2] text-white py-2 rounded-full text-sm hover:bg-[#0d8ddc]"
-                        >
-                            🐦 Twitter
-                        </a>
+                    <div className="mt-6 text-center">
+                        <p className="text-sm text-gray-600">
+                            ¿No tienes una cuenta?{' '}
+                            <Link to="/signup" className="text-coral-600 hover:text-coral-500 font-medium">
+                                Regístrate
+                            </Link>
+                        </p>
                     </div>
                 </div>
             </div>

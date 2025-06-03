@@ -22,9 +22,11 @@ const EbookAccessSection: React.FC = () => {
             <p className="text-gray-600 text-base mb-6">
               Crea una cuenta para comenzar tu viaje de lectura sostenible. Compra y vende libros de segunda mano, haz seguimiento de tu impacto ambiental y conéctate con otros amantes de los libros que se preocupan por nuestro planeta.
             </p>
-            <button className="primary-button text-sm px-6 py-2">
-              Únete Ahora
-            </button>
+            <a href="/Books">
+              <button className="primary-button text-sm px-6 py-2">
+                Únete Ahora
+              </button>
+            </a>
           </div>
         </div>
       </div>

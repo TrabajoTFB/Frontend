@@ -10,7 +10,7 @@ const NavBar: React.FC = () => {
 
     return (
         <nav className="nav-bar flex items-center justify-between px-6 py-2">
-            <a href="/profile" className="logo bg-gray-800 rounded-full p-2">
+            <a href="/" className="logo bg-gray-800 rounded-full p-2">
                 <img src="/images/logo.png" alt="Libroly Logo" height={40} />
             </a>
             

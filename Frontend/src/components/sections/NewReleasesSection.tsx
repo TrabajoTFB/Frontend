@@ -46,9 +46,11 @@ const NewReleasesSection: React.FC = () => {
           </div>
 
           <div className="text-center mt-12">
-            <button className="bg-coral-500 text-white px-8 py-3 rounded-md hover:bg-coral-600 transition-colors">
+            <a href="/Books">
+              <button className="bg-coral-500 text-white px-8 py-3 rounded-md hover:bg-coral-600 transition-colors">
               Ver más novedades
-            </button>
+              </button>
+            </a>
           </div>
         </div>
       </div>

@@ -25,3 +25,16 @@ export interface Language {
     id: number;
     codigo: string;
 }
+
+
+export interface Usuario {
+    apellidos: string;
+    contraseña: string;
+    email: string;
+    id: number;
+    book: Book;
+    nombre: string;
+    telefono: string;
+    user: string;
+    direccion: string;
+}

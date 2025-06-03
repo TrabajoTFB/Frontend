@@ -35,7 +35,6 @@ function App() {
             <Route path="/book/:isbn" element={<BookName />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
-<<<<<<< Updated upstream
             <Route path="/books" element={<Books />} />
             <Route 
               path="/profile" 
@@ -49,11 +48,6 @@ function App() {
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
-=======
-            <Route path="/books" element={<Books />} /> {/* lowercase */}
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/cart" element={<Cart />} /> {/* Added cart route */}
->>>>>>> Stashed changes
           </Routes>
         </main>
         <Footer />

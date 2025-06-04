@@ -14,6 +14,7 @@ import MySales from './pages/MySales';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import Contact from './pages/Contact';
+import WorkWithUs from './pages/WorkWithUs';
 import NotFound from './pages/NotFound';
 import NavBar from "./components/layout/NavBar";
 import TopBar from './components/layout/TopBar';
@@ -21,7 +22,6 @@ import Footer from './components/layout/Footer';
 import ChatBot from './components/ui/ChatBot';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './App.css';
-
 
 function App() {
   return (
@@ -52,6 +52,7 @@ function App() {
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/contact" element={<Contact />} />
             <Route path='/cart' element={<Cart />} />
+            <Route path='/work-with-us' element={<WorkWithUs />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

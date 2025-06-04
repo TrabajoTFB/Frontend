@@ -1,13 +1,12 @@
 import axios from 'axios';
+import type { Usuario } from '../types';
 
 const API_URL = 'http://localhost:8080';
 
-// Configuración global de axios
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 axios.defaults.headers.common['Accept'] = 'application/json';
 
-// Interceptor para agregar el token a las peticiones
 axios.interceptors.request.use((config) => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -17,7 +16,6 @@ axios.interceptors.request.use((config) => {
 });
 
 export const api = {
-    // Auth endpoints
     login: async (email: string, password: string) => {
         try {
             const response = await axios.post(`${API_URL}/login`, { email, password });
@@ -56,13 +54,13 @@ register: async (userData: {
     }
 },
 
-    // Check if user is authenticated
     isAuthenticated: () => {
         const token = localStorage.getItem('token');
         return !!token;
     },
 
-    // Get current user
+    // User Endpoints
+
     getCurrentUser: () => {
         const userStr = localStorage.getItem('user');
         return userStr ? JSON.parse(userStr) : null;
@@ -74,7 +72,20 @@ register: async (userData: {
         return response.data;
     },
 
+    getBookCountByUser: async() => {
+        const idUser = localStorage.getItem('usuario');
+        const response = await axios.get(`${API_URL}/user/libros/count/${idUser}`);
+        return response.data;
+    },
+
+    putUser: async(datos: Partial<Usuario>) => {
+        const idUser = localStorage.getItem('usuario');
+        const response = await axios.put(`${API_URL}/user/${idUser}`, datos);
+        return response.data;
+    },
+
     // Book endpoints
+
     getAllBooks: async () => {
         const response = await axios.get(`${API_URL}/books`);
         return response.data;

@@ -2,30 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { api } from '../../services/api';
 import type { Usuario } from '../../types';
 
-const ProfileInfo = ({ setIsEditing }: { setIsEditing: (val: string) => void }) => {
-  const [user, setUser] = useState<Usuario | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const userData = await api.getUserById();
-        setUser(userData);
-        setLoading(false);
-      } catch (err) {
-        console.error('Error fetching user:', err);
-        setError('Error al cargar los datos del usuario');
-        setLoading(false);
-      }
-    };
 
-    fetchUser();
-  }, []);
+const ProfileInfo = ({
+  user,
+  setIsEditing
+}: {
+  user: Usuario;
+  setIsEditing: (val: string) => void;
+}) => {
 
-  if (loading) return <p className="text-white">Cargando...</p>;
-  if (error) return <p className="text-red-500">{error}</p>;
-  if (!user) return null;
 
   const passwordLen = user.contraseña?.length || 8;
 

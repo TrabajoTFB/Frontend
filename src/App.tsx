@@ -22,10 +22,12 @@ import Footer from './components/layout/Footer';
 import ChatBot from './components/ui/ChatBot';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './App.css';
+import { CartProvider } from './contexts/CartContext';
 
 function App() {
   return (
     <AuthProvider>
+      <CartProvider>
       <BrowserRouter>
         <ScrollToTop />
         <div className="min-h-screen bg-white">
@@ -60,6 +62,7 @@ function App() {
         <ChatBot />
       </div>
       </BrowserRouter>
+      </CartProvider>
     </AuthProvider>
   );
 }

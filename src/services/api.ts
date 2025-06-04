@@ -25,6 +25,7 @@ export const api = {
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('user', JSON.stringify(response.data.user));
             }
+            localStorage.setItem('usuario', JSON.stringify(response.data.id));         
             return response.data;
         } catch (error) {
             console.error('Login error:', error);
@@ -65,6 +66,12 @@ register: async (userData: {
     getCurrentUser: () => {
         const userStr = localStorage.getItem('user');
         return userStr ? JSON.parse(userStr) : null;
+    },
+
+    getUserById: async() => {
+        const idUser = localStorage.getItem('usuario');
+        const response = await axios.get(`${API_URL}/user/${idUser}`)
+        return response.data;
     },
 
     // Book endpoints

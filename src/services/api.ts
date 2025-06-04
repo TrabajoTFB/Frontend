@@ -80,8 +80,13 @@ register: async (userData: {
         return response.data;
     },
 
+    getUserBooks: async () => {
+        const response = await axios.get(`${API_URL}/user/books`)
+        return response.data;
+    },
+
     getUserSales: async () => {
-        const response = await axios.get(`${API_URL}/user/sales`)
+        const response = await axios.get(`${API_URL}/user/books/sales`)
         return response.data;
     },
 

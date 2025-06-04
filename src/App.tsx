@@ -9,6 +9,7 @@ import Cart from './pages/Cart';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Profile from './pages/Profile';
+import MyBooks from './pages/MyBooks'
 import MySales from './pages/MySales';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
@@ -45,6 +46,7 @@ function App() {
                 </PrivateRoute>
               } 
             />
+            <Route path='/my-books' element={<MyBooks />} />
             <Route path='/my-sales' element={<MySales />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />

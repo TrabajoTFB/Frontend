@@ -12,9 +12,9 @@ const ProfileSales = ({ setIsEditing, isEditing, }
                 isEditing == "info" && 
                 <button
                     onClick={() => setIsEditing("newSales")}
-                    className="text-xl font-bold rounded-full bg-black px-3 mt-4 mb-4"
+                    className="text-xl text-white font-bold rounded-full bg-black px-3 mt-4 mb-4"
                 >
-                    +
+                    Crear venta
                 </button>
             }
         </div>

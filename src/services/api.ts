@@ -73,6 +73,11 @@ register: async (userData: {
         return response.data;
     },
 
+    getUserSales: async () => {
+        const response = await axios.get(`${API_URL}/user/sales`)
+        return response.data;
+    },
+
     getRandomBook: async () => {
         const response = await axios.get(`${API_URL}/book/random`);
         return response.data;

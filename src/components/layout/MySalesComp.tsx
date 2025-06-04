@@ -7,7 +7,7 @@ interface BooksCompProps {
   initialGenreId?: number;
 }
 
-const BooksComp: React.FC<BooksCompProps> = ({ initialGenreId }) => {
+const MySalesComp: React.FC<BooksCompProps> = ({ initialGenreId }) => {
   const [books, setBooks] = useState<Book[]>([]);
   const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
   const [genres, setGenres] = useState<Genre[]>([]);
@@ -24,7 +24,7 @@ const BooksComp: React.FC<BooksCompProps> = ({ initialGenreId }) => {
     const fetchInitialData = async () => {
       try {
         const [booksData, genresData] = await Promise.all([
-          api.getAllBooks(),
+          api.getUserSales(),
           api.getGenres()
         ]);
         setBooks(booksData);
@@ -204,4 +204,4 @@ const BooksComp: React.FC<BooksCompProps> = ({ initialGenreId }) => {
   );
 };
 
-export default BooksComp;
+export default MySalesComp;

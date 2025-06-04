@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import "./css/NavBar.css";
+import CartBadge from "../ui/CartBadge";
 
 const NavBar: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -57,12 +58,7 @@ const NavBar: React.FC = () => {
                 {isAuthenticated ? (
                     <>
                         {/* Carrito */}
-                        <Link to="/cart" className="text-gray-700 hover:text-coral-500 transition-colors relative">
-                            <i className="fas fa-shopping-cart text-xl"></i>
-                            <span className="absolute -top-2 -right-2 bg-coral-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                                0
-                            </span>
-                        </Link>
+                        <CartBadge />
 
                         {/* Usuario y menú desplegable */}
                         <div className="relative">

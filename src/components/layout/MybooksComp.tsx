@@ -3,7 +3,11 @@ import { api } from "../../services/api";
 import type { Book, Genre } from "../../types";
 import BookCard from "../ui/BookCard";
 
-const BooksComp: React.FC = () => {
+interface BooksCompProps {
+  initialGenreId?: number;
+}
+
+const MyBookComp: React.FC<BooksCompProps> = ({ initialGenreId }) => {
   const [books, setBooks] = useState<Book[]>([]);
   const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
   const [genres, setGenres] = useState<Genre[]>([]);
@@ -11,7 +15,7 @@ const BooksComp: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   // Estados para los filtros
-  const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
+  const [selectedGenres, setSelectedGenres] = useState<number[]>(initialGenreId ? [initialGenreId] : []);
   const [priceRange, setPriceRange] = useState({ min: '', max: '' });
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState<'titulo-asc' | 'titulo-desc' | 'precio-asc' | 'precio-desc'>('titulo-asc');
@@ -20,7 +24,7 @@ const BooksComp: React.FC = () => {
     const fetchInitialData = async () => {
       try {
         const [booksData, genresData] = await Promise.all([
-          api.getAllBooks(),
+          api.getUserBooks(),
           api.getGenres()
         ]);
         setBooks(booksData);
@@ -57,14 +61,6 @@ const BooksComp: React.FC = () => {
       );
     }
 
-    // Filtrar por rango de precio
-    if (priceRange.min !== '') {
-      result = result.filter(book => (book.precio || 0) >= Number(priceRange.min));
-    }
-    if (priceRange.max !== '') {
-      result = result.filter(book => (book.precio || 0) <= Number(priceRange.max));
-    }
-
     // Aplicar ordenamiento
     result.sort((a, b) => {
       switch (sortBy) {
@@ -92,13 +88,6 @@ const BooksComp: React.FC = () => {
     );
   };
 
-  const handlePriceChange = (type: 'min' | 'max', value: string) => {
-    setPriceRange(prev => ({
-      ...prev,
-      [type]: value
-    }));
-  };
-
   const clearFilters = () => {
     setSelectedGenres([]);
     setPriceRange({ min: '', max: '' });
@@ -124,30 +113,6 @@ const BooksComp: React.FC = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full border border-gray-300 rounded px-2 py-1.5 text-sm"
             />
-          </div>
-
-          {/* Precio */}
-          <div className="mb-6">
-            <label className="block mb-1 text-xs font-bold">Precio</label>
-            <div className="flex items-center gap-2 mb-2">
-              <span>€</span>
-              <input
-                type="number"
-                placeholder="Min"
-                value={priceRange.min}
-                onChange={(e) => handlePriceChange('min', e.target.value)}
-                className="border border-gray-300 rounded w-16 px-1 py-0.5 text-xs text-gray-800"
-              />
-              <span>a</span>
-              <span>€</span>
-              <input
-                type="number"
-                placeholder="Max"
-                value={priceRange.max}
-                onChange={(e) => handlePriceChange('max', e.target.value)}
-                className="border border-gray-300 rounded w-16 px-1 py-0.5 text-xs text-gray-800"
-              />
-            </div>
           </div>
 
           {/* Géneros */}
@@ -239,4 +204,4 @@ const BooksComp: React.FC = () => {
   );
 };
 
-export default BooksComp;
+export default MyBookComp;

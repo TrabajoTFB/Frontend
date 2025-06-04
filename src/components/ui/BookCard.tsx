@@ -7,7 +7,7 @@ interface BookCardProps {
 }
 
 const BookCard: React.FC<BookCardProps> = ({ libro }) => {
-  const { titulo, autor, urlImgPortada, valoracion = 5, precio = 15.99 } = libro;
+  const { titulo, autor, urlImgPortada, valoracion = 5, precio = 15.99} = libro;
   const [imageError, setImageError] = useState(false);
 
   // Crear un placeholder personalizado con el título del libro
@@ -58,7 +58,7 @@ const BookCard: React.FC<BookCardProps> = ({ libro }) => {
                 </span>
               ))}
             </div>
-            <span className="text-coral-500 font-semibold">${precio}</span>
+            <span className="text-coral-500 font-semibold">Desde ${precio}</span>
           </div>
         </div>
       </div>

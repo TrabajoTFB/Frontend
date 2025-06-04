@@ -30,10 +30,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Check if user is logged in on component mount
-        const currentUser = api.getCurrentUser();
-        if (currentUser) {
-            setUser(currentUser);
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        } else {
+            const currentUser = api.getCurrentUser();
+            if (currentUser) {
+                setUser(currentUser);
+            }
         }
         setLoading(false);
     }, []);
@@ -42,6 +46,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         try {
             const response = await api.login(email, password);
             setUser(response.user);
+            localStorage.setItem('user', JSON.stringify(response.user));
         } catch (error) {
             console.error('Login error:', error);
             throw error;
@@ -58,7 +63,6 @@ const register = async (userData: {
 }) => {
     try {
         const response = await api.register(userData);
-        // Después del registro exitoso, hacemos login automáticamente
         await login(userData.email, userData.contraseña);
         return response;
     } catch (error) {
@@ -71,6 +75,7 @@ const register = async (userData: {
     const logout = () => {
         api.logout();
         setUser(null);
+        localStorage.removeItem('user');
     };
 
     return (

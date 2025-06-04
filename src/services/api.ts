@@ -1,4 +1,5 @@
 import axios from 'axios';
+import type { Usuario } from '../types';
 
 const API_URL = 'http://localhost:8080';
 
@@ -58,6 +59,8 @@ register: async (userData: {
         return !!token;
     },
 
+    // User Endpoints
+
     getCurrentUser: () => {
         const userStr = localStorage.getItem('user');
         return userStr ? JSON.parse(userStr) : null;
@@ -68,6 +71,20 @@ register: async (userData: {
         const response = await axios.get(`${API_URL}/user/${idUser}`)
         return response.data;
     },
+
+    getBookCountByUser: async() => {
+        const idUser = localStorage.getItem('usuario');
+        const response = await axios.get(`${API_URL}/user/libros/count/${idUser}`);
+        return response.data;
+    },
+
+    putUser: async(datos: Partial<Usuario>) => {
+        const idUser = localStorage.getItem('usuario');
+        const response = await axios.put(`${API_URL}/user/${idUser}`, datos);
+        return response.data;
+    },
+
+    // Book endpoints
 
     getAllBooks: async () => {
         const response = await axios.get(`${API_URL}/books`);

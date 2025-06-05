@@ -13,7 +13,6 @@ import MyBooks from './pages/MyBooks'
 import MySales from './pages/MySales';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
-import Contact from './pages/Contact';
 import WorkWithUs from './pages/WorkWithUs';
 import NotFound from './pages/NotFound';
 import NavBar from "./components/layout/NavBar";
@@ -52,7 +51,6 @@ function App() {
             <Route path='/my-sales' element={<MySales />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/contact" element={<Contact />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='/work-with-us' element={<WorkWithUs />} />
             <Route path="*" element={<NotFound />} />

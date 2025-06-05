@@ -1,23 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import type { Book } from '../../types';
+import { api } from '../../services/api';
 
 interface BookCardProps {
   libro: Book;
 }
 
 const BookCard: React.FC<BookCardProps> = ({ libro }) => {
-  const { titulo, autor, urlImgPortada, valoracion = 5, precio = 15.99} = libro;
+  const { titulo, autor, urlImgPortada, valoracion = 5 } = libro;
   const [imageError, setImageError] = useState(false);
+  const [minPrecio, setMinPrecio] = useState<number | null>(null);
 
-  // Crear un placeholder personalizado con el título del libro
+  useEffect(() => {
+    const fetchVentas = async () => {
+      try {
+        const ventas = await api.getVentaByIsbn(libro.isbn.toString());
+        if (ventas && ventas.length > 0) {
+          const precios = ventas.map((venta: any) => venta.precio);
+          const precioMin = Math.min(...precios);
+          setMinPrecio(precioMin);
+        }
+      } catch (error) {
+        console.error('Error al obtener las ventas:', error);
+      }
+    };
+
+    fetchVentas();
+  }, [libro.isbn]);
+
   const getPlaceholderImage = () => {
-    const bgColor = 'e2e8f0'; // Gris claro
-    const textColor = '1a1a1a'; // Casi negro
+    const bgColor = 'e2e8f0'; 
+    const textColor = '1a1a1a';
     const text = encodeURIComponent(titulo.slice(0, 20) + (titulo.length > 20 ? '...' : ''));
     return `https://placehold.co/400x600/${bgColor}/${textColor}?text=${text}`;
   };
-  
+
   return (
     <div className="group">
       <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
@@ -58,7 +76,9 @@ const BookCard: React.FC<BookCardProps> = ({ libro }) => {
                 </span>
               ))}
             </div>
-            <span className="text-coral-500 font-semibold">Desde ${precio}</span>
+            <span className="text-coral-500 font-semibold">
+              {minPrecio !== null ? `Desde €${minPrecio.toFixed(2)}` : 'Fuera de stock'}
+            </span>
           </div>
         </div>
       </div>

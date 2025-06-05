@@ -119,5 +119,11 @@ register: async (userData: {
     getBookByIsbn: async (isbn: string) => {
         const response = await axios.get(`${API_URL}/book/${isbn}`);
         return response.data;
+    },
+
+    getVentaByIsbn: async (isbn: string) => {
+    const response = await axios.get(`${API_URL}/venta/${isbn}`);
+    return response.data;
     }
+
 };

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { data } from 'react-router-dom';
 
 const ProfileNewSales = ({ setIsEditing }: { setIsEditing: (val: string) => void }) => {
   const [form, setForm] = useState({
@@ -8,16 +9,21 @@ const ProfileNewSales = ({ setIsEditing }: { setIsEditing: (val: string) => void
     handPicking: false,
   });
 
-  const subjectOption = [
-    'Nuevo con etiqueta',
-    'Como nuevo',
-    'Buen estado',
-    'En condiciones aceptables',
-    'Deteriorado'
-  ];
+  const statusMap: Record<string, number> = {
+    'Nuevo con etiqueta': 5,
+    'Como nuevo': 4,
+    'Buen estado': 3,
+    'En condiciones aceptables': 2,
+    'Deteriorado': 1
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const dataToSend = 
+    {
+      ...form,
+      status: statusMap[form.status] || 1,
+    };
     try
     {
       const response = await fetch('http://localhost:8080/api/libros',
@@ -27,7 +33,7 @@ const ProfileNewSales = ({ setIsEditing }: { setIsEditing: (val: string) => void
         {
           'Content-Type': 'application/json',
         }, 
-        body: JSON.stringify(form),
+        body: JSON.stringify(dataToSend),
       });
       if (response.ok)
         alert('libro guardado correctamente');
@@ -93,7 +99,7 @@ const ProfileNewSales = ({ setIsEditing }: { setIsEditing: (val: string) => void
             className="w-full p-2 rounded text-black"
           >
           <option value="">Estado del libro</option>
-          {subjectOption.map((option) => (
+          {Object.keys(statusMap).map((option) => (
             <option key={option} value={option}>
               {option}
             </option>

@@ -143,13 +143,8 @@ const MyBookComp: React.FC<BooksCompProps> = ({ initialGenreId }) => {
         </aside>
 
         <section className="flex-1">
-          {/* Breadcrumb */}
-          <div className="mb-6 text-sm text-gray-600">
-            <span className="text-coral-500">Inicio</span> / Libros
-          </div>
-
           {/* Barra opciones */}
-          <div className="flex justify-between items-center text-sm text-gray-800 mb-8">
+          <div className="flex justify-between items-center text-sm text-gray-800 mb-8 mt-5">
             <div>
               Ordenar por:{" "}
               <select

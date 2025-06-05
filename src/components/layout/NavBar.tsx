@@ -49,8 +49,6 @@ const NavBar: React.FC = () => {
                 <li><Link to="/work-with-us" className="hover:text-coral-500 transition-colors">Trabaja con nosotros</Link></li>
                 <li><Link to="/blog" className="hover:text-coral-500 transition-colors">Blog</Link></li>
                 <li><Link to="/about-us" className="hover:text-coral-500 transition-colors">Sobre Nosotros</Link></li>
-                <li><Link to="/contact" className="hover:text-coral-500 transition-colors">Contacto</Link></li>
-                
             </ul>
 
             {/* Botones de autenticación y carrito - Desktop */}

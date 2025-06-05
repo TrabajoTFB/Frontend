@@ -19,6 +19,7 @@ import NavBar from "./components/layout/NavBar";
 import TopBar from './components/layout/TopBar';
 import Footer from './components/layout/Footer';
 import ChatBot from './components/ui/ChatBot';
+import TermsAndConditions from './pages/TermsAndConditions';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './App.css';
 import { CartProvider } from './contexts/CartContext';
@@ -53,6 +54,7 @@ function App() {
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='/work-with-us' element={<WorkWithUs />} />
+            <Route path='/terms-conditions' element={<TermsAndConditions />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

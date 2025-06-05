@@ -16,6 +16,30 @@ const ProfileNewSales = ({ setIsEditing }: { setIsEditing: (val: string) => void
     'Deteriorado'
   ];
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try
+    {
+      const response = await fetch('http://localhost:8080/api/libros',
+      {
+        method: 'POST', 
+        headers: 
+        {
+          'Content-Type': 'application/json',
+        }, 
+        body: JSON.stringify(form),
+      });
+      if (response.ok)
+        alert('libro guardado correctamente');
+      else
+        alert('Error al guardar el libro');
+    }
+    catch (error)
+    {
+      alert('Error de conexión con el servidor');
+    }
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
     setForm(prev => ({
@@ -27,7 +51,10 @@ const ProfileNewSales = ({ setIsEditing }: { setIsEditing: (val: string) => void
   };
 
   return (
-    <form className="bg-blue-800 text-white rounded-2xl p-6 w-full max-w-md">
+    <form 
+      className="bg-blue-800 text-white rounded-2xl p-6 w-full max-w-md"
+      onSubmit={handleSubmit}
+    >
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label className="block font-bold mb-1">ISBN</label>

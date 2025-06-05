@@ -1,5 +1,5 @@
 import React from "react";
-import MyBookComp from "../components/layout/MybooksComp";
+import MyBookComp from "../components/layout/MyBooksComponent";
 
 const MyBooks: React.FC = () => {
     return (

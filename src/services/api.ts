@@ -91,8 +91,9 @@ register: async (userData: {
         return response.data;
     },
 
-    getUserBooks: async () => {
-        const response = await axios.get(`${API_URL}/user/books`)
+    getUserWithBooks: async() => {
+        const idUser = localStorage.getItem('usuario');
+        const response = await axios.get(`${API_URL}/user/${idUser}`);
         return response.data;
     },
 

@@ -19,34 +19,34 @@ const ProfileInfo = ({
     <form className="bg-blue-800 text-white rounded-2xl p-6 w-full h-full">
       <div className="grid grid-cols-2 gap-8">
         <div>
-          <label className="font-bold block mb-1">Name</label>
+          <label className="font-bold block mb-1">Nombre</label>
           <p>{user.nombre}</p>
         </div>
         <div>
-          <label className="font-bold block mb-1">Surname</label>
+          <label className="font-bold block mb-1">Apellidos</label>
           <p>{user.apellidos}</p>
         </div>
 
         <div className="col-span-2">
-          <label className="font-bold block mb-1">Direction</label>
+          <label className="font-bold block mb-1">Dirección</label>
           <p>{user.direccion || 'Sin direccion asignada'}</p>
         </div>
 
         <div>
-          <label className="font-bold block mb-1">Password</label>
+          <label className="font-bold block mb-1">Contraseña</label>
           <p>{"*".repeat(passwordLen)}</p>
         </div>
         <div>
-          <label className="font-bold block mb-1">Mail</label>
+          <label className="font-bold block mb-1">Correo electrónico</label>
           <p>{user.email}</p>
         </div>
 
         <div>
-          <label className="font-bold block mb-1">Phone</label>
+          <label className="font-bold block mb-1">Número de teléfono</label>
           <p>{user.telefono}</p>
         </div>
         <div>
-          <label className="font-bold block mb-1">Username</label>
+          <label className="font-bold block mb-1">Nombre de usuario</label>
           <p>{user.user}</p>
         </div>
       </div>

@@ -8,11 +8,21 @@ const ProfileNewSales = ({ setIsEditing }: { setIsEditing: (val: string) => void
     handPicking: false,
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
+  const subjectOption = [
+    'Nuevo con etiqueta',
+    'Como nuevo',
+    'Buen estado',
+    'En condiciones aceptables',
+    'Deteriorado'
+  ];
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
     setForm(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === 'checkbox'
+        ? (e.target as HTMLInputElement).checked
+        : value,
     }));
   };
 
@@ -24,9 +34,10 @@ const ProfileNewSales = ({ setIsEditing }: { setIsEditing: (val: string) => void
           <input
             type="text"
             name="isbn"
-            placeholder="📘 Book name"
+            placeholder="ISBN"
             value={form.isbn}
             onChange={handleChange}
+            required
             className="w-full p-2 rounded text-black"
           />
         </div>
@@ -35,24 +46,32 @@ const ProfileNewSales = ({ setIsEditing }: { setIsEditing: (val: string) => void
           <label className="block font-bold mb-1">Precio</label>
           <input
             type="number"
-            name="precio"
-            placeholder="💲 price"
+            name="price"
+            placeholder="Precio"
             value={form.price}
             onChange={handleChange}
+            required
             className="w-full p-2 rounded text-black"
           />
         </div>
 
         <div className="col-span-2">
           <label className="block font-bold mb-1">Estado</label>
-          <input
-            type="text"
+          <select
+            id='status'
             name="status"
-            placeholder="Estado"
             value={form.status}
             onChange={handleChange}
+            required
             className="w-full p-2 rounded text-black"
-          />
+          >
+          <option value="">Estado del libro</option>
+          {subjectOption.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+          </select>
         </div>
 
         <div className="col-span-2 flex items-center space-x-4 mt-2">

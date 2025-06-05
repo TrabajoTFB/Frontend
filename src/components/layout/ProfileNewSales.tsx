@@ -8,25 +8,63 @@ const ProfileNewSales = ({ setIsEditing }: { setIsEditing: (val: string) => void
     handPicking: false,
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
+  const subjectOption = [
+    'Nuevo con etiqueta',
+    'Como nuevo',
+    'Buen estado',
+    'En condiciones aceptables',
+    'Deteriorado'
+  ];
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try
+    {
+      const response = await fetch('http://localhost:8080/api/libros',
+      {
+        method: 'POST', 
+        headers: 
+        {
+          'Content-Type': 'application/json',
+        }, 
+        body: JSON.stringify(form),
+      });
+      if (response.ok)
+        alert('libro guardado correctamente');
+      else
+        alert('Error al guardar el libro');
+    }
+    catch (error)
+    {
+      alert('Error de conexión con el servidor');
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
     setForm(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === 'checkbox'
+        ? (e.target as HTMLInputElement).checked
+        : value,
     }));
   };
 
   return (
-    <form className="bg-blue-800 text-white rounded-2xl p-6 w-full max-w-md">
+    <form 
+      className="bg-blue-800 text-white rounded-2xl p-6 w-full max-w-md"
+      onSubmit={handleSubmit}
+    >
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label className="block font-bold mb-1">ISBN</label>
           <input
             type="text"
             name="isbn"
-            placeholder="📘 Book name"
+            placeholder="ISBN"
             value={form.isbn}
             onChange={handleChange}
+            required
             className="w-full p-2 rounded text-black"
           />
         </div>
@@ -35,24 +73,32 @@ const ProfileNewSales = ({ setIsEditing }: { setIsEditing: (val: string) => void
           <label className="block font-bold mb-1">Precio</label>
           <input
             type="number"
-            name="precio"
-            placeholder="💲 price"
+            name="price"
+            placeholder="Precio"
             value={form.price}
             onChange={handleChange}
+            required
             className="w-full p-2 rounded text-black"
           />
         </div>
 
         <div className="col-span-2">
           <label className="block font-bold mb-1">Estado</label>
-          <input
-            type="text"
+          <select
+            id='status'
             name="status"
-            placeholder="Estado"
             value={form.status}
             onChange={handleChange}
+            required
             className="w-full p-2 rounded text-black"
-          />
+          >
+          <option value="">Estado del libro</option>
+          {subjectOption.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+          </select>
         </div>
 
         <div className="col-span-2 flex items-center space-x-4 mt-2">

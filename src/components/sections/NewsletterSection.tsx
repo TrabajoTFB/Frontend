@@ -14,7 +14,7 @@ const NewsletterSection: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 relative">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
-            Suscríbete a Nuestro Boletín
+            Suscríbete a nuestro boletín
           </h2>
           <p className="text-white/90 mb-8 max-w-xl mx-auto">
             ¡Mantente conectado! Suscríbete a nuestro boletín para recibir recomendaciones de libros y enterarte de todas nuestras novedades.

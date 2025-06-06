@@ -23,10 +23,12 @@ const ProfileNewSales = ({ setIsEditing }: { setIsEditing: (val: string) => void
     {
       ...form,
       status: statusMap[form.status] || 1,
+      enVenta: true,
     };
     try
     {
-      const response = await fetch('http://localhost:8080/api/libros',
+      
+      const response = await fetch('http://localhost:8080/user/1/',
       {
         method: 'POST', 
         headers: 

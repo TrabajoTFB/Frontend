@@ -12,7 +12,12 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [addedVendedorId, setAddedVendedorId] = useState<number | null>(null);
   const [vendedores, setVendedores] = useState<any[]>([]);
+  const [estadoFiltro, setEstadoFiltro] = useState<number | ''>('');
   const [loading, setLoading] = useState(true);
+
+  const vendedoresFiltrados = estadoFiltro == ''
+    ? vendedores
+    : vendedores.filter(v => v.estado == estadoFiltro);
 
   useEffect(() => {
     const fetchVendedores = async () => {
@@ -42,6 +47,14 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
     setAddedVendedorId(vendedor.id);
     setShowSuccess(true);
     setTimeout(() => setShowSuccess(false), 3000);
+  };
+
+  const estadoMap: Record<number, string> = {
+    5: 'Nuevo con etiqueta',
+    4: 'Como nuevo',
+    3: 'Buen estado',
+    2: 'En condiciones aceptables',
+    1: 'Deteriorado',
   };
 
   return (
@@ -124,15 +137,34 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
             </div>
           )}
 
+          {/* Vendedores */}
           <div>
-            <h3 className="text-lg font-semibold mb-3">Vendedores disponibles</h3>
+            <h3 className="text-lg font-semibold mb-3">Vendedores disponibles
+
+            {/* Filtro */}
+            <div className='mb-2 ml-1'>
+              <select 
+                className='border rounded px-2 py-1 text-sm'
+                value={estadoFiltro}
+                onChange={e => setEstadoFiltro(e.target.value == '' ? '' : Number(e.target.value))}
+              >
+                <option value="">Filtrar por estado</option>
+                <option value={5}>Nuevo con etiqueta</option>
+                <option value={4}>Como nuevo</option>
+                <option value={3}>Buen estado</option>
+                <option value={2}>En condiciones aceptables</option>
+                <option value={1}>Deteriorado</option>
+              </select>
+            </div>
+
+            </h3>
             {loading ? (
               <p>Cargando vendedores...</p>
             ) : vendedores.length === 0 ? (
               <p>No hay vendedores disponibles para este libro.</p>
             ) : (
               <div className="space-y-3">
-                {vendedores.map((v) => {
+                {vendedoresFiltrados.map((v) => {
                   const itemId = `${book.isbn}-${v.id}`;
                   const isInCart = state.items.some((item) => item.id === itemId);
                   return (
@@ -144,8 +176,7 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
                         <p className="font-semibold">
                           {v.nombre} {v.apellidos}
                         </p>
-                        <p className="text-sm text-gray-500">{v.email}</p>
-                        <p className="text-sm text-gray-500">{v.telefono}</p>
+                        <p className="text-sm text-gray-500">{estadoMap[v.estado]}</p>
                       </div>
                       <div className="text-right">
                         <p className="text-coral-600 font-bold text-lg">

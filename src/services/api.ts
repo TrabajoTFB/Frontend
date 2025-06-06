@@ -98,8 +98,10 @@ register: async (userData: {
     },
 
     getUserSales: async () => {
-        const response = await axios.get(`${API_URL}/user/books/sales`)
-        return response.data;
+        const idUser = localStorage.getItem('usuario');
+        const response = await axios.get(`${API_URL}/user/${idUser}`);
+        const sales = (response.data.libros).filter((libro: any) => libro.enVenta)
+        return sales;
     },
 
     getRandomBook: async () => {

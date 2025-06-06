@@ -13,7 +13,6 @@ interface UserBook {
   publisher: string;
   isbn: number;
 }
-
 interface User {
   id: number;
   nombre: string;

@@ -15,13 +15,13 @@ const ProfileEdit = ({
   
   const [showPassword, setShowPassword] = useState(false);
 
-    // Estados para cada campo editable
-    const [nombre, setNombre] = useState(user.nombre);
-    const [apellidos, setApellidos] = useState(user.apellidos);
-    const [direccion, setDireccion] = useState(user.direccion);
-    const [telefono, setTelefono] = useState(user.telefono);
-    const [email, setEmail] = useState(user.email);
-    const [contraseña, setContraseña] = useState(user.contraseña);
+  // Estados para cada campo editable
+  const [nombre, setNombre] = useState(user.nombre || "");
+  const [apellidos, setApellidos] = useState(user.apellidos || "");
+  const [direccion, setDireccion] = useState(user.direccion || "");
+  const [telefono, setTelefono] = useState(user.telefono || "");
+  const [email, setEmail] = useState(user.email || "");
+  const [contraseña, setContraseña] = useState(user.contraseña || "");
 
     const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
@@ -46,79 +46,95 @@ const ProfileEdit = ({
 
   return (
     <form 
-      className="bg-white shadow-lg rounded-2xl p-8 w-full h-full border border-gray-100"
+      className="w-full max-w-lg"
       onSubmit={handleSubmit}>
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label className="font-bold block mb-1 text-gray-700">Name</label>
-          <input
-            type="text"
-            defaultValue={user.nombre}
-            onChange={(e) => setNombre(e.target.value)}
-            placeholder="Full name"
-            className="w-full p-2 rounded-xl text-gray-900 border border-gray-300 focus:ring-coral-500 focus:border-coral-500"
-          />
-        </div>
-        <div>
-          <label className="font-bold block mb-1 text-gray-700">Surname</label>
-          <input
-            type="text"
-            defaultValue={user.apellidos}
-            onChange={(e) => setApellidos(e.target.value)}
-            placeholder="Surname"
-            className="w-full p-2 rounded-xl text-gray-900 border border-gray-300 focus:ring-coral-500 focus:border-coral-500"
-          />
-        </div>
-        <div className="col-span-2">
-          <label className="font-bold block mb-1 text-gray-700">Direction</label>
-          <input
-            type="text"
-            defaultValue={user.direccion}
-            onChange={(e) => setDireccion(e.target.value)}
-            placeholder="Direction"
-            className="w-full p-2 rounded-xl text-gray-900 border border-gray-300 focus:ring-coral-500 focus:border-coral-500"
-          />
-        </div>
-        <div>
-          <label className="font-bold block mb-1 text-gray-700">Password</label>
-          <div className="relative">
+      <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+        <div className="flex flex-col items-start border-b border-gray-100 py-2">
+          <dt className="text-xs text-gray-500 font-medium mb-1">Nombre</dt>
+          <dd className="w-full">
             <input
-              type={showPassword ? "text" : "password"}
-              defaultValue={user.contraseña}
-              onChange={(e) => setContraseña(e.target.value)}
-              placeholder="Password"
-              className="w-full p-2 rounded-xl text-gray-900 border border-gray-300 focus:ring-coral-500 focus:border-coral-500 pr-10"
+              type="text"
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
+              placeholder="Nombre"
+              className="text-base text-gray-900 font-semibold pl-2 bg-transparent border-none focus:ring-0 focus:outline-none w-full"
             />
-            <button
-              type="button"
-              onClick={() => setShowPassword(prev => !prev)}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm bg-white text-coral-500 px-2 py-1 rounded shadow"
-            >
-              {showPassword ? "Ocultar" : "Mostrar"}
-            </button>
-          </div>
+          </dd>
         </div>
-        <div>
-          <label className="font-bold block mb-1 text-gray-700">Mail</label>
-          <input
-            type="email"
-            defaultValue={user.email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Mail"
-            className="w-full p-2 rounded-xl text-gray-900 border border-gray-300 focus:ring-coral-500 focus:border-coral-500"
-          />
+        <div className="flex flex-col items-start border-b border-gray-100 py-2">
+          <dt className="text-xs text-gray-500 font-medium mb-1">Apellidos</dt>
+          <dd className="w-full">
+            <input
+              type="text"
+              value={apellidos}
+              onChange={(e) => setApellidos(e.target.value)}
+              placeholder="Apellidos"
+              className="text-base text-gray-900 font-semibold pl-2 bg-transparent border-none focus:ring-0 focus:outline-none w-full"
+            />
+          </dd>
         </div>
-        <div>
-          <label className="font-bold block mb-1 text-gray-700">Phone</label>
-          <input
-            type="tel"
-            defaultValue={user.telefono}
-            onChange={(e) => setTelefono(e.target.value)}
-            placeholder="Phone"
-            className="w-full p-2 rounded-xl text-gray-900 border border-gray-300 focus:ring-coral-500 focus:border-coral-500"
-          />
+        <div className="flex flex-col items-start border-b border-gray-100 py-2">
+          <dt className="text-xs text-gray-500 font-medium mb-1">Usuario</dt>
+          <dd className="text-base text-gray-900 font-semibold pl-2">{user.user}</dd>
         </div>
-      </div>
+        <div className="flex flex-col items-start border-b border-gray-100 py-2">
+          <dt className="text-xs text-gray-500 font-medium mb-1">Correo</dt>
+          <dd className="w-full">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Correo electrónico"
+              className="text-base text-gray-900 font-semibold pl-2 bg-transparent border-none focus:ring-0 focus:outline-none w-full"
+            />
+          </dd>
+        </div>
+        <div className="flex flex-col items-start border-b border-gray-100 py-2">
+          <dt className="text-xs text-gray-500 font-medium mb-1">Teléfono</dt>
+          <dd className="w-full">
+            <input
+              type="tel"
+              value={telefono}
+              onChange={(e) => setTelefono(e.target.value)}
+              placeholder="Teléfono"
+              className="text-base text-gray-900 font-semibold pl-2 bg-transparent border-none focus:ring-0 focus:outline-none w-full"
+            />
+          </dd>
+        </div>
+        <div className="flex flex-col items-start border-b border-gray-100 py-2">
+          <dt className="text-xs text-gray-500 font-medium mb-1">Dirección</dt>
+          <dd className="w-full">
+            <input
+              type="text"
+              value={direccion}
+              onChange={(e) => setDireccion(e.target.value)}
+              placeholder="Dirección"
+              className="text-base text-gray-900 font-semibold pl-2 bg-transparent border-none focus:ring-0 focus:outline-none w-full"
+            />
+          </dd>
+        </div>
+        <div className="flex flex-col items-start border-b border-gray-100 py-2 col-span-2">
+          <dt className="text-xs text-gray-500 font-medium mb-1">Contraseña</dt>
+          <dd className="w-full">
+            <div className="relative">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                value={contraseña}
+                onChange={(e) => setContraseña(e.target.value)}
+                placeholder="Contraseña"
+                className="text-base text-gray-900 font-semibold pl-2 bg-transparent border-none focus:ring-0 focus:outline-none w-full pr-10"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(prev => !prev)}
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-xs text-coral-500 px-2 py-1 rounded"
+              >
+                {showPassword ? "Ocultar" : "Mostrar"}
+              </button>
+            </div>
+          </dd>
+        </div>
+      </dl>
       <div className='flex justify-center mt-6'>
         <button
           type="submit"
@@ -128,6 +144,7 @@ const ProfileEdit = ({
         </button>
         <button
           onClick={() => setIsEditing("info")}
+          type="button"
           className="bg-white text-coral-500 font-bold py-2 px-6 rounded-xl shadow-md border border-coral-500 hover:bg-coral-50 transition-colors m-2"
         >
           Cancelar

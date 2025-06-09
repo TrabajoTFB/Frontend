@@ -54,7 +54,11 @@ const blogPosts: BlogPostType[] = [
 
 const BlogPost: React.FC = () => {
   const { slug } = useParams();
-  const post = blogPosts.find(p => p.title.toLowerCase().replace(/\s+/g, '-') === slug);
+  // Permitir acceso tanto por id numérico como por slug de título
+  const post = blogPosts.find(p =>
+    p.id.toString() === slug ||
+    p.title.toLowerCase().replace(/\s+/g, '-') === slug
+  );
 
   if (!post) {
     return (

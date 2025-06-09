@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { data } from 'react-router-dom';
 
 const ProfileNewSales = ({ setIsEditing }: { setIsEditing: (val: string) => void }) => {
   const [form, setForm] = useState({

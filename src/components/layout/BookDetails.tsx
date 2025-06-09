@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useCart } from '../../contexts/CartContext';
+import { useAuth } from '../../contexts/AuthContext';
 import type { Book } from '../../types';
 import { api } from '../../services/api';
 import { Link } from 'react-router-dom';
@@ -10,11 +11,16 @@ interface BookDetailsProps {
 
 const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
   const { addItem, removeItem, state } = useCart();
+  const { user: authUser } = useAuth();
   const [showSuccess, setShowSuccess] = useState(false);
   const [addedVendedorId, setAddedVendedorId] = useState<number | null>(null);
   const [vendedores, setVendedores] = useState<any[]>([]);
   const [estadoFiltro, setEstadoFiltro] = useState<number | ''>('');
   const [loading, setLoading] = useState(true);
+  const [addToLibraryLoading, setAddToLibraryLoading] = useState(false);
+  const [addToLibrarySuccess, setAddToLibrarySuccess] = useState(false);
+  const [addToLibraryError, setAddToLibraryError] = useState<string | null>(null);
+  const [userBooks, setUserBooks] = useState<number[] | null>(null);
 
   const vendedoresFiltrados = estadoFiltro == ''
     ? vendedores
@@ -35,6 +41,21 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
     fetchVendedores();
   }, [book.isbn]);
 
+  useEffect(() => {
+    const fetchUserBooks = async () => {
+      const idUsuario = Number(localStorage.getItem('usuario'));
+      if (!idUsuario) return;
+      try {
+        const userData = await api.getUserWithBooks();
+        const libros = userData.libros || [];
+        setUserBooks(libros.map((l: any) => l.isbn));
+      } catch {
+        setUserBooks([]);
+      }
+    };
+    fetchUserBooks();
+  }, [book.isbn]);
+
   const handleAddToCart = (vendedor: any) => {
     addItem({
       id: `${book.isbn}-${vendedor.id}`, // ID único por vendedor
@@ -48,6 +69,28 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
     setAddedVendedorId(vendedor.id);
     setShowSuccess(true);
     setTimeout(() => setShowSuccess(false), 3000);
+  };
+
+  const handleAddToLibrary = async () => {
+    setAddToLibraryLoading(true);
+    setAddToLibraryError(null);
+    try {
+      const idUsuario = Number(localStorage.getItem('usuario'));
+      const res = await api.addBookByIsbn({
+        idUsuario,
+        isbn: book.isbn
+      });
+      if (res) {
+        setAddToLibrarySuccess(true);
+        setTimeout(() => setAddToLibrarySuccess(false), 2500);
+      } else {
+        setAddToLibraryError('No se pudo agregar el libro o ya está en tu biblioteca.');
+      }
+    } catch (err) {
+      setAddToLibraryError('No se pudo agregar el libro. Intenta de nuevo.');
+    } finally {
+      setAddToLibraryLoading(false);
+    }
   };
 
   const estadoMap: Record<number, string> = {
@@ -135,6 +178,27 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
                 />
               </svg>
               ¡Libro agregado al carrito!
+            </div>
+          )}
+
+          {/* Sección: ¿Ya tienes este libro? */}
+          {userBooks && !userBooks.includes(book.isbn) && (
+            <div className="my-3 p-2 bg-gray-50 border border-coral-100 rounded-lg flex flex-col items-center max-w-xs mx-auto">
+              <span className="font-semibold text-gray-700 mb-1 text-sm">¿Ya tienes este libro?</span>
+              <button
+                onClick={handleAddToLibrary}
+                disabled={addToLibraryLoading}
+                className="flex items-center gap-2 bg-coral-500 hover:bg-coral-600 text-white px-3 py-1.5 rounded font-semibold text-sm transition-colors disabled:opacity-60"
+              >
+                <i className="fas fa-plus"></i>
+                {addToLibraryLoading ? 'Agregando...' : 'Agregar a mi biblioteca'}
+              </button>
+              {addToLibrarySuccess && (
+                <span className="mt-1 text-green-600 text-xs">¡Libro agregado a tu biblioteca!</span>
+              )}
+              {addToLibraryError && (
+                <span className="mt-1 text-red-500 text-xs">{addToLibraryError}</span>
+              )}
             </div>
           )}
 

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import UserBookCard from "../ui/UserBooks";
+import LoadingSpinner from "../ui/LoadingSpinner";
+import { useAuth } from "../../contexts/AuthContext";
 
 interface UserBook {
   titulo: string;
@@ -13,18 +15,10 @@ interface UserBook {
   publisher: string;
   isbn: number;
 }
-interface User {
-  id: number;
-  nombre: string;
-  apellidos: string;
-  email: string;
-  libros: UserBook[];
-}
 
 const MyBooksComponent: React.FC = () => {
   const [books, setBooks] = useState<UserBook[]>([]);
   const [filteredBooks, setFilteredBooks] = useState<UserBook[]>([]);
-  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -32,11 +26,17 @@ const MyBooksComponent: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState<'titulo-asc' | 'titulo-desc' | 'fecha-asc' | 'fecha-desc' | 'valoracion-desc'>('titulo-asc');
 
+  // Estados para agregar libro
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [isbnInput, setIsbnInput] = useState("");
+  const [addLoading, setAddLoading] = useState(false);
+  const [addError, setAddError] = useState<string | null>(null);
+  const { user: authUser } = useAuth();
+
   useEffect(() => {
     const fetchUserBooks = async () => {
       try {
         const userData = await api.getUserWithBooks();
-        setUser(userData);
         setBooks(userData.libros || []);
         setFilteredBooks(userData.libros || []);
         setLoading(false);
@@ -95,6 +95,8 @@ const MyBooksComponent: React.FC = () => {
       <div className="absolute top-28 left-20 w-96 h-96 bg-coral-500/30 rounded-xl -z-10"></div>
 
       <div className="max-w-7xl w-full bg-white rounded-xl shadow-lg p-8">
+        {/* Botón para abrir modal */}
+
 
         <div className="flex gap-10">
           {/* Sidebar de filtros */}
@@ -135,12 +137,19 @@ const MyBooksComponent: React.FC = () => {
                   <option value="valoracion-desc">Mejor valorados</option>
                 </select>
               </div>
-              <div>Mostrando {filteredBooks.length} resultado{filteredBooks.length !== 1 ? 's' : ''}</div>
-            </div>
+        <div className="flex justify-end mb-6">
+          <button
+            className="bg-coral-500 hover:bg-coral-600 text-white rounded-full p-2 shadow transition-colors flex items-center gap-2"
+            onClick={() => setShowAddModal(true)}
+            title="Agregar libro por ISBN"
+          >
+            <i className="fas fa-plus"></i>
+            <span className="hidden sm:inline">Agregar libro</span>
+          </button>
+        </div>            </div>
             {loading ? (
-              <div className="text-center py-12">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-coral-500 mx-auto"></div>
-                <p className="mt-4 text-gray-600">Cargando tu biblioteca...</p>
+              <div className="flex flex-col items-center justify-center py-12">
+                <LoadingSpinner />
               </div>
             ) : error ? (
               <div className="text-center py-12">
@@ -180,6 +189,71 @@ const MyBooksComponent: React.FC = () => {
             )}
           </section>
         </div>
+
+        {/* Modal para agregar libro */}
+        {showAddModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+            <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-xs relative">
+              <button
+                className="absolute top-2 right-2 text-gray-400 hover:text-coral-500 text-xl"
+                onClick={() => { setShowAddModal(false); setIsbnInput(""); setAddError(null); }}
+                aria-label="Cerrar"
+              >
+                <i className="fas fa-times"></i>
+              </button>
+              <h2 className="text-lg font-bold mb-4 text-coral-600">Agregar libro por ISBN</h2>
+              <form
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  setAddLoading(true);
+                  setAddError(null);
+                  try {
+                    // Obtener idUsuario del localStorage
+                    const idUsuario = Number(localStorage.getItem('usuario'));
+                    const res = await api.addBookByIsbn({
+                      idUsuario,
+                      isbn: Number(isbnInput)
+                    });
+                    if (res) {
+                      setShowAddModal(false);
+                      setIsbnInput("");
+                      setAddError(null);
+                      // Refresca la lista
+                      const userData = await api.getUserWithBooks();
+                      setBooks(userData.libros || []);
+                      setFilteredBooks(userData.libros || []);
+                    } else {
+                      setAddError("No se encontró el libro o ya está en tu biblioteca.");
+                    }
+                  } catch (err) {
+                    setAddError("No se pudo agregar el libro. Verifica el ISBN.");
+                  } finally {
+                    setAddLoading(false);
+                  }
+                }}
+                className="flex flex-col gap-4"
+              >
+                <input
+                  type="text"
+                  placeholder="Introduce el ISBN"
+                  value={isbnInput}
+                  onChange={e => setIsbnInput(e.target.value)}
+                  className="border border-gray-300 rounded px-3 py-2 text-sm focus:outline-coral-500"
+                  required
+                />
+                {addError && <p className="text-red-500 text-xs">{addError}</p>}
+                <button
+                  type="submit"
+                  className="bg-coral-500 hover:bg-coral-600 text-white rounded-md py-2 font-semibold flex items-center justify-center gap-2 disabled:opacity-60"
+                  disabled={addLoading}
+                >
+                  {addLoading ? <LoadingSpinner className="h-5 w-5" /> : <i className="fas fa-plus"></i>}
+                  Agregar
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
       </div>
     </main>
   );

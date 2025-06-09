@@ -38,45 +38,45 @@ const BookCard: React.FC<BookCardProps> = ({ libro }) => {
 
   return (
     <div className="group">
-      <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
-        <div className="aspect-[3/4] relative overflow-hidden bg-gray-100">
+      <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:-translate-y-2 w-40 sm:w-44 md:w-48 xl:w-52 mx-auto">
+        <div className="aspect-[3/4] relative overflow-hidden bg-gray-100 min-h-[160px]">
           <img
             src={!imageError ? urlImgPortada : getPlaceholderImage()}
             alt={`Portada de ${titulo}`}
             onError={() => setImageError(true)}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110 max-h-56 sm:max-h-64 md:max-h-72 xl:max-h-80"
             loading="lazy"
           />
           <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity duration-300">
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <Link 
                 to={`/book/${libro.isbn}`}
-                className="bg-coral-500 text-white px-6 py-2 rounded-md hover:bg-coral-600 transition-colors"
+                className="bg-coral-500 text-white px-4 py-2 rounded-md hover:bg-coral-600 transition-colors text-sm"
               >
                 Ver detalles
               </Link>
             </div>
           </div>
         </div>
-        <div className="p-4">
+        <div className="p-3">
           <Link to={`/book/${libro.isbn}`}>
-            <h3 className="text-lg font-semibold text-gray-900 mb-1 line-clamp-1 hover:text-coral-500 transition-colors">
+            <h3 className="text-base font-semibold text-gray-900 mb-1 line-clamp-1 hover:text-coral-500 transition-colors">
               {titulo}
             </h3>
           </Link>
-          <p className="text-gray-600 text-sm mb-2">{autor}</p>
+          <p className="text-gray-600 text-xs mb-2">{autor}</p>
           <div className="flex items-center justify-between">
             <div className="flex space-x-1">
               {[...Array(5)].map((_, i) => (
                 <span 
                   key={i} 
-                  className={`text-sm ${i < valoracion ? "text-yellow-400" : "text-gray-300"}`}
+                  className={`text-xs ${i < valoracion ? "text-yellow-400" : "text-gray-300"}`}
                 >
                   ★
                 </span>
               ))}
             </div>
-            <span className="text-coral-500 font-semibold">
+            <span className="text-coral-500 font-semibold text-xs">
               {minPrecio !== null ? `Desde €${minPrecio.toFixed(2)}` : 'Fuera de stock'}
             </span>
           </div>

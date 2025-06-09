@@ -6,13 +6,13 @@ import ProfileEdit from "../components/layout/ProfileEdit";
 import ProfileNewSales from "../components/layout/ProfileNewSales";
 import { api } from "../services/api";
 import type { Usuario } from "../types";
+import LoadingSpinner from "../components/ui/LoadingSpinner";
 
 const Profile: React.FC = () => {
   const [isEditing, setIsEditing] = useState("info");
   const [user, setUser] = useState<Usuario | null>(null);
   const [bookCount, setBookCount] = useState<number | 0>(0);
   const [loading, setLoading] = useState(true);
-
 
   const fetchProfileData = async () => {
     try {
@@ -26,12 +26,17 @@ const Profile: React.FC = () => {
       setLoading(false);
     }
   };
-  
+
   useEffect(() => {
     fetchProfileData();
   }, []);
 
-  if (loading || !user) return <p className="text-center mt-4">Cargando perfil...</p>;
+  if (loading) return (
+    <div className="flex justify-center items-center min-h-[400px]">
+      <LoadingSpinner />
+    </div>
+  );
+  if (!user) return <p className="text-center mt-4">No se pudo cargar el perfil.</p>;
 
   return (
     <div className="bg-white flex justify-center p-8 gap-1">
@@ -46,8 +51,8 @@ const Profile: React.FC = () => {
 
         <div className="flex justify-center md:justify-start md:w-1/2">
           <div className="w-full max-w-xl min-h-[400px]">
-            {isEditing === "edit" && <ProfileEdit user={user} setIsEditing={setIsEditing} onUserUpdated={fetchProfileData} />}
-            {isEditing === "info" && <ProfileInfo user={user} setIsEditing={setIsEditing} />}
+            {isEditing === "edit" && user && <ProfileEdit user={user} setIsEditing={setIsEditing} onUserUpdated={fetchProfileData} />}
+            {isEditing === "info" && user && <ProfileInfo user={user} setIsEditing={setIsEditing} />}
             {isEditing === "newSales" && <ProfileNewSales setIsEditing={setIsEditing} />}
           </div>
         </div>

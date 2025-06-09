@@ -125,26 +125,24 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [state, dispatch] = useReducer(cartReducer, {
-    items: [],
-    total: 0,
-    itemCount: 0,
-  });
-
-  // Cargar carrito del localStorage al inicializar
-  useEffect(() => {
+  // Inicialización segura desde localStorage
+  const getInitialCart = () => {
     const savedCart = localStorage.getItem('cart');
     if (savedCart) {
       try {
-        const parsedCart = JSON.parse(savedCart);
-        dispatch({ type: 'LOAD_CART', payload: parsedCart });
-      } catch (error) {
-        console.error('Error loading cart from localStorage:', error);
+        const parsed = JSON.parse(savedCart);
+        if (Array.isArray(parsed)) return { items: parsed, total: calculateTotal(parsed), itemCount: calculateItemCount(parsed) };
+        if (parsed && Array.isArray(parsed.items)) return { items: parsed.items, total: calculateTotal(parsed.items), itemCount: calculateItemCount(parsed.items) };
+      } catch (e) {
+        console.error('Error parsing cart from localStorage:', e);
       }
     }
-  }, []);
+    return { items: [], total: 0, itemCount: 0 };
+  };
 
-  // Guardar carrito en localStorage cada vez que cambie
+  const [state, dispatch] = useReducer(cartReducer, undefined, getInitialCart);
+
+  // Persistir carrito en localStorage
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(state.items));
   }, [state.items]);

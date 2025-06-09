@@ -129,11 +129,10 @@ register: async (userData: {
     return response.data;
     },
 
-    addBookByIsbn: async (isbn: string) => {
-        const idUser = localStorage.getItem('usuario');
+    addBookByIsbn: async ({ idUsuario, isbn }: { idUsuario: number, isbn: number }) => {
         const response = await axios.post(`${API_URL}/agregar/isbn`, {
-            ISBN: isbn,
-            idUsuario: parseInt(idUser || '0')
+            idUsuario,
+            isbn
         });
         return response.data;
     }

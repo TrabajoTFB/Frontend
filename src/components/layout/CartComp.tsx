@@ -3,9 +3,10 @@ import { useCart } from "../../contexts/CartContext";
 import { useAuth } from "../../contexts/AuthContext"; // Importar el AuthContext
 import { api } from "../../services/api";
 import type { Usuario } from "../../types";
+import { useNavigate } from "react-router-dom";
 
 const CartComp: React.FC = () => {
-  const { state: cartState } = useCart();
+  const { state: cartState, removeItem } = useCart();
   const { user, isAuthenticated } = useAuth();
   const [currentUser, setCurrentUser] = useState<Usuario | null>(null);
   const [loading, setLoading] = useState(true);
@@ -23,6 +24,8 @@ const CartComp: React.FC = () => {
     email: "",
     ageConfirmed: false,
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loadUserInfo = async () => {
@@ -93,6 +96,17 @@ const CartComp: React.FC = () => {
   const discount = subtotal * 0.1;
   const shipping = subtotal > 50 ? 0 : 5.99;
   const total = subtotal - discount + shipping;
+
+  const handleCheckout = () => {
+    // Simulación de pago: redirige a la página de compra finalizada con los datos del carrito y del envío
+    navigate("/checkout-success", {
+      state: {
+        cart: cartState,
+        shipping: form,
+      },
+      replace: true
+    });
+  };
 
   if (loading) {
     return (
@@ -399,28 +413,33 @@ const CartComp: React.FC = () => {
                 <p className="text-gray-500 text-center py-8">Tu carrito está vacío</p>
               ) : (
                 cartState.items.map((item) => (
-                  <div key={item.id} className="mb-4 pb-4 border-b border-gray-100 last:border-b-0">
-                    <div className="flex gap-3">
-                      {item.image && (
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          className="w-12 h-16 object-cover rounded"
-                        />
+                  <div key={item.id} className="mb-4 pb-4 border-b border-gray-100 last:border-b-0 flex gap-3 items-center">
+                    {item.image && (
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-12 h-16 object-cover rounded"
+                      />
+                    )}
+                    <div className="flex-1">
+                      <p className="font-semibold text-sm">{item.title}</p>
+                      {item.author && (
+                        <p className="text-xs text-gray-500">por {item.author}</p>
                       )}
-                      <div className="flex-1">
-                        <p className="font-semibold text-sm">{item.title}</p>
-                        {item.author && (
-                          <p className="text-xs text-gray-500">por {item.author}</p>
-                        )}
-                        <div className="flex justify-between items-center mt-1">
-                          <span className="text-sm">Cantidad: {item.quantity}</span>
-                          <span className="font-bold">
-                            €{(item.price * item.quantity).toFixed(2)}
-                          </span>
-                        </div>
+                      <div className="flex justify-between items-center mt-1">
+                        <span className="text-sm">Cantidad: {item.quantity}</span>
+                        <span className="font-bold">
+                          €{(item.price * item.quantity).toFixed(2)}
+                        </span>
                       </div>
                     </div>
+                    <button
+                      onClick={() => removeItem(item.id)}
+                      className="ml-2 px-3 py-1 rounded-full bg-coral-100 text-coral-600 hover:bg-coral-200 transition-colors text-xs font-semibold"
+                      title="Eliminar libro del carrito"
+                    >
+                      Eliminar
+                    </button>
                   </div>
                 ))
               )}
@@ -526,6 +545,7 @@ const CartComp: React.FC = () => {
           <section className="mt-6 max-w-4xl">
             <button
               disabled={!form.ageConfirmed}
+              onClick={handleCheckout}
               className={`w-full py-4 px-6 rounded-lg font-semibold text-white text-lg transition-all duration-200 ${
                 form.ageConfirmed
                   ? "bg-coral-500 hover:bg-coral-600 shadow-lg hover:shadow-xl transform hover:-translate-y-1"

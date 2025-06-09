@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useCart } from '../../contexts/CartContext';
 import type { Book } from '../../types';
 import { api } from '../../services/api';
+import { Link } from 'react-router-dom';
 
 interface BookDetailsProps {
   book: Book;
@@ -174,7 +175,12 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
                     >
                       <div>
                         <p className="font-semibold">
-                          {v.nombre} {v.apellidos}
+                          <Link
+                          to={`/user/${v.id}`}
+                          className='hover:underline hover:text-coral-600 transition-color'
+                          >
+                            {v.nombre} {v.apellidos}
+                          </Link>
                         </p>
                         <p className="text-sm text-gray-500">{estadoMap[v.estado]}</p>
                       </div>

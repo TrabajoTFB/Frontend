@@ -59,13 +59,10 @@ const ProfileNewSales = ({ setIsEditing }: { setIsEditing: (val: string) => void
   };
 
   return (
-    <form 
-      className="bg-blue-800 text-white rounded-2xl p-6 w-full max-w-md"
-      onSubmit={handleSubmit}
-    >
+    <form className="bg-white shadow-lg rounded-2xl p-8 w-full h-full border border-gray-100" onSubmit={handleSubmit}>
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block font-bold mb-1">ISBN</label>
+          <label className="block font-bold mb-1 text-gray-700">ISBN</label>
           <input
             type="text"
             name="isbn"
@@ -73,12 +70,12 @@ const ProfileNewSales = ({ setIsEditing }: { setIsEditing: (val: string) => void
             value={form.isbn}
             onChange={handleChange}
             required
-            className="w-full p-2 rounded text-black"
+            className="w-full p-2 rounded text-gray-900 border border-gray-300 focus:ring-coral-500 focus:border-coral-500"
           />
         </div>
 
         <div>
-          <label className="block font-bold mb-1">Precio</label>
+          <label className="block font-bold mb-1 text-gray-700">Precio</label>
           <input
             type="number"
             name="price"
@@ -86,19 +83,19 @@ const ProfileNewSales = ({ setIsEditing }: { setIsEditing: (val: string) => void
             value={form.price}
             onChange={handleChange}
             required
-            className="w-full p-2 rounded text-black"
+            className="w-full p-2 rounded text-gray-900 border border-gray-300 focus:ring-coral-500 focus:border-coral-500"
           />
         </div>
 
         <div className="col-span-2">
-          <label className="block font-bold mb-1">Estado</label>
+          <label className="block font-bold mb-1 text-gray-700">Estado</label>
           <select
             id='status'
             name="status"
             value={form.status}
             onChange={handleChange}
             required
-            className="w-full p-2 rounded text-black"
+            className="w-full p-2 rounded text-gray-900 border border-gray-300 focus:ring-coral-500 focus:border-coral-500"
           >
           <option value="">Estado del libro</option>
           {Object.keys(statusMap).map((option) => (
@@ -110,13 +107,13 @@ const ProfileNewSales = ({ setIsEditing }: { setIsEditing: (val: string) => void
         </div>
 
         <div className="col-span-2 flex items-center space-x-4 mt-2">
-          <label className="font-bold">Disponible para recoger en mano</label>
+          <label className="font-bold text-gray-700">Disponible para recoger en mano</label>
           <input
             type="checkbox"
             name="handPicking"
             checked={form.handPicking}
             onChange={handleChange}
-            className="w-5 h-5"
+            className="w-5 h-5 accent-coral-500"
           />
         </div>
       </div>
@@ -125,7 +122,7 @@ const ProfileNewSales = ({ setIsEditing }: { setIsEditing: (val: string) => void
         <button
           onClick={() => setIsEditing("info")}
           type="submit"
-          className="bg-white text-black font-bold py-2 px-4 rounded-xl shadow-md hover:shadow-lg"
+          className="bg-coral-500 text-white font-bold py-2 px-6 rounded-xl shadow-md hover:bg-coral-600 transition-colors m-2"
         >
           Guardar
         </button>

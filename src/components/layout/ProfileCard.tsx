@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import type { Usuario } from '../../types';
 
 
@@ -11,20 +10,20 @@ const ProfileCard = ({
   }) => {
 
     return (
-        <div className="bg-blue-800 text-center text-white p-1 w-72 h-80 rounded-xl">
-            <div className="flex justify-center mb-4 mt-12">
-                <a href="/profile" className="logo flex items-center justify-center w-28 h-28 bg-gray-800 rounded-full overflow-hidden">
+        <div className="bg-gray-50 text-center text-gray-900 p-4 w-80 h-80 rounded-2xl border border-coral-100 flex flex-col items-center justify-between transition-transform duration-300 hover:-translate-y-1">
+            <div className="flex flex-col items-center mt-8">
+                <a href="/profile" className="logo flex items-center justify-center w-28 h-28 bg-gradient-to-br from-coral-500 to-coral-600 rounded-full overflow-hidden shadow-md border-4 border-white">
                     <img
                         src="/images/profile.png"
                         alt="Foto de perfil"
                         className="w-full h-full object-cover"
                     />
                 </a>
+                <h2 className="text-xl font-bold font-poppins mt-4 text-gray-900">{user.nombre} {user.apellidos}</h2>
             </div>
-            <h2 className="text-xl font-bold font-poppins">{user.nombre} {user.apellidos}</h2>
             <div className="flex justify-center gap-2 mt-3">
-                <span className="bg-yellow-200 text-black text-xs font-bold py-1 px-3 rounded-full">{bookCount} books</span>
-                <span className="bg-indigo-100 text-black text-xs font-bold py-1 px-3 rounded-full">Seller</span>
+                <span className="bg-yellow-200 text-black text-xs font-bold py-1 px-3 rounded-full shadow">{bookCount} libros</span>
+                <span className="bg-coral-500/90 text-white text-xs font-bold py-1 px-3 rounded-full shadow">Vendedor</span>
             </div>
         </div>
     );

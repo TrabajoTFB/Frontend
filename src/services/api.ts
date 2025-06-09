@@ -127,6 +127,15 @@ register: async (userData: {
     getVentaByIsbn: async (isbn: string) => {
     const response = await axios.get(`${API_URL}/venta/${isbn}`);
     return response.data;
+    },
+
+    addBookByIsbn: async (isbn: string) => {
+        const idUser = localStorage.getItem('usuario');
+        const response = await axios.post(`${API_URL}/agregar/isbn`, {
+            ISBN: isbn,
+            idUsuario: parseInt(idUser || '0')
+        });
+        return response.data;
     }
 
 };

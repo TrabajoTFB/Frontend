@@ -46,97 +46,93 @@ const ProfileEdit = ({
 
   return (
     <form 
-      className="bg-blue-800 text-white rounded-2xl p-6 w-full h-full"
+      className="bg-white shadow-lg rounded-2xl p-8 w-full h-full border border-gray-100"
       onSubmit={handleSubmit}>
-
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="font-bold block mb-1">Name</label>
+          <label className="font-bold block mb-1 text-gray-700">Name</label>
           <input
             type="text"
             defaultValue={user.nombre}
             onChange={(e) => setNombre(e.target.value)}
             placeholder="Full name"
-            className="w-full p-2 rounded-xl text-black"
+            className="w-full p-2 rounded-xl text-gray-900 border border-gray-300 focus:ring-coral-500 focus:border-coral-500"
           />
         </div>
         <div>
-          <label className="font-bold block mb-1">Surname</label>
+          <label className="font-bold block mb-1 text-gray-700">Surname</label>
           <input
             type="text"
             defaultValue={user.apellidos}
             onChange={(e) => setApellidos(e.target.value)}
             placeholder="Surname"
-            className="w-full p-2 rounded-xl text-black"
+            className="w-full p-2 rounded-xl text-gray-900 border border-gray-300 focus:ring-coral-500 focus:border-coral-500"
           />
         </div>
-
         <div className="col-span-2">
-          <label className="font-bold block mb-1">Direction</label>
+          <label className="font-bold block mb-1 text-gray-700">Direction</label>
           <input
             type="text"
             defaultValue={user.direccion}
             onChange={(e) => setDireccion(e.target.value)}
             placeholder="Direction"
-            className="w-full p-2 rounded-xl text-black"
+            className="w-full p-2 rounded-xl text-gray-900 border border-gray-300 focus:ring-coral-500 focus:border-coral-500"
           />
         </div>
-
         <div>
-          <label className="font-bold block mb-1">Password</label>
+          <label className="font-bold block mb-1 text-gray-700">Password</label>
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
               defaultValue={user.contraseña}
               onChange={(e) => setContraseña(e.target.value)}
               placeholder="Password"
-              className="w-full p-2 rounded-xl text-black pr-10"
+              className="w-full p-2 rounded-xl text-gray-900 border border-gray-300 focus:ring-coral-500 focus:border-coral-500 pr-10"
             />
             <button
               type="button"
               onClick={() => setShowPassword(prev => !prev)}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm bg-white text-black px-2 py-1 rounded"
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm bg-white text-coral-500 px-2 py-1 rounded shadow"
             >
               {showPassword ? "Ocultar" : "Mostrar"}
             </button>
           </div>
         </div>
         <div>
-          <label className="font-bold block mb-1">Mail</label>
+          <label className="font-bold block mb-1 text-gray-700">Mail</label>
           <input
             type="email"
             defaultValue={user.email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Mail"
-            className="w-full p-2 rounded-xl text-black"
+            className="w-full p-2 rounded-xl text-gray-900 border border-gray-300 focus:ring-coral-500 focus:border-coral-500"
           />
         </div>
-
         <div>
-          <label className="font-bold block mb-1">Phone</label>
+          <label className="font-bold block mb-1 text-gray-700">Phone</label>
           <input
             type="tel"
             defaultValue={user.telefono}
             onChange={(e) => setTelefono(e.target.value)}
             placeholder="Phone"
-            className="w-full p-2 rounded-xl text-black"
+            className="w-full p-2 rounded-xl text-gray-900 border border-gray-300 focus:ring-coral-500 focus:border-coral-500"
           />
         </div>
       </div>
-        <div className='flex justify-center mt-2'>
+      <div className='flex justify-center mt-6'>
         <button
           type="submit"
-          className="mt-6 bg-white text-black font-bold py-2 px-4 rounded-xl shadow-md hover:shadow-lg m-5"
+          className="bg-coral-500 text-white font-bold py-2 px-6 rounded-xl shadow-md hover:bg-coral-600 transition-colors m-2"
         >
           Guardar
         </button>
-          <button
-              onClick={() => setIsEditing("info")}
-              className="mt-6 bg-white text-black font-bold py-2 px-4 rounded-xl shadow-md hover:shadow-lg m-5"
-          >
-              Cancelar
-          </button>
-        </div>
+        <button
+          onClick={() => setIsEditing("info")}
+          className="bg-white text-coral-500 font-bold py-2 px-6 rounded-xl shadow-md border border-coral-500 hover:bg-coral-50 transition-colors m-2"
+        >
+          Cancelar
+        </button>
+      </div>
     </form>
   );
 };

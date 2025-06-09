@@ -1,22 +1,21 @@
-import React from "react";
-
 const ProfileSales = ({ setIsEditing, isEditing, }
 : 
 { setIsEditing: (val: string) => void; isEditing: string; }) => {
     return (
-        <div className="flex mt-6 bg-green-200">
-            <img src="images/logo.png" alt="imagen" className="px-2"/>
-            <img src="images/logo.png" alt="imagen" className="px-2"/>
-            <img src="images/logo.png" alt="imagen" className="px-2"/>
-            {
-                isEditing == "info" && 
+        <div className="flex flex-col items-center gap-2 mt-6">
+            <div className="flex gap-2 mb-2">
+                <img src="images/logo.png" alt="imagen" className="w-10 h-10 rounded-full border-2 border-coral-200 bg-white shadow-sm" />
+                <img src="images/logo.png" alt="imagen" className="w-10 h-10 rounded-full border-2 border-coral-200 bg-white shadow-sm" />
+                <img src="images/logo.png" alt="imagen" className="w-10 h-10 rounded-full border-2 border-coral-200 bg-white shadow-sm" />
+            </div>
+            {isEditing == "info" && (
                 <button
                     onClick={() => setIsEditing("newSales")}
-                    className="text-xl text-white font-bold rounded-full bg-black px-3 mt-4 mb-4"
+                    className="flex items-center gap-2 text-base font-semibold rounded-full bg-coral-500 hover:bg-coral-600 text-white px-6 py-2 shadow transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-coral-400 focus:ring-offset-2 mt-2"
                 >
                     Crear venta
                 </button>
-            }
+            )}
         </div>
     );
 };

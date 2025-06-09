@@ -9,7 +9,7 @@ interface BookDetailsProps {
 }
 
 const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
-  const { addItem, state } = useCart();
+  const { addItem, removeItem, state } = useCart();
   const [showSuccess, setShowSuccess] = useState(false);
   const [addedVendedorId, setAddedVendedorId] = useState<number | null>(null);
   const [vendedores, setVendedores] = useState<any[]>([]);
@@ -189,14 +189,14 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
                           €{v.precio.toFixed(2)}
                         </p>
                         <button
-                          onClick={() => handleAddToCart(v)}
-                          className={`mt-2 px-3 py-1 rounded-md text-sm font-medium text-white ${
+                          onClick={() => isInCart ? removeItem(itemId) : handleAddToCart(v)}
+                          className={`mt-2 px-3 py-1 rounded-md text-sm font-medium text-white transition-colors duration-150 ${
                             isInCart
-                              ? 'bg-green-500 hover:bg-green-600'
+                              ? 'bg-gray-400 hover:bg-gray-500'
                               : 'bg-coral-500 hover:bg-coral-600'
                           }`}
                         >
-                          {isInCart ? 'Agregar otro' : 'Agregar'}
+                          {isInCart ? 'Quitar del carrito' : 'Agregar'}
                         </button>
                       </div>
                     </div>

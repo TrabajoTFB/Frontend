@@ -45,7 +45,9 @@ const NavBar: React.FC = () => {
             <ul className="nav-list hidden lg:flex gap-6">
                 <li><Link to="/" className="hover:text-coral-500 transition-colors">Inicio</Link></li>
                 <li><Link to="/books" className="hover:text-coral-500 transition-colors">Libros</Link></li>
-                <li><Link to="/my-books" className="hover:text-coral-500 transition-colors">Mis Libros</Link></li>
+                {isAuthenticated && (
+                <li><Link to="/my-books" className="hover:text-coral-500 transition-colors">Mi Biblioteca</Link></li>
+                )}
                 <li><Link to="/work-with-us" className="hover:text-coral-500 transition-colors">Trabaja con nosotros</Link></li>
                 <li><Link to="/blog" className="hover:text-coral-500 transition-colors">Blog</Link></li>
                 <li><Link to="/about-us" className="hover:text-coral-500 transition-colors">Sobre Nosotros</Link></li>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import "./css/NavBar.css";
@@ -9,6 +9,7 @@ const NavBar: React.FC = () => {
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
     const { isAuthenticated, user, logout } = useAuth();
     const navigate = useNavigate();
+    const menuRef = useRef<HTMLDivElement>(null);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -25,6 +26,18 @@ const NavBar: React.FC = () => {
         navigate('/');
         setIsUserMenuOpen(false);
     };
+
+    // Cerrar menú móvil al hacer click fuera
+    useEffect(() => {
+        if (!isMenuOpen) return;
+        const handleClickOutside = (event: MouseEvent) => {
+            if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+                setIsMenuOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, [isMenuOpen]);
 
     return (
         <nav className="nav-bar flex items-center justify-between px-6 py-2 bg-white shadow-sm">
@@ -48,7 +61,7 @@ const NavBar: React.FC = () => {
                 {isAuthenticated && (
                 <li><Link to="/my-books" className="hover:text-coral-500 transition-colors">Mi Biblioteca</Link></li>
                 )}
-                <li><Link to="/work-with-us" className="hover:text-coral-500 transition-colors">Trabaja con nosotros</Link></li>
+                <li><Link to="/work-with-us" className="hover:text-coral-500 transition-colors">Libroly Pro</Link></li>
                 <li><Link to="/blog" className="hover:text-coral-500 transition-colors">Blog</Link></li>
                 <li><Link to="/about-us" className="hover:text-coral-500 transition-colors">Sobre Nosotros</Link></li>
             </ul>
@@ -127,7 +140,7 @@ const NavBar: React.FC = () => {
 
             {/* Menú móvil */}
             {isMenuOpen && (
-                <div className="lg:hidden absolute top-full left-0 right-0 bg-white shadow-lg z-50">
+                <div ref={menuRef} className="lg:hidden absolute top-full left-0 right-0 bg-white shadow-lg z-50">
                     <ul className="flex flex-col py-4">
                         <li><Link to="/" className="block px-6 py-2 hover:bg-gray-50">Inicio</Link></li>
                         <li><Link to="/books" className="block px-6 py-2 hover:bg-gray-50">Libros</Link></li>

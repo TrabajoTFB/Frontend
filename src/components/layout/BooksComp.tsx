@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import type { Book, Genre } from "../../types";
 import BookCard from "../ui/BookCard";
+import LoadingSpinner from "../ui/LoadingSpinner";
 
 interface BooksCompProps {
   initialGenreId?: number;
@@ -152,8 +153,7 @@ const BooksComp: React.FC<BooksCompProps> = ({ initialGenreId }) => {
 
           {loading ? (
             <div className="text-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-coral-500 mx-auto"></div>
-              <p className="mt-4 text-gray-600">Cargando libros...</p>
+                <LoadingSpinner />
             </div>
           ) : error ? (
             <div className="text-center py-12">
@@ -176,7 +176,7 @@ const BooksComp: React.FC<BooksCompProps> = ({ initialGenreId }) => {
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
               {filteredBooks.map((book: Book) => (
                 <BookCard key={book.isbn} libro={book} />
               ))}

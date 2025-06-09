@@ -74,7 +74,7 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
               {book.titulo}
             </h1>
-            <p className="text-xl text-gray-600 mb-1">por {book.autor}</p>
+            <p className="text-xl text-gray-600 mb-1">Por {book.autor}</p>
             <p className="text-sm text-gray-500">ISBN: {book.isbn}</p>
           </div>
 
@@ -176,7 +176,7 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
                       <div>
                         <p className="font-semibold">
                           <Link
-                          to={`/user/${v.id}`}
+                          to={`/seller/${v.id}`}
                           className='hover:underline hover:text-coral-600 transition-color'
                           >
                             {v.nombre} {v.apellidos}

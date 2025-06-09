@@ -14,6 +14,7 @@ import MySales from './pages/MySales';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import WorkWithUs from './pages/WorkWithUs';
+import Seller from './pages/Seller';
 import NotFound from './pages/NotFound';
 import TermsAndConditions from './pages/TermsAndConditions';
 import FAQ from './pages/FAQ';
@@ -59,6 +60,7 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path='/cart' element={<Cart />} />
+            <Route path='/seller/:slug' element={<Seller />} />
             <Route path='/work-with-us' element={<WorkWithUs />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

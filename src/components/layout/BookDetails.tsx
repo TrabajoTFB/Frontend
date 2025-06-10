@@ -77,8 +77,8 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
     try {
       const idUsuario = Number(localStorage.getItem('usuario'));
       const res = await api.addBookByIsbn({
-        idUsuario,
-        isbn: book.isbn
+        idUsuario: Number(idUsuario),
+        isbn: Number(book.isbn)
       });
       if (res) {
         setAddToLibrarySuccess(true);

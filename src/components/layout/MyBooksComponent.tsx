@@ -123,8 +123,8 @@ const MyBooksComponent: React.FC = () => {
           {/* Contenido principal */}
           <section className="flex-1">
             <div className="flex justify-between items-center text-sm text-gray-800 mb-8 mt-5">
-              <div>
-                Ordenar por:{" "}
+              <div className="flex items-center gap-4">
+                <span>Ordenar por: </span>
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as any)}
@@ -136,17 +136,21 @@ const MyBooksComponent: React.FC = () => {
                   <option value="fecha-asc">Más antiguos</option>
                   <option value="valoracion-desc">Mejor valorados</option>
                 </select>
+                <button
+                  className="bg-coral-500 text-white px-4 py-2 rounded-lg hover:bg-coral-600 transition-colors flex items-center gap-2"
+                  onClick={() => setShowAddModal(true)}
+                  title="Agregar libro por ISBN"
+                >
+                  <i className="fas fa-plus"></i>
+                  <span className="hidden sm:inline">Agregar libro</span>
+                </button>
               </div>
-        <div className="flex justify-end mb-6">
-          <button
-            className="bg-coral-500 hover:bg-coral-600 text-white rounded-full p-2 shadow transition-colors flex items-center gap-2"
-            onClick={() => setShowAddModal(true)}
-            title="Agregar libro por ISBN"
-          >
-            <i className="fas fa-plus"></i>
-            <span className="hidden sm:inline">Agregar libro</span>
-          </button>
-        </div>            </div>
+              <div>
+                Mostrando {filteredBooks.length} resultados
+              </div>
+            </div>
+
+
             {loading ? (
               <div className="flex flex-col items-center justify-center py-12">
                 <LoadingSpinner />

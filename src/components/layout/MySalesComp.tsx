@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import type { Book, Genre } from "../../types";
-import BookCard from "../ui/BookCard";
+import BookToSell from "../ui/BookToSell";
 import LoadingSpinner from "../ui/LoadingSpinner";
 
 const estadoMap: Record<number, string> = {
@@ -280,7 +280,7 @@ const MySalesComp: React.FC<BooksCompProps> = ({ initialGenreId }) => {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredBooks.map((book: Book) => (
-                <BookCard key={book.isbn} libro={book} />
+                <BookToSell key={book.isbn} libro={book} />
               ))}
             </div>
           )}

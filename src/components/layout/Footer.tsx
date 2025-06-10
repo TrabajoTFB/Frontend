@@ -32,6 +32,7 @@ const Footer: React.FC = () => {
         <div>
           <h3 className="text-lg font-bold mb-4">ENLACES</h3>
           <ul className="space-y-2 text-sm">
+            <li><a href="/contact" className="hover:text-slate-500 transition-all">CONTACTO</a></li>
             <li><a href="/privacy-policy" className="hover:text-slate-500 transition-all">POLÍTICA DE PRIVACIDAD</a></li>
             <li><a href="/faq" className="hover:text-slate-500 transition-all">FAQ</a></li>
             <li><a href="terms-conditions" className="hover:text-slate-500 transition-all">TÉRMINOS Y CONDICIONES</a></li>

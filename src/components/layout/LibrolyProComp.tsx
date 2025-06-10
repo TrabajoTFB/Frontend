@@ -1,6 +1,6 @@
 import React from "react";
 
-const WorkWithUsComp: React.FC = () => {
+const librolyProComp: React.FC = () => {
   const plans = [
     {
       name: 'Libroly Basic',
@@ -84,4 +84,4 @@ const WorkWithUsComp: React.FC = () => {
   );
 };
 
-export default WorkWithUsComp;
+export default librolyProComp;

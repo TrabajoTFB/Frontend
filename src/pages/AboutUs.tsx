@@ -8,7 +8,7 @@ const AboutUs: React.FC = () => {
       </a>
       <h1 className="text-4xl font-bold text-coral-500 mb-4 text-center">Sobre Nosotros</h1>
       <p className="text-lg text-gray-700 mb-6 text-center max-w-2xl">
-        <span className="font-semibold text-coral-500">TFB Books</span> es un proyecto dedicado a fomentar la sostenibilidad, la cultura y la comunidad a través de la compra, venta e intercambio de libros de segunda mano. Creemos que cada libro merece una segunda vida y que compartir historias es una forma poderosa de conectar personas y cuidar el planeta.
+        <span className="font-semibold text-coral-500">Libroly</span> es un proyecto dedicado a fomentar la sostenibilidad, la cultura y la comunidad a través de la compra, venta e intercambio de libros de segunda mano. Creemos que cada libro merece una segunda vida y que compartir historias es una forma poderosa de conectar personas y cuidar el planeta.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl mb-8">
         <div className="bg-coral-50 rounded-xl p-6 flex flex-col items-center">

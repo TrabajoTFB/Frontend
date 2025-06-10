@@ -163,6 +163,14 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     dispatch({ type: 'CLEAR_CART' });
   };
 
+  useEffect(() => {
+    // Exponer clearCart globalmente para poder vaciar el contexto desde fuera (ej: tras checkout)
+    (window as any).__clearCart = clearCart;
+    return () => {
+      delete (window as any).__clearCart;
+    };
+  }, []);
+
   return (
     <CartContext.Provider value={{ state, addItem, removeItem, updateQuantity, clearCart }}>
       {children}

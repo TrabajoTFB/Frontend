@@ -142,16 +142,18 @@ const NavBar: React.FC = () => {
             {isMenuOpen && (
                 <div ref={menuRef} className="lg:hidden absolute top-full left-0 right-0 bg-white shadow-lg z-50">
                     <ul className="flex flex-col py-4">
-                        <li><Link to="/" className="block px-6 py-2 hover:bg-gray-50">Inicio</Link></li>
-                        <li><Link to="/books" className="block px-6 py-2 hover:bg-gray-50">Libros</Link></li>
-                        <li><Link to="/about-us" className="block px-6 py-2 hover:bg-gray-50">Sobre Nosotros</Link></li>
-                        <li><Link to="/contact" className="block px-6 py-2 hover:bg-gray-50">Contacto</Link></li>
-                        <li><Link to="/blog" className="block px-6 py-2 hover:bg-gray-50">Blog</Link></li>
-                        
+                        <li><Link to="/" className="block px-6 py-2 hover:bg-gray-50" onClick={() => setIsMenuOpen(false)}>Inicio</Link></li>
+                        <li><Link to="/books" className="block px-6 py-2 hover:bg-gray-50" onClick={() => setIsMenuOpen(false)}>Libros</Link></li>
+                        {isAuthenticated && (
+                          <li><Link to="/my-books" className="block px-6 py-2 hover:bg-gray-50" onClick={() => setIsMenuOpen(false)}>Mi Biblioteca</Link></li>
+                        )}
+                        <li><Link to="/work-with-us" className="block px-6 py-2 hover:bg-gray-50" onClick={() => setIsMenuOpen(false)}>Libroly Pro</Link></li>
+                        <li><Link to="/blog" className="block px-6 py-2 hover:bg-gray-50" onClick={() => setIsMenuOpen(false)}>Blog</Link></li>
+                        <li><Link to="/about-us" className="block px-6 py-2 hover:bg-gray-50" onClick={() => setIsMenuOpen(false)}>Sobre Nosotros</Link></li>
                         {isAuthenticated ? (
                             <>
                                 <li className="border-t mt-2 pt-2">
-                                    <Link to="/cart" className="block px-6 py-2 hover:bg-gray-50">
+                                    <Link to="/cart" className="block px-6 py-2 hover:bg-gray-50" onClick={() => setIsMenuOpen(false)}>
                                         <div className="flex items-center gap-2">
                                             <i className="fas fa-shopping-cart"></i>
                                             <span>Carrito</span>
@@ -159,7 +161,7 @@ const NavBar: React.FC = () => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/profile" className="block px-6 py-2 hover:bg-gray-50">
+                                    <Link to="/profile" className="block px-6 py-2 hover:bg-gray-50" onClick={() => setIsMenuOpen(false)}>
                                         <div className="flex items-center gap-2">
                                             <img 
                                                 src="/images/profile.png" 
@@ -171,13 +173,18 @@ const NavBar: React.FC = () => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/my-orders" className="block px-6 py-2 hover:bg-gray-50">
+                                    <Link to="/my-orders" className="block px-6 py-2 hover:bg-gray-50" onClick={() => setIsMenuOpen(false)}>
                                         Mis Pedidos
                                     </Link>
                                 </li>
                                 <li>
+                                    <Link to="/my-sales" className="block px-6 py-2 hover:bg-gray-50" onClick={() => setIsMenuOpen(false)}>
+                                        Mis Ventas
+                                    </Link>
+                                </li>
+                                <li>
                                     <button 
-                                        onClick={handleLogout}
+                                        onClick={() => { handleLogout(); setIsMenuOpen(false); }}
                                         className="block w-full text-left px-6 py-2 hover:bg-gray-50"
                                     >
                                         Cerrar sesión
@@ -187,10 +194,10 @@ const NavBar: React.FC = () => {
                         ) : (
                             <>
                                 <li className="border-t mt-2 pt-2">
-                                    <Link to="/login" className="block px-6 py-2 hover:bg-gray-50">Login</Link>
+                                    <Link to="/login" className="block px-6 py-2 hover:bg-gray-50" onClick={() => setIsMenuOpen(false)}>Login</Link>
                                 </li>
                                 <li>
-                                    <Link to="/signup" className="block px-6 py-2 hover:bg-gray-50">Sign up</Link>
+                                    <Link to="/signup" className="block px-6 py-2 hover:bg-gray-50" onClick={() => setIsMenuOpen(false)}>Sign up</Link>
                                 </li>
                             </>
                         )}

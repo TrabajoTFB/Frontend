@@ -27,6 +27,7 @@ export interface Book {
   paginas?: number;
   publisher?: string;
   idiomas?: Language[];
+  enVenta?: boolean;
 }
 
 // Tipos para el carrito

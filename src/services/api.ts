@@ -135,6 +135,15 @@ register: async (userData: {
             isbn
         });
         return response.data;
-    }
+    },
 
+    createSale: async (saleData: { usuarioId: number; libroISBN: number; precio: number; estado: number; enVenta: boolean }) => {
+        try {
+            const response = await axios.put(`${API_URL}/venta`, saleData);
+            return response.data;
+        } catch (error) {
+            console.error('Create sale error:', error);
+            throw error;
+        }
+    },
 };

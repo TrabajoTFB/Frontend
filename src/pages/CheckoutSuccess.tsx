@@ -24,7 +24,10 @@ const CheckoutSuccess: React.FC = () => {
         setAdded(false);
       }
     };
-    addMissingBooks();
+    addMissingBooks().then(() => {
+      localStorage.removeItem('cart');
+      if ((window as any).__clearCart) (window as any).__clearCart();
+    });
     // eslint-disable-next-line
   }, []);
 

@@ -61,7 +61,7 @@ const NavBar: React.FC = () => {
                 {isAuthenticated && (
                 <li><Link to="/my-books" className="hover:text-coral-500 transition-colors">Mi Biblioteca</Link></li>
                 )}
-                <li><Link to="/work-with-us" className="hover:text-coral-500 transition-colors">Libroly Pro</Link></li>
+                <li><Link to="/libroly-pro" className="hover:text-coral-500 transition-colors">Libroly Pro</Link></li>
                 <li><Link to="/blog" className="hover:text-coral-500 transition-colors">Blog</Link></li>
                 <li><Link to="/about-us" className="hover:text-coral-500 transition-colors">Sobre Nosotros</Link></li>
             </ul>

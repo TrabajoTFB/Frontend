@@ -63,7 +63,7 @@ function App() {
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='/seller/:slug' element={<Seller />} />
-            <Route path='/work-with-us' element={<WorkWithUs />} />
+            <Route path='/libroly-pro' element={<WorkWithUs />} />
             <Route path="/checkout-success" element={<CheckoutSuccess />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="*" element={<NotFound />} />

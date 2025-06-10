@@ -22,11 +22,10 @@ const Footer: React.FC = () => {
           <ul className="space-y-2 text-sm">
             <li><a href="/" className="hover:text-slate-500 transition-all">INICIO</a></li>
             <li><a href="/books" className="hover:text-slate-500 transition-all">LIBROS</a></li>
-            <li><a href="/about-us" className="hover:text-slate-500 transition-all">SOBRE NOSOTROS</a></li>
-            <li><a href="/contact" className="hover:text-slate-500 transition-all">CONTACTO</a></li>
+            <li><a href="/my-books" className="hover:text-slate-500 transition-all">MI BIBLIOTECA</a></li>
+            <li><a href="/libroly-pro" className="hover:text-slate-500 transition-all">LYBROLY PRO</a></li>
             <li><a href="/blog" className="hover:text-slate-500 transition-all">BLOG</a></li>
-            <li><a href="/blog" className="hover:text-slate-500 transition-all">MIS LIBROS</a></li>
-            <li><a href="/blog" className="hover:text-slate-500 transition-all">TRABAJA CON NOSOTROS</a></li>
+            <li><a href="/about-us" className="hover:text-slate-500 transition-all">SOBRE NOSOTROS</a></li>
           </ul>
         </div>
 

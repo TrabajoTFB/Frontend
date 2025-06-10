@@ -62,7 +62,7 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path='/cart' element={<Cart />} />
-            <Route path='/seller/:slug' element={<Seller />} />
+            <Route path='/seller/:id' element={<Seller />} />
             <Route path='/libroly-pro' element={<WorkWithUs />} />
             <Route path="/checkout-success" element={<CheckoutSuccess />} />
             <Route path="/about-us" element={<AboutUs />} />

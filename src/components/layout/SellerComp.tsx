@@ -18,7 +18,7 @@ const SellerComp: React.FC = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const data = await api.getUserById(id);
+        const data = await api.getSellerById(id);
         setUser(data);
       } catch (err) {
         setUser(null);

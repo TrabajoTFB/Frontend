@@ -72,6 +72,11 @@ register: async (userData: {
         return response.data;
     },
 
+    getSellerById: async(id: string | number) => {
+        const response = await axios.get(`${API_URL}/user/${id}`);
+        return response.data;
+    },
+
     getBookCountByUser: async() => {
         const idUser = localStorage.getItem('usuario');
         const response = await axios.get(`${API_URL}/user/libros/count/${idUser}`);

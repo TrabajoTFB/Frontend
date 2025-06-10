@@ -19,7 +19,7 @@ const BlogCard = ({ post }) => {
         <p className="text-gray-600 mb-2">{excerpt}</p>
         <div className="text-sm text-gray-400 mb-4">{date}</div>
         <Link
-          to="#"
+          to={`/blog/${post.id}`}
           className="text-coral-500 hover:underline font-medium text-sm"
         >
           Leer más

@@ -23,6 +23,8 @@ import NavBar from "./components/layout/NavBar";
 import TopBar from './components/layout/TopBar';
 import Footer from './components/layout/Footer';
 import ChatBot from './components/ui/ChatBot';
+import CheckoutSuccess from "./pages/CheckoutSuccess";
+import AboutUs from './pages/AboutUs';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './App.css';
@@ -62,6 +64,8 @@ function App() {
             <Route path='/cart' element={<Cart />} />
             <Route path='/seller/:slug' element={<Seller />} />
             <Route path='/work-with-us' element={<WorkWithUs />} />
+            <Route path="/checkout-success" element={<CheckoutSuccess />} />
+            <Route path="/about-us" element={<AboutUs />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

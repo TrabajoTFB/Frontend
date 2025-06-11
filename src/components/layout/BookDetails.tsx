@@ -22,11 +22,9 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
   const [addToLibraryError, setAddToLibraryError] = useState<string | null>(null);
   const [userBooks, setUserBooks] = useState<number[] | null>(null);
 
-  const currentUserId = Number(localStorage.getItem('usuario'));
-  
-  const vendedoresFiltrados = vendedores
-    .filter(v => v.id !== currentUserId) // Excluir el usuario actual
-    .filter(v => estadoFiltro === '' || v.estado == estadoFiltro); // Aplicar filtro de estado
+  const vendedoresFiltrados = estadoFiltro == ''
+    ? vendedores
+    : vendedores.filter(v => v.estado == estadoFiltro);
 
   useEffect(() => {
     const fetchVendedores = async () => {
@@ -227,7 +225,7 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
             </h3>
             {loading ? (
               <p>Cargando vendedores...</p>
-            ) : vendedores.length === 0 ? (
+            ) : vendedoresFiltrados.length === 0 ? (
               <p>No hay vendedores disponibles para este libro.</p>
             ) : vendedores.every(v => v.id === currentUserId) ? (
               <div className="p-4 bg-coral-50 border-2 border-coral-200 rounded-lg flex items-center justify-between">

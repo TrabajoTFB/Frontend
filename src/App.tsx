@@ -13,9 +13,10 @@ import MyBooks from './pages/MyBooks'
 import MySales from './pages/MySales';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
-import WorkWithUs from './pages/WorkWithUs';
+import LibrolyPro from './pages/LibrolyPro';
 import Seller from './pages/Seller';
 import NotFound from './pages/NotFound';
+import Contact from './pages/Contact';
 import TermsAndConditions from './pages/TermsAndConditions';
 import FAQ from './pages/FAQ';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -63,10 +64,11 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path='/cart' element={<Cart />} />
-            <Route path='/seller/:slug' element={<Seller />} />
-            <Route path='/libroly-pro' element={<WorkWithUs />} />
+            <Route path='/seller/:id' element={<Seller />} />
+            <Route path='/libroly-pro' element={<LibrolyPro />} />
             <Route path="/checkout-success" element={<CheckoutSuccess />} />
             <Route path="/subscription-success" element={<SubscriptionSuccess />} />
+            <Route path='/contact' element={<Contact />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -1,10 +1,14 @@
 import React from "react";
+import { useAuth } from "../../contexts/AuthContext";
 
-const librolyProComp: React.FC = () => {
+const LibrolyProComp: React.FC = () => {
+  const { user, isAuthenticated } = useAuth();
+
   const plans = [
     {
       name: 'Libroly Basic',
       price: '4,99',
+      type: 'basic',
       perks: [
         'Verificado en tu cuenta',
         'Soporte por email',
@@ -17,6 +21,7 @@ const librolyProComp: React.FC = () => {
     {
       name: 'Libroly Plus',
       price: '9,99',
+      type: 'pro',
       perks: [
         'Verificado en tu cuenta',
         'Soporte prioritario 24/7',
@@ -29,6 +34,7 @@ const librolyProComp: React.FC = () => {
     {
       name: 'Libroly Pro',
       price: '19,99',
+      type: 'premium',
       perks: [
         'Verificado en tu cuenta',
         'Soporte premium 24/7',
@@ -42,6 +48,37 @@ const librolyProComp: React.FC = () => {
     },
   ];
 
+  const handleSubscription = async (planType: string) => {
+    try {
+      if (!isAuthenticated) {
+        alert('Debes iniciar sesión para suscribirte a un plan');
+        return;
+      }
+
+      const response = await fetch('http://localhost:5000/create-subscription', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          plan: planType,
+          userId: user.id
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al crear la suscripción');
+      }
+
+      const { checkout_url } = await response.json();
+      window.location.href = checkout_url;
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Ha ocurrido un error al procesar tu suscripción. Por favor, inténtalo de nuevo.');
+    }
+  };
+
   return (
     <main className="min-h-screen bg-gray-50 py-16">
       <div className="container mx-auto px-4">
@@ -51,6 +88,7 @@ const librolyProComp: React.FC = () => {
             Elige el plan que mejor se adapta a tu librería o editorial y accede a ventajas exclusivas para potenciar tus ventas y visibilidad en Libroly.
           </p>
         </div>
+
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {plans.map((plan, idx) => (
             <div
@@ -70,10 +108,16 @@ const librolyProComp: React.FC = () => {
                   </li>
                 ))}
               </ul>
-              <button className={`w-full py-2 px-4 rounded-lg font-semibold text-white transition-colors ${plan.highlight ? 'bg-coral-500 hover:bg-coral-600' : 'bg-gray-400 hover:bg-gray-500'}`}>Elegir</button>
+              <button 
+                onClick={() => handleSubscription(plan.type)}
+                className={`w-full py-2 px-4 rounded-lg font-semibold text-white transition-colors ${plan.highlight ? 'bg-coral-500 hover:bg-coral-600' : 'bg-gray-400 hover:bg-gray-500'}`}
+              >
+                Elegir plan
+              </button>
             </div>
           ))}
         </div>
+
         <div className="max-w-2xl mx-auto text-center text-gray-700 text-lg mt-10">
           <p>
             Todos los planes incluyen <span className="font-semibold text-coral-600">verificado</span>, asistencia 24/7, prioridad en ventas y soporte personalizado. Elige el plan que más se adapte a tu negocio y haz crecer tu librería con <span className="font-bold text-coral-500">Libroly Pro</span>.
@@ -84,4 +128,4 @@ const librolyProComp: React.FC = () => {
   );
 };
 
-export default librolyProComp;
+export default LibrolyProComp;

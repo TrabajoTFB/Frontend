@@ -22,9 +22,13 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
   const [addToLibraryError, setAddToLibraryError] = useState<string | null>(null);
   const [userBooks, setUserBooks] = useState<number[] | null>(null);
 
-  const vendedoresFiltrados = estadoFiltro == ''
-    ? vendedores
-    : vendedores.filter(v => v.estado == estadoFiltro);
+  // Get current user ID safely
+  const currentUserId = localStorage.getItem('usuario') ? Number(localStorage.getItem('usuario')) : null;
+  
+  // Filter sellers: exclude current user and apply state filter
+  const vendedoresFiltrados = vendedores
+    .filter(v => currentUserId === null || v.id !== currentUserId) // Only filter if we have a user ID
+    .filter(v => estadoFiltro === '' || v.estado == estadoFiltro);
 
   useEffect(() => {
     const fetchVendedores = async () => {
@@ -227,7 +231,7 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
               <p>Cargando vendedores...</p>
             ) : vendedoresFiltrados.length === 0 ? (
               <p>No hay vendedores disponibles para este libro.</p>
-            ) : vendedores.every(v => v.id === currentUserId) ? (
+            ) : currentUserId && vendedores.every(v => v.id === currentUserId) ? (
               <div className="p-4 bg-coral-50 border-2 border-coral-200 rounded-lg flex items-center justify-between">
                 <div>
                   <p className="text-gray-700 font-medium">Solo tú tienes este libro en venta</p>
@@ -282,7 +286,7 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
             )}
           </div>
           {/* Si eres vendedor de este libro, mostrar un enlace rápido */}
-          {vendedores.some(v => v.id === currentUserId) && (
+          {currentUserId && vendedores.some(v => v.id === currentUserId) && (
             <div className="mt-4 p-4 bg-coral-50 border border-coral-200 rounded-lg flex items-center justify-between">
               <div>
                 <p className="text-gray-700 font-medium">Tienes este libro en venta</p>

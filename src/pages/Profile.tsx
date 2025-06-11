@@ -3,7 +3,11 @@ import ProfileEdit from "../components/layout/ProfileEdit";
 import { api } from "../services/api";
 import type { Usuario } from "../types";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
+<<<<<<< HEAD
 import SubscriptionActionButton from "../components/ui/SubscriptionActionButton";
+=======
+import { getAvatarUrl } from "../utils/avatar";
+>>>>>>> main
 
 interface ProfileProps {}
 
@@ -130,6 +134,7 @@ const Profile: React.FC<ProfileProps> = () => {
       <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-10 w-full">
         {/* Imagen perfil */}
         <div className="flex-shrink-0 flex flex-col items-center md:items-start w-full md:w-56">
+<<<<<<< HEAD
           <div className="relative">
             <img
               src="/images/profile.png"
@@ -151,6 +156,14 @@ const Profile: React.FC<ProfileProps> = () => {
               {user.verificado === 1 ? <i className="fas fa-check text-sm"></i> : 'No verificado'}
             </span>
           </div>
+=======
+          <img
+            src={getAvatarUrl(user.email)}
+            alt="Avatar"
+            className="w-28 h-28 rounded-full object-cover mb-2 md:mb-4"
+          />
+          <h1 className="text-2xl font-bold text-gray-900 mb-1 text-center md:text-left">{user.nombre} {user.apellidos}</h1>
+>>>>>>> main
           <div className="text-gray-600 text-sm flex flex-col items-center md:items-start gap-0.5 mb-2">
             <span>{user.email}</span>
             <span>{user.telefono || "Sin teléfono"}</span>

@@ -11,9 +11,8 @@ interface BookDetailsProps {
 
 const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
   const { addItem, removeItem, state } = useCart();
-  const { user: authUser } = useAuth();
+  const { user } = useAuth();
   const [showSuccess, setShowSuccess] = useState(false);
-  const [addedVendedorId, setAddedVendedorId] = useState<number | null>(null);
   const [vendedores, setVendedores] = useState<any[]>([]);
   const [estadoFiltro, setEstadoFiltro] = useState<number | ''>('');
   const [loading, setLoading] = useState(true);
@@ -22,11 +21,12 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
   const [addToLibraryError, setAddToLibraryError] = useState<string | null>(null);
   const [userBooks, setUserBooks] = useState<number[] | null>(null);
 
-  const idUsuario = localStorage.getItem('usuario');
-  const vendedoresFiltrados = (estadoFiltro == ''
+  // Get current user ID for filtering own sales
+  const currentUserId = user?.id;
+
+  const vendedoresFiltrados = estadoFiltro == ''
     ? vendedores
-    : vendedores.filter(v => v.estado == estadoFiltro)
-  ).filter(v => String(v.id) != String(idUsuario));
+    : vendedores.filter(v => v.estado == estadoFiltro);
 
   const [error, setError] = useState<string | null>(null);
   const [retryCount, setRetryCount] = useState(0);
@@ -67,7 +67,7 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
       if (!idUsuario) return;
       try {
         const userData = await api.getUserWithBooks();
-        const libros = userData.libros || [];
+        const libros = userData.libros ?? [];
         setUserBooks(libros.map((l: any) => l.isbn));
       } catch {
         setUserBooks([]);
@@ -86,7 +86,6 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
       author: book.autor,
     });
 
-    setAddedVendedorId(vendedor.id);
     setShowSuccess(true);
     setTimeout(() => setShowSuccess(false), 3000);
   };
@@ -175,7 +174,7 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
                   {book.idiomas.map(lang => lang.nombre).join(', ')}
                 </div>
               )}
-            {book.valoracion && (
+            {Boolean(book.valoracion) && (
               <div>
                 <span className="font-semibold">Valoración:</span> {book.valoracion}/5 ⭐
               </div>
@@ -183,7 +182,7 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
             {book.generoLiterario && book.generoLiterario.length > 0 && (
               <div className="col-span-2">
                 <span className="font-semibold">Géneros:</span>{' '}
-                {book.generoLiterario.map((genre) => genre.nombre || genre).join(', ')}
+                {book.generoLiterario.map((genre) => typeof genre === 'string' ? genre : genre.nombre).join(', ')}
               </div>
             )}
           </div>
@@ -263,6 +262,18 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
               </div>
             ) : vendedoresFiltrados.length === 0 ? (
               <p>No hay vendedores disponibles para este libro.</p>
+            ) : currentUserId && vendedores.every(v => v.id === currentUserId) ? (
+              <div className="p-4 bg-coral-50 border-2 border-coral-200 rounded-lg flex items-center justify-between">
+                <div>
+                  <p className="text-gray-700 font-medium">Solo tú tienes este libro en venta</p>
+                  <p className="text-sm text-gray-600 mt-1">{estadoMap[vendedores[0].estado]}</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-coral-600 font-bold text-lg">€{vendedores[0].precio.toFixed(2)}</p>
+                </div>
+              </div>
+            ) : vendedoresFiltrados.length === 0 ? (
+              <p>No hay otros vendedores disponibles para este libro.</p>
             ) : (
               <div className="space-y-3">
                 {vendedoresFiltrados.map((v) => {
@@ -305,6 +316,22 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
               </div>
             )}
           </div>
+          {/* Si eres vendedor de este libro, mostrar un enlace rápido */}
+          {currentUserId && vendedores.some(v => v.id === currentUserId) && (
+            <div className="mt-4 p-4 bg-coral-50 border border-coral-200 rounded-lg flex items-center justify-between">
+              <div>
+                <p className="text-gray-700 font-medium">Tienes este libro en venta</p>
+                <p className="text-sm text-gray-600 mt-1">
+                  {estadoMap[vendedores.find(v => v.id === currentUserId)?.estado]}
+                </p>
+              </div>
+              <div className="text-right">
+                <p className="text-coral-600 font-bold text-lg">
+                  €{vendedores.find(v => v.id === currentUserId)?.precio.toFixed(2)}
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

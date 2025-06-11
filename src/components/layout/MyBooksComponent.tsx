@@ -100,25 +100,7 @@ const MyBooksComponent: React.FC = () => {
 
         <div className="flex gap-10">
           {/* Sidebar de filtros */}
-          <aside className="w-60 text-sm font-semibold text-gray-800">
-            <div className="mb-6">
-              <label className="block mb-1 text-xs font-bold">Buscar</label>
-              <input
-                type="text"
-                placeholder="Buscar por título o autor"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full border border-gray-300 rounded px-2 py-1.5 text-sm"
-              />
-            </div>
 
-            <button
-              onClick={clearFilters}
-              className="w-full text-coral-500 hover:text-coral-600 text-sm font-medium"
-            >
-              Limpiar filtros
-            </button>
-          </aside>
 
           {/* Contenido principal */}
           <section className="flex-1">

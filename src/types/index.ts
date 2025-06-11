@@ -1,6 +1,14 @@
 export type { BlogPost } from './blog';
 
-// types/index.ts
+export interface User {
+  id: number;
+  nombre: string;
+  apellidos: string;
+  email: string;
+  verificado: number;
+  telefono?: string;
+  urlFotoPerfil?: string;
+}
 
 export interface Genre {
   id?: number;

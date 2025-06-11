@@ -11,6 +11,7 @@ import SignUp from './pages/SignUp';
 import Profile from './pages/Profile';
 import MyBooks from './pages/MyBooks'
 import MySales from './pages/MySales';
+import MyOrders from './pages/MyOrders';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import LibrolyPro from './pages/LibrolyPro';
@@ -60,6 +61,11 @@ function App() {
             />
             <Route path='/my-books' element={<MyBooks />} />
             <Route path='/my-sales' element={<MySales />} />
+            <Route path='/my-orders' element={
+              <PrivateRoute>
+                <MyOrders />
+              </PrivateRoute>
+            } />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path='/cart' element={<Cart />} />

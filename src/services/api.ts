@@ -214,5 +214,11 @@ register: async (userData: {
             console.error('Error creating purchase:', error);
             throw error;
         }
+    },
+
+    getPurchaseHistory: async () => {
+        const userId = JSON.parse(localStorage.getItem('usuario') || '0');
+        const response = await axios.get(`${API_URL}/historial/comprador/${userId}`);
+        return response.data;
     }
 };

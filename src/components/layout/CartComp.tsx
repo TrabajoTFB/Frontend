@@ -110,8 +110,9 @@ const CartComp: React.FC = () => {
       const response = await fetch('http://localhost:5000/create-checkout-session', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify({
           order_id: Date.now().toString(), // Puedes generar un ID de orden más sofisticado
           items: items

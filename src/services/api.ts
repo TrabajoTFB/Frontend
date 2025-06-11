@@ -198,4 +198,21 @@ register: async (userData: {
             throw error;
         }
     },
+
+    createPurchase: async (purchaseData: {
+        compradorId: number;
+        detalles: Array<{
+            idVendedor: number;
+            isbn: number;
+        }>;
+        precioFinal: number;
+    }) => {
+        try {
+            const response = await axios.post(`${API_URL}/comprar`, purchaseData);
+            return response.data;
+        } catch (error) {
+            console.error('Error creating purchase:', error);
+            throw error;
+        }
+    }
 };

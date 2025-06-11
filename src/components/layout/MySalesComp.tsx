@@ -102,6 +102,14 @@ const MySalesComp: React.FC<BooksCompProps> = ({ initialGenreId }) => {
     setFilteredBooks(result);
   }, [books, searchTerm, selectedGenres, sortBy]);
 
+  const handleUpdateBook = (updatedBook: Book) => {
+    setBooks(prevBooks =>
+      prevBooks.map(book =>
+        book.isbn === updatedBook.isbn ? { ...book, ...updatedBook } : book
+      )
+    );
+  };
+
   const handleGenreToggle = (genreId: number) => {
     setSelectedGenres(prev =>
       prev.includes(genreId)
@@ -280,7 +288,7 @@ const MySalesComp: React.FC<BooksCompProps> = ({ initialGenreId }) => {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredBooks.map((book: Book) => (
-                <BookToSell key={book.isbn} libro={book} />
+                <BookToSell key={book.isbn} libro={book} onUpdate={handleUpdateBook} />
               ))}
             </div>
           )}

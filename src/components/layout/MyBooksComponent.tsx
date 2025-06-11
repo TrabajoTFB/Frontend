@@ -131,47 +131,8 @@ const MyBooksComponent: React.FC = () => {
 
       <div className="max-w-7xl w-full bg-white rounded-xl shadow-lg p-8">
         <div className="flex gap-10">
-<<<<<<< HEAD
           {/* Sidebar de filtros */}
 
-=======
-          {/* Sidebar filtros */}
-          <aside className="w-60 text-sm font-semibold text-gray-800">
-            <div className="mb-6">
-              <label className="block mb-1 text-xs font-bold">Buscar</label>
-              <input
-                type="text"
-                placeholder="Buscar por título o autor"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full border border-gray-300 rounded px-2 py-1.5 text-sm"
-              />
-            </div>
-            {/* Géneros */}
-            <div className="mb-6">
-              <h3 className="font-bold text-base mb-2">Géneros</h3>
-              <div className="space-y-2 max-h-48 overflow-y-auto">
-                {genres.map((genre) => (
-                  <label key={genre.id} className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      checked={genre.id ? selectedGenres.includes(genre.id) : false}
-                      onChange={() => genre.id && handleGenreToggle(genre.id)}
-                      className="rounded text-coral-500 focus:ring-coral-500"
-                    />
-                    <span className="text-sm">{genre.nombre}</span>
-                  </label>
-                ))}
-              </div>
-            </div>
-            <button
-              onClick={clearFilters}
-              className="w-full text-coral-500 hover:text-coral-600 text-sm font-medium"
-            >
-              Limpiar filtros
-            </button>
-          </aside>
->>>>>>> main
 
           <section className="flex-1">
             <div className="flex justify-between items-center text-sm text-gray-800 mb-8 mt-5">

@@ -5,7 +5,6 @@ import { api } from "../services/api";
 const CheckoutSuccess: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
-<<<<<<< HEAD
   const [checkoutData, setCheckoutData] = useState(() => {
     const savedData = localStorage.getItem('checkout_info');
     return savedData ? JSON.parse(savedData) : { cart: {}, shipping: {} };
@@ -84,93 +83,6 @@ const CheckoutSuccess: React.FC = () => {
       isSubscribed = false;
     };
   }, []);
-=======
-  const [orderData, setOrderData] = useState<any>(null);
-  const [added, setAdded] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const processPayment = async () => {
-      try {
-        // Verificar el session_id de Stripe
-        const sessionId = new URLSearchParams(location.search).get('session_id');
-        if (!sessionId) {
-          navigate('/cart');
-          return;
-        }
-
-        // Recuperar los datos de envío guardados
-        const savedData = localStorage.getItem('shippingDetails');
-        if (!savedData) {
-          navigate('/cart');
-          return;
-        }
-
-        const { cart, shipping } = JSON.parse(savedData);
-        setOrderData({ cart, shipping });
-        
-        // Procesar la compra
-        const idUsuario = Number(localStorage.getItem('usuario'));
-        if (!idUsuario) {
-          navigate('/login');
-          return;
-        }
-
-        // Añadir libros a la biblioteca del usuario
-        const userData = await api.getUserWithBooks();
-        const userIsbns = (userData.libros || []).map((l: any) => l.isbn);
-        const booksToAdd = cart.items.filter((item: any) => !userIsbns.includes(item.isbn));
-        
-        for (const item of booksToAdd) {
-          await api.addBookByIsbn({ idUsuario, isbn: item.isbn });
-        }
-
-        setAdded(true);
-        
-        // Limpiar datos
-        localStorage.removeItem('shippingDetails');
-        if ((window as any).__clearCart) {
-          (window as any).__clearCart();
-        }
-      } catch (error) {
-        console.error('Error processing payment:', error);
-        setAdded(false);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    processPayment();
-  }, [location.search, navigate]);
-
-  if (loading) {
-    return (
-      <main className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-coral-500"></div>
-        <p className="mt-4 text-gray-600">Procesando tu compra...</p>
-      </main>
-    );
-  }
-
-  if (!orderData) {
-    return (
-      <main className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
-        <div className="bg-white rounded-xl shadow-lg p-8 max-w-xl w-full text-center">
-          <h1 className="text-2xl font-bold text-red-600 mb-4">Error al procesar el pago</h1>
-          <p className="text-gray-600 mb-6">No se pudo completar la transacción. Por favor, intenta de nuevo.</p>
-          <button
-            onClick={() => navigate('/cart')}
-            className="bg-coral-500 hover:bg-coral-600 text-white px-6 py-2 rounded-md font-semibold transition-colors"
-          >
-            Volver al carrito
-          </button>
-        </div>
-      </main>
-    );
-  }
-
-  const { cart, shipping } = orderData;
->>>>>>> main
 
   if (processing) {
     return (
@@ -190,19 +102,8 @@ const CheckoutSuccess: React.FC = () => {
       <div className="bg-white rounded-xl shadow-lg p-8 max-w-xl w-full flex flex-col items-center">
         <img src="/images/logo.png" alt="Libroly Logo" className="w-16 mb-4" />
         <h1 className="text-3xl font-bold text-coral-600 mb-2 text-center">¡Gracias por tu compra!</h1>
-<<<<<<< HEAD
         {added && <p className="text-green-600 text-center text-sm mb-2">Los libros de tu compra se han añadido a tu biblioteca.</p>}
         <p className="text-gray-700 text-center mb-6">Tu pedido ha sido procesado correctamente. Pronto recibirás un email con los detalles del envío.</p>
-=======
-        {added && (
-          <p className="text-green-600 text-center text-sm mb-2">
-            Los libros de tu compra se han añadido a tu biblioteca.
-          </p>
-        )}
-        <p className="text-gray-700 text-center mb-6">
-          Tu pedido ha sido procesado correctamente. Pronto recibirás un email con los detalles del envío.
-        </p>
->>>>>>> main
         
         <div className="w-full mb-6">
           <h2 className="text-lg font-semibold text-gray-800 mb-2">Detalles del envío</h2>
@@ -213,11 +114,7 @@ const CheckoutSuccess: React.FC = () => {
             <div><span className="font-bold">Email:</span> {shipping?.email}</div>
           </div>
         </div>
-<<<<<<< HEAD
         
-=======
-
->>>>>>> main
         <div className="w-full mb-6">
           <h2 className="text-lg font-semibold text-gray-800 mb-2">Resumen de tu compra</h2>
           <div className="bg-gray-50 rounded-lg p-4 text-sm text-gray-700">

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { api } from "../../services/api";
@@ -9,13 +8,6 @@ const LibrolyProComp: React.FC = () => {
   const [showPlanDialog, setShowPlanDialog] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState('');
-=======
-import React from "react";
-import { useAuth } from "../../contexts/AuthContext";
-
-const LibrolyProComp: React.FC = () => {
-  const { user, isAuthenticated } = useAuth();
->>>>>>> main
 
   const plans = [
     {
@@ -63,7 +55,6 @@ const LibrolyProComp: React.FC = () => {
 
   const handleSubscription = async (planType: string) => {
     try {
-<<<<<<< HEAD
       if (!isAuthenticated || !user) {
         setFeedbackMessage('Debes iniciar sesión para suscribirte a un plan');
         setShowFeedback(true);
@@ -240,37 +231,6 @@ const LibrolyProComp: React.FC = () => {
   }
 
   // Si el usuario no está verificado, mostramos los planes
-=======
-      if (!isAuthenticated) {
-        alert('Debes iniciar sesión para suscribirte a un plan');
-        return;
-      }
-
-      const response = await fetch('http://localhost:5000/create-subscription', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-          plan: planType,
-          userId: user.id
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Error al crear la suscripción');
-      }
-
-      const { checkout_url } = await response.json();
-      window.location.href = checkout_url;
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Ha ocurrido un error al procesar tu suscripción. Por favor, inténtalo de nuevo.');
-    }
-  };
-
->>>>>>> main
   return (
     <main className="min-h-screen bg-gray-50 py-12">
       <div className="container mx-auto px-4">
@@ -281,13 +241,8 @@ const LibrolyProComp: React.FC = () => {
           </p>
         </div>
 
-<<<<<<< HEAD
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {plans.map(plan => (
-=======
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          {plans.map((plan, idx) => (
->>>>>>> main
             <div
               key={plan.name}
               className={`bg-white rounded-xl p-6 shadow-sm border ${
@@ -309,7 +264,6 @@ const LibrolyProComp: React.FC = () => {
               </ul>
               <button 
                 onClick={() => handleSubscription(plan.type)}
-<<<<<<< HEAD
                 className={`w-full py-2 rounded-lg text-sm font-medium transition-colors ${
                   plan.highlight 
                     ? 'bg-coral-500 text-white hover:bg-coral-600' 
@@ -317,21 +271,12 @@ const LibrolyProComp: React.FC = () => {
                 }`}
               >
                 {currentPlan === plan.type ? 'Plan actual' : 'Seleccionar'}
-=======
-                className={`w-full py-2 px-4 rounded-lg font-semibold text-white transition-colors ${plan.highlight ? 'bg-coral-500 hover:bg-coral-600' : 'bg-gray-400 hover:bg-gray-500'}`}
-              >
-                Elegir plan
->>>>>>> main
               </button>
             </div>
           ))}
         </div>
 
-<<<<<<< HEAD
         <div className="max-w-lg mx-auto text-center text-sm text-gray-500">
-=======
-        <div className="max-w-2xl mx-auto text-center text-gray-700 text-lg mt-10">
->>>>>>> main
           <p>
             Todos los planes incluyen verificación de cuenta, soporte prioritario y herramientas avanzadas para hacer crecer tu presencia en Libroly.
           </p>

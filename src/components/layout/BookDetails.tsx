@@ -11,9 +11,8 @@ interface BookDetailsProps {
 
 const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
   const { addItem, removeItem, state } = useCart();
-  const { user: authUser } = useAuth();
+  const { user } = useAuth();
   const [showSuccess, setShowSuccess] = useState(false);
-  const [addedVendedorId, setAddedVendedorId] = useState<number | null>(null);
   const [vendedores, setVendedores] = useState<any[]>([]);
   const [estadoFiltro, setEstadoFiltro] = useState<number | ''>('');
   const [loading, setLoading] = useState(true);
@@ -21,6 +20,9 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
   const [addToLibrarySuccess, setAddToLibrarySuccess] = useState(false);
   const [addToLibraryError, setAddToLibraryError] = useState<string | null>(null);
   const [userBooks, setUserBooks] = useState<number[] | null>(null);
+
+  // Get current user ID for filtering own sales
+  const currentUserId = user?.id;
 
   const vendedoresFiltrados = estadoFiltro == ''
     ? vendedores
@@ -47,7 +49,7 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
       if (!idUsuario) return;
       try {
         const userData = await api.getUserWithBooks();
-        const libros = userData.libros || [];
+        const libros = userData.libros ?? [];
         setUserBooks(libros.map((l: any) => l.isbn));
       } catch {
         setUserBooks([]);
@@ -66,7 +68,6 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
       author: book.autor,
     });
 
-    setAddedVendedorId(vendedor.id);
     setShowSuccess(true);
     setTimeout(() => setShowSuccess(false), 3000);
   };
@@ -155,7 +156,7 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
                   {book.idiomas.map(lang => lang.nombre).join(', ')}
                 </div>
               )}
-            {book.valoracion && (
+            {Boolean(book.valoracion) && (
               <div>
                 <span className="font-semibold">Valoración:</span> {book.valoracion}/5 ⭐
               </div>
@@ -163,7 +164,7 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
             {book.generoLiterario && book.generoLiterario.length > 0 && (
               <div className="col-span-2">
                 <span className="font-semibold">Géneros:</span>{' '}
-                {book.generoLiterario.map((genre) => genre.nombre || genre).join(', ')}
+                {book.generoLiterario.map((genre) => typeof genre === 'string' ? genre : genre.nombre).join(', ')}
               </div>
             )}
           </div>

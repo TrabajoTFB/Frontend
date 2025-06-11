@@ -3,6 +3,7 @@ import ProfileEdit from "../components/layout/ProfileEdit";
 import { api } from "../services/api";
 import type { Usuario } from "../types";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
+import { getAvatarUrl } from "../utils/avatar";
 
 const Profile: React.FC = () => {
   const [isEditing, setIsEditing] = useState("info");
@@ -47,7 +48,7 @@ const Profile: React.FC = () => {
         {/* Imagen perfil */}
         <div className="flex-shrink-0 flex flex-col items-center md:items-start w-full md:w-56">
           <img
-            src="/images/profile.png"
+            src={getAvatarUrl(user.email)}
             alt="Avatar"
             className="w-28 h-28 rounded-full object-cover mb-2 md:mb-4"
           />

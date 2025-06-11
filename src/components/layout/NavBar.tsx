@@ -79,11 +79,7 @@ const NavBar: React.FC = () => {
                                 onClick={toggleUserMenu}
                                 className="flex items-center gap-2 text-gray-700 hover:text-coral-500 transition-colors"
                             >
-                                <img 
-                                    src="/images/profile.png" 
-                                    alt="Profile" 
-                                    className="w-8 h-8 rounded-full"
-                                />
+                                <i className="fas fa-user-circle text-2xl"></i>
                                 <span>{user?.nombre}</span>
                             </button>
 
@@ -163,11 +159,7 @@ const NavBar: React.FC = () => {
                                 <li>
                                     <Link to="/profile" className="block px-6 py-2 hover:bg-gray-50" onClick={() => setIsMenuOpen(false)}>
                                         <div className="flex items-center gap-2">
-                                            <img 
-                                                src="/images/profile.png" 
-                                                alt="Profile" 
-                                                className="w-8 h-8 rounded-full"
-                                            />
+                                            <i className="fas fa-user-circle text-2xl"></i>
                                             <span>{user?.nombre}</span>
                                         </div>
                                     </Link>

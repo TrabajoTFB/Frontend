@@ -14,6 +14,14 @@ export interface Language {
   codigo?: string; // ej: "es", "en", "fr"
 }
 
+export interface Seller {
+  id: string;
+  nombre: string;
+  estado: string;
+  valoracion: number;
+  precio: number;
+}
+
 export interface Book {
   titulo: string;
   autor: string;
@@ -28,6 +36,7 @@ export interface Book {
   publisher?: string;
   idiomas?: Language[];
   enVenta?: boolean;
+  sellers?: Seller[];
 }
 
 // Tipos para el carrito

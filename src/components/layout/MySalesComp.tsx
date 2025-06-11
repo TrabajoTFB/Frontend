@@ -79,7 +79,8 @@ const MySalesComp: React.FC<BooksCompProps> = ({ initialGenreId }) => {
     // Filtrar por géneros seleccionados
     if (selectedGenres.length > 0) {
       result = result.filter(book =>
-        book.generoLiterario.some(genre => genre.id && selectedGenres.includes(genre.id))
+        Array.isArray(book.libro?.generoLiterario) &&
+        book.libro.generoLiterario.some(genre => genre.id && selectedGenres.includes(genre.id))
       );
     }
 

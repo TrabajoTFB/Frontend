@@ -1,10 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
-const WorkWithUsComp: React.FC = () => {
-  const plans = [
+type PlanType = 'basic' | 'pro' | 'premium';
+
+interface Plan {
+  name: string;
+  price: string;
+  type: PlanType;
+  perks: string[];
+  color: string;
+  highlight: boolean;
+}
+
+interface ApiResponse {
+  checkout_url: string;
+}
+
+interface AxiosResponse {
+  data: ApiResponse;
+}
+
+const WorkWithUsComp = () => {
+  const [loadingPlan, setLoadingPlan] = useState<PlanType | null>(null);
+
+  const handleSubscribe = async (planType: PlanType) => {
+    try {
+      setLoadingPlan(planType);
+      const response = await axios.post('http://localhost:5000/create-subscription', 
+        { plan: planType },
+        { withCredentials: true }
+      );
+      
+      if (response.data.checkout_url) {
+        // Store the selected plan in localStorage so we can access it on success
+        localStorage.setItem('selectedPlan', planType);
+        window.location.href = response.data.checkout_url;
+      } else {
+        throw new Error('No se recibió la URL de checkout');
+      }
+    } catch (error) {
+      console.error('Error creating subscription:', error);
+      alert('Lo sentimos, ha ocurrido un error al procesar tu suscripción. Por favor, inténtalo de nuevo más tarde o contacta con soporte si el problema persiste.');
+    } finally {
+      setLoadingPlan(null);
+    }
+  };
+
+  const plans: Plan[] = [
     {
       name: 'Libroly Basic',
       price: '4,99',
+      type: 'basic' as PlanType,
       perks: [
         'Verificado en tu cuenta',
         'Soporte por email',
@@ -17,6 +63,7 @@ const WorkWithUsComp: React.FC = () => {
     {
       name: 'Libroly Plus',
       price: '9,99',
+      type: 'pro' as PlanType,
       perks: [
         'Verificado en tu cuenta',
         'Soporte prioritario 24/7',
@@ -29,6 +76,7 @@ const WorkWithUsComp: React.FC = () => {
     {
       name: 'Libroly Pro',
       price: '19,99',
+      type: 'premium' as PlanType,
       perks: [
         'Verificado en tu cuenta',
         'Soporte premium 24/7',
@@ -52,7 +100,7 @@ const WorkWithUsComp: React.FC = () => {
           </p>
         </div>
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          {plans.map((plan, idx) => (
+          {plans.map((plan) => (
             <div
               key={plan.name}
               className={`relative rounded-2xl p-8 bg-gradient-to-br ${plan.color} shadow-lg flex flex-col items-center border-2 ${plan.highlight ? 'border-coral-500 scale-105 z-10' : 'border-gray-100'} transition-transform`}
@@ -63,14 +111,22 @@ const WorkWithUsComp: React.FC = () => {
               <h2 className="text-2xl font-bold mb-2 text-coral-600">{plan.name}</h2>
               <div className="text-4xl font-extrabold text-gray-900 mb-2">€{plan.price}<span className="text-lg font-normal text-gray-500">/mes</span></div>
               <ul className="text-left space-y-2 mb-6 mt-4 w-full max-w-xs mx-auto">
-                {plan.perks.map((perk, i) => (
+                {plan.perks.map((perk: string, i: number) => (
                   <li key={i} className="flex items-center gap-2 text-gray-800">
                     <span className="text-green-500"><i className="fas fa-check-circle"></i></span>
                     {perk}
                   </li>
                 ))}
               </ul>
-              <button className={`w-full py-2 px-4 rounded-lg font-semibold text-white transition-colors ${plan.highlight ? 'bg-coral-500 hover:bg-coral-600' : 'bg-gray-400 hover:bg-gray-500'}`}>Elegir</button>
+              <button 
+                onClick={() => handleSubscribe(plan.type)}
+                disabled={loadingPlan === plan.type}
+                className={`w-full py-2 px-4 rounded-lg font-semibold text-white transition-colors 
+                  ${plan.highlight ? 'bg-coral-500 hover:bg-coral-600' : 'bg-gray-400 hover:bg-gray-500'}
+                  ${loadingPlan === plan.type ? 'opacity-75 cursor-not-allowed' : ''}`}
+              >
+                {loadingPlan === plan.type ? 'Procesando...' : 'Elegir'}
+              </button>
             </div>
           ))}
         </div>

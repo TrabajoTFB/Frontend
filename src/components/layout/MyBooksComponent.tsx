@@ -91,15 +91,11 @@ const MyBooksComponent: React.FC = () => {
 
   return (
     <main className="min-h-[calc(100vh-96px-96px)] px-6 py-12 flex justify-center relative bg-white">
-      {/* Fondo decorativo */}
       <div className="absolute top-28 left-20 w-96 h-96 bg-coral-500/30 rounded-xl -z-10"></div>
 
       <div className="max-w-7xl w-full bg-white rounded-xl shadow-lg p-8">
-        {/* Botón para abrir modal */}
-
 
         <div className="flex gap-10">
-          {/* Sidebar de filtros */}
           <aside className="w-60 text-sm font-semibold text-gray-800">
             <div className="mb-6">
               <label className="block mb-1 text-xs font-bold">Buscar</label>
@@ -120,7 +116,6 @@ const MyBooksComponent: React.FC = () => {
             </button>
           </aside>
 
-          {/* Contenido principal */}
           <section className="flex-1">
             <div className="flex justify-between items-center text-sm text-gray-800 mb-8 mt-5">
               <div>

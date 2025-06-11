@@ -1,4 +1,5 @@
 import type { Usuario } from '../../types';
+import { getAvatarUrl } from '../../utils/avatar';
 
 
 const ProfileCard = ({
@@ -12,9 +13,9 @@ const ProfileCard = ({
     return (
         <div className="bg-gray-50 text-center text-gray-900 p-4 w-80 h-80 rounded-2xl border border-coral-100 flex flex-col items-center justify-between transition-transform duration-300 hover:-translate-y-1">
             <div className="flex flex-col items-center mt-8">
-                <a href="/profile" className="logo flex items-center justify-center w-28 h-28 bg-gradient-to-br from-coral-500 to-coral-600 rounded-full overflow-hidden shadow-md border-4 border-white">
+                <a href="/profile" className="logo flex items-center justify-center w-28 h-28 rounded-full overflow-hidden shadow-md border-4 border-white">
                     <img
-                        src="/images/profile.png"
+                        src={getAvatarUrl(user.email)}
                         alt="Foto de perfil"
                         className="w-full h-full object-cover"
                     />

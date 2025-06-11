@@ -25,6 +25,7 @@ import Footer from './components/layout/Footer';
 import ChatBot from './components/ui/ChatBot';
 import CheckoutSuccess from "./pages/CheckoutSuccess";
 import AboutUs from './pages/AboutUs';
+import SubscriptionSuccess from './pages/SubscriptionSuccess';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './App.css';
@@ -65,6 +66,7 @@ function App() {
             <Route path='/seller/:slug' element={<Seller />} />
             <Route path='/libroly-pro' element={<WorkWithUs />} />
             <Route path="/checkout-success" element={<CheckoutSuccess />} />
+            <Route path="/subscription-success" element={<SubscriptionSuccess />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -97,46 +97,15 @@ const CartComp: React.FC = () => {
   const shipping = subtotal > 50 ? 0 : 5.99;
   const total = subtotal - discount + shipping;
 
-  const handleCheckout = async () => {
-    try {
-      // Crear un array de items para Stripe con la información necesaria
-      const items = cartState.items.map(item => ({
-        isbn: item.isbn,
-        price: item.price,
-        quantity: item.quantity
-      }));
-
-      // Llamar al microservicio de pago
-      const response = await fetch('http://localhost:5000/create-checkout-session', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-          order_id: Date.now().toString(), // Puedes generar un ID de orden más sofisticado
-          items: items
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Error al crear la sesión de pago');
-      }
-
-      const { checkout_url } = await response.json();
-      
-      // Guardar los datos del envío en localStorage para recuperarlos después
-      localStorage.setItem('shippingDetails', JSON.stringify({
+  const handleCheckout = () => {
+    // Simulación de pago: redirige a la página de compra finalizada con los datos del carrito y del envío
+    navigate("/checkout-success", {
+      state: {
         cart: cartState,
-        shipping: form
-      }));
-
-      // Redirigir a la página de checkout de Stripe
-      window.location.href = checkout_url;
-    } catch (error) {
-      console.error('Error en el checkout:', error);
-      alert('Hubo un error al procesar el pago. Por favor, inténtalo de nuevo.');
-    }
+        shipping: form,
+      },
+      replace: true
+    });
   };
 
   if (loading) {

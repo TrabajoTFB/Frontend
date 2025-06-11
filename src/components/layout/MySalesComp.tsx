@@ -193,45 +193,6 @@ const MySalesComp: React.FC<BooksCompProps> = ({ initialGenreId }) => {
 
       <div className="max-w-7xl w-full bg-white rounded-xl shadow-lg p-8 flex gap-10">
         {/* Sidebar filtros */}
-        <aside className="w-60 text-sm font-semibold text-gray-800">
-          {/* Búsqueda */}
-          <div className="mb-6">
-            <label className="block mb-1 text-xs font-bold">Buscar</label>
-            <input
-              type="text"
-              placeholder="Buscar por título o autor"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full border border-gray-300 rounded px-2 py-1.5 text-sm"
-            />
-          </div>
-
-          {/* Géneros */}
-          <div className="mb-6">
-            <h3 className="font-bold text-base mb-2">Géneros</h3>
-            <div className="space-y-2 max-h-48 overflow-y-auto">
-              {genres.map((genre) => (
-                <label key={genre.id} className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    checked={genre.id ? selectedGenres.includes(genre.id) : false}
-                    onChange={() => genre.id && handleGenreToggle(genre.id)}
-                    className="rounded text-coral-500 focus:ring-coral-500"
-                  />
-                  <span className="text-sm">{genre.nombre}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-
-          {/* Limpiar filtros */}
-          <button
-            onClick={clearFilters}
-            className="w-full text-coral-500 hover:text-coral-600 text-sm font-medium"
-          >
-            Limpiar filtros
-          </button>
-        </aside>
 
         <section className="flex-1">
           {/* Barra opciones */}

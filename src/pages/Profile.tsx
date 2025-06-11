@@ -3,13 +3,100 @@ import ProfileEdit from "../components/layout/ProfileEdit";
 import { api } from "../services/api";
 import type { Usuario } from "../types";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
+<<<<<<< HEAD
+import SubscriptionActionButton from "../components/ui/SubscriptionActionButton";
+=======
 import { getAvatarUrl } from "../utils/avatar";
+>>>>>>> main
 
-const Profile: React.FC = () => {
+interface ProfileProps {}
+
+const Profile: React.FC<ProfileProps> = () => {
   const [isEditing, setIsEditing] = useState("info");
   const [user, setUser] = useState<Usuario | null>(null);
   const [loading, setLoading] = useState(true);
   const [bookCount, setBookCount] = useState<number>(0);
+  const [currentPlan, setCurrentPlan] = useState<string>(localStorage.getItem('userPlan') || 'basic');
+
+  const plans = [
+    {
+      name: 'Libroly Basic',
+      price: '4,99',
+      type: 'basic',
+      perks: ['Verificado en tu cuenta', 'Soporte por email', 'Aparece en búsquedas', 'Acceso a estadísticas básicas'],
+    },
+    {
+      name: 'Libroly Plus',
+      price: '9,99',
+      type: 'pro',
+      perks: ['Verificado en tu cuenta', 'Soporte prioritario 24/7', 'Aparece primero en ventas', 'Estadísticas avanzadas'],
+    },
+    {
+      name: 'Libroly Pro',
+      price: '19,99',
+      type: 'premium',
+      perks: ['Verificado en tu cuenta', 'Soporte premium 24/7', 'Destacado en la home', 'Aparece primero en ventas', 'Asesoría personalizada', 'Acceso a campañas exclusivas'],
+    }
+  ];
+
+  const handleSubscription = async (planType: string) => {
+    try {
+      if (!user) {
+        alert('Debes iniciar sesión para suscribirte a un plan');
+        return;
+      }
+
+      // Primero actualizamos el estado de verificación del usuario
+      try {
+        await api.updateUserVerification();
+      } catch (error) {
+        console.error('Error al actualizar verificación:', error);
+        // Continuamos con la suscripción aunque falle la verificación
+      }
+
+      const response = await fetch('http://localhost:5000/create-subscription', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          plan: planType,
+          userId: user.id
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al crear la suscripción');
+      }
+
+      const { checkout_url } = await response.json();
+      window.location.href = checkout_url;
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Ha ocurrido un error al procesar tu suscripción. Por favor, inténtalo de nuevo.');
+    }
+  };
+
+  const handlePlanChange = (planType: string) => {
+    setCurrentPlan(planType);
+    localStorage.setItem('userPlan', planType);
+  };
+
+  const handleCancelSubscription = async () => {
+    try {
+      if (!user) return;
+      
+      // Aquí iría la lógica de cancelación con Stripe cuando la implementemos
+      await api.updateUserVerification(); // Esto pondrá verificado en 0
+      localStorage.removeItem('userPlan');
+      setCurrentPlan('basic');
+      window.location.reload(); // Recargamos para mostrar los planes
+    } catch (error) {
+      console.error('Error al cancelar la suscripción:', error);
+      alert('Ha ocurrido un error al cancelar tu suscripción. Por favor, inténtalo de nuevo.');
+    }
+  };
 
   const fetchProfileData = async () => {
     try {
@@ -47,12 +134,36 @@ const Profile: React.FC = () => {
       <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-10 w-full">
         {/* Imagen perfil */}
         <div className="flex-shrink-0 flex flex-col items-center md:items-start w-full md:w-56">
+<<<<<<< HEAD
+          <div className="relative">
+            <img
+              src="/images/profile.png"
+              alt="Avatar"
+              className="w-28 h-28 rounded-full object-cover mb-2 md:mb-4"
+            />
+          </div>
+          <div className="flex items-center gap-2 mb-1">
+            <h1 className="text-2xl font-bold text-gray-900 text-center md:text-left">
+              {user.nombre} {user.apellidos}
+            </h1>
+            <span 
+              className={`text-sm font-medium px-2 py-0.5 rounded-full ${
+                user.verificado === 1 
+                  ? 'bg-green-100 text-green-700 border border-green-200' 
+                  : 'bg-gray-100 text-gray-500 border border-gray-200'
+              }`}
+            >
+              {user.verificado === 1 ? <i className="fas fa-check text-sm"></i> : 'No verificado'}
+            </span>
+          </div>
+=======
           <img
             src={getAvatarUrl(user.email)}
             alt="Avatar"
             className="w-28 h-28 rounded-full object-cover mb-2 md:mb-4"
           />
           <h1 className="text-2xl font-bold text-gray-900 mb-1 text-center md:text-left">{user.nombre} {user.apellidos}</h1>
+>>>>>>> main
           <div className="text-gray-600 text-sm flex flex-col items-center md:items-start gap-0.5 mb-2">
             <span>{user.email}</span>
             <span>{user.telefono || "Sin teléfono"}</span>
@@ -65,6 +176,7 @@ const Profile: React.FC = () => {
             <span role="img" aria-label="Editar">✏️</span> Editar perfil
           </button>
         </div>
+
         {/* Detalles de la cuenta */}
         <section className="flex-1 w-full bg-gray-50 rounded-2xl px-6 py-6 flex flex-col items-center md:items-start">
           <h2 className="text-xl font-bold text-gray-900 mb-6 w-full text-center md:text-left">Detalles de la cuenta</h2>
@@ -87,6 +199,16 @@ const Profile: React.FC = () => {
                   <dt className="text-xs text-gray-500 font-medium mb-1">Usuario</dt>
                   <dd className="text-base text-gray-900 font-semibold pl-2">{user.user}</dd>
                 </div>
+
+                <div className="flex flex-col items-start border-b border-gray-100 py-2">
+                  <dt className="text-xs text-gray-500 font-medium mb-1">Estado de la cuenta</dt>
+                  <dd className={`flex items-center gap-2 text-base pl-2 ${
+                    user.verificado === 1 ? 'text-green-600' : 'text-gray-500'
+                  }`}>
+                    <i className={`fas ${user.verificado === 1 ? 'fa-shield-check' : 'fa-shield'}`}></i>
+                    {user.verificado === 1 ? 'Cuenta verificada' : 'Cuenta sin verificar'}
+                  </dd>
+                </div>
                 <div className="flex flex-col items-start border-b border-gray-100 py-2">
                   <dt className="text-xs text-gray-500 font-medium mb-1">Correo</dt>
                   <dd className="text-base text-gray-900 font-semibold pl-2">{user.email}</dd>
@@ -104,6 +226,9 @@ const Profile: React.FC = () => {
           </div>
         </section>
       </div>
+
+
+
       <section className="w-full mb-10 flex flex-row gap-6 justify-center items-center">
         <a href="/my-books" className="flex-1 max-w-xs bg-white flex flex-col items-center py-6 px-2 rounded-xl transition hover:shadow-md focus:outline-none focus:ring-2 focus:ring-coral-500">
           <span className="text-coral-500 text-4xl mb-2">📚</span>

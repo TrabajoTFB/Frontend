@@ -131,6 +131,10 @@ const MyBooksComponent: React.FC = () => {
 
       <div className="max-w-7xl w-full bg-white rounded-xl shadow-lg p-8">
         <div className="flex gap-10">
+<<<<<<< HEAD
+          {/* Sidebar de filtros */}
+
+=======
           {/* Sidebar filtros */}
           <aside className="w-60 text-sm font-semibold text-gray-800">
             <div className="mb-6">
@@ -167,6 +171,7 @@ const MyBooksComponent: React.FC = () => {
               Limpiar filtros
             </button>
           </aside>
+>>>>>>> main
 
           <section className="flex-1">
             <div className="flex justify-between items-center text-sm text-gray-800 mb-8 mt-5">

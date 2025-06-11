@@ -28,20 +28,38 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
     ? vendedores
     : vendedores.filter(v => v.estado == estadoFiltro);
 
+  const [error, setError] = useState<string | null>(null);
+  const [retryCount, setRetryCount] = useState(0);
+
   useEffect(() => {
     const fetchVendedores = async () => {
       try {
+        setLoading(true);
+        setError(null);
         const data = await api.getVentaByIsbn(book.isbn.toString());
         setVendedores(data);
-      } catch (error) {
+      } catch (error: any) {
         console.error('Error al obtener vendedores:', error);
+        const isConnectionError = error.response?.status === 500 && 
+          (error.response?.data?.message?.includes('JPA EntityManager') || 
+           error.response?.data?.message?.includes('Communications link failure'));
+        
+        if (isConnectionError && retryCount < 3) {
+          // Reintento automático después de 2 segundos
+          setTimeout(() => {
+            setRetryCount(prev => prev + 1);
+          }, 2000);
+          setError('Problemas de conexión. Reintentando...');
+        } else {
+          setError('No se pudieron cargar los vendedores. Por favor, intenta recargar la página.');
+        }
       } finally {
         setLoading(false);
       }
     };
 
     fetchVendedores();
-  }, [book.isbn]);
+  }, [book.isbn, retryCount]);
 
   useEffect(() => {
     const fetchUserBooks = async () => {
@@ -225,7 +243,23 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
 
             </h3>
             {loading ? (
-              <p>Cargando vendedores...</p>
+              <div className="flex items-center justify-center p-4">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-coral-500"></div>
+                <span className="ml-3 text-gray-600">{error || 'Cargando vendedores...'}</span>
+              </div>
+            ) : error ? (
+              <div className="text-center py-4">
+                <p className="text-red-500 mb-2">{error}</p>
+                <button
+                  onClick={() => {
+                    setRetryCount(0);
+                    setError(null);
+                  }}
+                  className="text-coral-500 hover:text-coral-600 underline"
+                >
+                  Reintentar
+                </button>
+              </div>
             ) : vendedoresFiltrados.length === 0 ? (
               <p>No hay vendedores disponibles para este libro.</p>
             ) : currentUserId && vendedores.every(v => v.id === currentUserId) ? (

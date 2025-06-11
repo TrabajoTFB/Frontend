@@ -1,6 +1,14 @@
 export type { BlogPost } from './blog';
 
-// types/index.ts
+export interface User {
+  id: number;
+  nombre: string;
+  apellidos: string;
+  email: string;
+  verificado: number;
+  telefono?: string;
+  urlFotoPerfil?: string;
+}
 
 export interface Genre {
   id?: number;
@@ -56,17 +64,18 @@ export interface CartState {
   itemCount: number;
 }
 
-
 export interface Usuario {
-    apellidos: string;
-    contraseña: string;
-    email: string;
-    id: number;
-    book: Book;
-    nombre: string;
-    telefono: string;
-    user: string;
-    direccion: string;
+  apellidos: string;
+  contraseña: string;
+  email: string;
+  id: number;
+  book: Book;
+  nombre: string;
+  telefono: string;
+  user: string;
+  direccion: string;
+  verificado: number;
+  libros: any[];
 }
 
 interface PaymentIntentResponse {

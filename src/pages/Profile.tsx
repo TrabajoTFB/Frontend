@@ -46,12 +46,27 @@ const Profile: React.FC = () => {
       <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-10 w-full">
         {/* Imagen perfil */}
         <div className="flex-shrink-0 flex flex-col items-center md:items-start w-full md:w-56">
-          <img
-            src="/images/profile.png"
-            alt="Avatar"
-            className="w-28 h-28 rounded-full object-cover mb-2 md:mb-4"
-          />
-          <h1 className="text-2xl font-bold text-gray-900 mb-1 text-center md:text-left">{user.nombre} {user.apellidos}</h1>
+          <div className="relative">
+            <img
+              src="/images/profile.png"
+              alt="Avatar"
+              className="w-28 h-28 rounded-full object-cover mb-2 md:mb-4"
+            />
+          </div>
+          <div className="flex items-center gap-2 mb-1">
+            <h1 className="text-2xl font-bold text-gray-900 text-center md:text-left">
+              {user.nombre} {user.apellidos}
+            </h1>
+            <span 
+              className={`text-sm font-medium px-2 py-0.5 rounded-full ${
+                user.verificado === 1 
+                  ? 'bg-green-100 text-green-700 border border-green-200' 
+                  : 'bg-gray-100 text-gray-500 border border-gray-200'
+              }`}
+            >
+              {user.verificado === 1 ? <i className="fas fa-check text-sm"></i> : 'No verificado'}
+            </span>
+          </div>
           <div className="text-gray-600 text-sm flex flex-col items-center md:items-start gap-0.5 mb-2">
             <span>{user.email}</span>
             <span>{user.telefono || "Sin teléfono"}</span>
@@ -85,6 +100,15 @@ const Profile: React.FC = () => {
                 <div className="flex flex-col items-start border-b border-gray-100 py-2">
                   <dt className="text-xs text-gray-500 font-medium mb-1">Usuario</dt>
                   <dd className="text-base text-gray-900 font-semibold pl-2">{user.user}</dd>
+                </div>
+                <div className="flex flex-col items-start border-b border-gray-100 py-2">
+                  <dt className="text-xs text-gray-500 font-medium mb-1">Estado de la cuenta</dt>
+                  <dd className={`flex items-center gap-2 text-base pl-2 ${
+                    user.verificado === 1 ? 'text-green-600' : 'text-gray-500'
+                  }`}>
+                    <i className={`fas ${user.verificado === 1 ? 'fa-shield-check' : 'fa-shield'}`}></i>
+                    {user.verificado === 1 ? 'Cuenta verificada' : 'Cuenta sin verificar'}
+                  </dd>
                 </div>
                 <div className="flex flex-col items-start border-b border-gray-100 py-2">
                   <dt className="text-xs text-gray-500 font-medium mb-1">Correo</dt>

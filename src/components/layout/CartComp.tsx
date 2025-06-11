@@ -97,15 +97,61 @@ const CartComp: React.FC = () => {
   const shipping = subtotal > 50 ? 0 : 5.99;
   const total = subtotal - discount + shipping;
 
-  const handleCheckout = () => {
-    // Simulación de pago: redirige a la página de compra finalizada con los datos del carrito y del envío
-    navigate("/checkout-success", {
-      state: {
-        cart: cartState,
-        shipping: form,
-      },
-      replace: true
-    });
+  const handleCheckout = async () => {
+    try {
+      // Calcular precio final con descuento y envío por item
+      const items = cartState.items.map(item => {
+        const itemSubtotal = item.price * item.quantity;
+        const itemDiscount = itemSubtotal * 0.1; // 10% descuento
+        const itemPrice = itemSubtotal - itemDiscount;
+        
+        return {
+          isbn: String(item.isbn),
+          price: itemPrice,
+          quantity: 1, // Ponemos quantity a 1 porque ya incluimos el precio total del item
+          title: item.title
+        };
+      });
+
+      // Añadir el cargo de envío como un item separado si aplica
+      if (shipping > 0) {
+        items.push({
+          isbn: "shipping",
+          price: shipping,
+          quantity: 1,
+          title: "Gastos de envío"
+        });
+      }
+
+      // Crear la sesión de checkout con la información del carrito y envío
+      const shippingInfo = {
+        firstName: form.firstName,
+        lastName: form.lastName,
+        address: form.address,
+        city: form.city,
+        zip: form.zip,
+        country: form.country,
+        phone: form.phone,
+        email: form.email
+      };
+
+      const session = await api.createStripeCheckoutSession(items, cartState, shippingInfo);
+
+      // Redirigir a Stripe
+      if (session && session.checkout_url) {
+        // Guardar información del carrito y envío en localStorage para recuperarla después
+        localStorage.setItem('checkout_info', JSON.stringify({
+          cart: cartState,
+          shipping: shippingInfo
+        }));
+        window.location.href = session.checkout_url;
+      } else {
+        throw new Error('No se recibió una URL de checkout válida');
+      }
+    } catch (error) {
+      console.error('Error al procesar el pago:', error);
+      alert('Ha ocurrido un error al procesar el pago. Por favor, inténtalo de nuevo.');
+    }
   };
 
   if (loading) {

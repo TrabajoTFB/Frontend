@@ -9,25 +9,42 @@ const CheckoutSuccess: React.FC = () => {
   const [added, setAdded] = useState(false);
 
   useEffect(() => {
-    const addMissingBooks = async () => {
-      if (!cart?.items?.length) return;
-      const idUsuario = Number(localStorage.getItem('usuario'));
+    const processSuccessfulPayment = async () => {
+      const params = new URLSearchParams(window.location.search);
+      const sessionId = params.get('session_id');
+
+      if (!sessionId) {
+        navigate('/cart');
+        return;
+      }
+
       try {
+        // Get saved checkout info from localStorage
+        const checkoutInfo = JSON.parse(localStorage.getItem('checkout_info') || '{}');
+        const storedCart = checkoutInfo.cart;
+        const storedShipping = checkoutInfo.shipping;
+
+        const idUsuario = Number(localStorage.getItem('usuario'));
         const userData = await api.getUserWithBooks();
         const userIsbns = (userData.libros || []).map((l: any) => l.isbn);
-        const booksToAdd = cart.items.filter((item: any) => !userIsbns.includes(item.isbn));
+        const booksToAdd = storedCart?.items?.filter((item: any) => !userIsbns.includes(item.isbn)) || [];
+        
         for (const item of booksToAdd) {
           await api.addBookByIsbn({ idUsuario, isbn: item.isbn });
         }
         setAdded(true);
-      } catch {
-        setAdded(false);
+
+        // Clear cart and checkout info
+        localStorage.removeItem('cart');
+        localStorage.removeItem('checkout_info');
+        if ((window as any).__clearCart) (window as any).__clearCart();
+      } catch (error) {
+        console.error('Error processing successful payment:', error);
+        navigate('/cart');
       }
     };
-    addMissingBooks().then(() => {
-      localStorage.removeItem('cart');
-      if ((window as any).__clearCart) (window as any).__clearCart();
-    });
+
+    processSuccessfulPayment();
     // eslint-disable-next-line
   }, []);
 

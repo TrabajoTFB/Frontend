@@ -6,7 +6,20 @@ const ProfileInfo = ({ user, setIsEditing }: { user: import('../../types').Usuar
       <div className="grid grid-cols-2 gap-8">
         <div>
           <label className="font-bold block mb-1 text-coral-600">Nombre</label>
-          <p className="text-gray-900 font-medium">{user.nombre}</p>
+          <div className="flex items-center gap-2">
+            <p className="text-gray-900 font-medium">{user.nombre}</p>
+            <span 
+              className={`text-sm font-medium px-2 py-0.5 rounded flex items-center gap-1 ${
+                user.verificado === 1 
+                  ? 'bg-green-100 text-green-700 border border-green-200' 
+                  : 'bg-gray-100 text-gray-700 border border-gray-200'
+              }`}
+            >
+              {user.verificado === 1 
+                ? <><i className="fas fa-check-circle mr-1"></i>Verificado</> 
+                : <><i className="fas fa-clock mr-1"></i>No verificado</>}
+            </span>
+          </div>
         </div>
         <div>
           <label className="font-bold block mb-1 text-coral-600">Apellidos</label>

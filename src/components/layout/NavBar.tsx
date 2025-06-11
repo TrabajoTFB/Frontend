@@ -84,7 +84,14 @@ const NavBar: React.FC = () => {
                                     alt="Profile" 
                                     className="w-8 h-8 rounded-full"
                                 />
-                                <span>{user?.nombre}</span>
+                                <div className="flex items-center gap-2">
+                                    <span>{user?.nombre}</span>
+                                    {user?.verificado === 1 && (
+                                        <span className="text-xs px-1.5 py-0.5 rounded bg-green-100 text-green-700">
+                                            ✓
+                                        </span>
+                                    )}
+                                </div>
                             </button>
 
                             {isUserMenuOpen && (
@@ -147,7 +154,7 @@ const NavBar: React.FC = () => {
                         {isAuthenticated && (
                           <li><Link to="/my-books" className="block px-6 py-2 hover:bg-gray-50" onClick={() => setIsMenuOpen(false)}>Mi Biblioteca</Link></li>
                         )}
-                        <li><Link to="/work-with-us" className="block px-6 py-2 hover:bg-gray-50" onClick={() => setIsMenuOpen(false)}>Libroly Pro</Link></li>
+                        <li><Link to="/libroly-pro" className="block px-6 py-2 hover:bg-gray-50" onClick={() => setIsMenuOpen(false)}>Libroly Pro</Link></li>
                         <li><Link to="/blog" className="block px-6 py-2 hover:bg-gray-50" onClick={() => setIsMenuOpen(false)}>Blog</Link></li>
                         <li><Link to="/about-us" className="block px-6 py-2 hover:bg-gray-50" onClick={() => setIsMenuOpen(false)}>Sobre Nosotros</Link></li>
                         {isAuthenticated ? (
@@ -168,7 +175,14 @@ const NavBar: React.FC = () => {
                                                 alt="Profile" 
                                                 className="w-8 h-8 rounded-full"
                                             />
-                                            <span>{user?.nombre}</span>
+                                            <div className="flex items-center gap-2">
+                                                <span>{user?.nombre}</span>
+                                                {user?.verificado === 1 && (
+                                                    <span className="text-xs px-1.5 py-0.5 rounded bg-green-100 text-green-700">
+                                                        ✓
+                                                    </span>
+                                                )}
+                                            </div>
                                         </div>
                                     </Link>
                                 </li>

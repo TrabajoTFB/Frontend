@@ -26,7 +26,7 @@ const ProfileEdit = ({
     const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
       try {        
-        await api.putUser( {
+        await api.putUser({
           id: user.id,
           user: user.user,
           nombre,
@@ -34,7 +34,8 @@ const ProfileEdit = ({
           direccion,
           telefono,
           email,
-          contraseña
+          contraseña,
+          verificado: user.verificado  // Mantenemos el estado de verificación actual
         });
         await onUserUpdated();
         setIsEditing("info"); // Vuelve al modo de visualización

@@ -2,6 +2,7 @@ import axios from 'axios';
 import type { Usuario } from '../types';
 
 const API_URL = 'http://localhost:8080';
+const PYTHON_API_URL = 'http://localhost:5000';
 
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
@@ -89,6 +90,19 @@ register: async (userData: {
         return response.data;
     },
 
+    updateUserVerification: async () => {
+        const idUser = localStorage.getItem('usuario');
+        // Primero obtenemos los datos actuales del usuario
+        const currentUser = await axios.get(`${API_URL}/user/${idUser}`);
+        
+        // Actualizamos solo cambiando el campo verificado
+        const response = await axios.put(`${API_URL}/user/${idUser}`, {
+            ...currentUser.data,
+            verificado: 1
+        });
+        return response.data;
+    },
+
     // Book endpoints
 
     getAllBooks: async () => {
@@ -148,6 +162,39 @@ register: async (userData: {
             return response.data;
         } catch (error) {
             console.error('Create sale error:', error);
+            throw error;
+        }
+    },
+
+    createStripeCheckoutSession: async (items: Array<{price: number, quantity: number, title: string, isbn: string}>) => {
+        try {
+            const orderId = `order_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+            
+            // Añadir la URL de éxito directamente a checkout-success
+            const response = await axios.post(`${PYTHON_API_URL}/create-checkout-session`, {
+                order_id: orderId,
+                items,
+                success_url: `${window.location.origin}/checkout-success?session_id={CHECKOUT_SESSION_ID}`,
+                cancel_url: `${window.location.origin}/cart`
+            });
+
+            if (!response.data || !response.data.checkout_url) {
+                throw new Error('No se recibió una URL de checkout válida del servidor');
+            }
+
+            return response.data;
+        } catch (error) {
+            console.error('Error creating checkout session:', error);
+            throw error;
+        }
+    },
+
+    verifyPaymentSession: async (sessionId: string) => {
+        try {
+            const response = await axios.get(`${PYTHON_API_URL}/verify-payment/${sessionId}`);
+            return response.data;
+        } catch (error) {
+            console.error('Error verifying payment:', error);
             throw error;
         }
     },

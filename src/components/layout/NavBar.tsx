@@ -79,19 +79,8 @@ const NavBar: React.FC = () => {
                                 onClick={toggleUserMenu}
                                 className="flex items-center gap-2 text-gray-700 hover:text-coral-500 transition-colors"
                             >
-                                <img 
-                                    src="/images/profile.png" 
-                                    alt="Profile" 
-                                    className="w-8 h-8 rounded-full"
-                                />
-                                <div className="flex items-center gap-2">
-                                    <span>{user?.nombre}</span>
-                                    {user?.verificado === 1 && (
-                                        <span className="text-xs px-1.5 py-0.5 rounded bg-green-100 text-green-700">
-                                            ✓
-                                        </span>
-                                    )}
-                                </div>
+                                <i className="fas fa-user-circle text-2xl"></i>
+                                <span>{user?.nombre}</span>
                             </button>
 
                             {isUserMenuOpen && (
@@ -170,19 +159,8 @@ const NavBar: React.FC = () => {
                                 <li>
                                     <Link to="/profile" className="block px-6 py-2 hover:bg-gray-50" onClick={() => setIsMenuOpen(false)}>
                                         <div className="flex items-center gap-2">
-                                            <img 
-                                                src="/images/profile.png" 
-                                                alt="Profile" 
-                                                className="w-8 h-8 rounded-full"
-                                            />
-                                            <div className="flex items-center gap-2">
-                                                <span>{user?.nombre}</span>
-                                                {user?.verificado === 1 && (
-                                                    <span className="text-xs px-1.5 py-0.5 rounded bg-green-100 text-green-700">
-                                                        ✓
-                                                    </span>
-                                                )}
-                                            </div>
+                                            <i className="fas fa-user-circle text-2xl"></i>
+                                            <span>{user?.nombre}</span>
                                         </div>
                                     </Link>
                                 </li>

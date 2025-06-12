@@ -11,6 +11,7 @@ import SignUp from './pages/SignUp';
 import Profile from './pages/Profile';
 import MyBooks from './pages/MyBooks'
 import MySales from './pages/MySales';
+import MyOrders from './pages/MyOrders';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import LibrolyPro from './pages/LibrolyPro';
@@ -26,6 +27,7 @@ import Footer from './components/layout/Footer';
 import ChatBot from './components/ui/ChatBot';
 import CheckoutSuccess from "./pages/CheckoutSuccess";
 import AboutUs from './pages/AboutUs';
+import SubscriptionSuccess from './pages/SubscriptionSuccess';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './App.css';
@@ -66,12 +68,18 @@ function App() {
             } />
             <Route path='/my-books' element={<MyBooks />} />
             <Route path='/my-sales' element={<MySales />} />
+            <Route path='/my-orders' element={
+              <PrivateRoute>
+                <MyOrders />
+              </PrivateRoute>
+            } />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='/seller/:id' element={<Seller />} />
             <Route path='/libroly-pro' element={<LibrolyPro />} />
             <Route path="/checkout-success" element={<CheckoutSuccess />} />
+            <Route path="/subscription-success" element={<SubscriptionSuccess />} />
             <Route path='/contact' element={<Contact />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="*" element={<NotFound />} />

@@ -3,6 +3,7 @@ import { api } from "../../services/api";
 import UserBookCard from "../ui/UserBooks";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import { useAuth } from "../../contexts/AuthContext";
+import type { Genre } from "../../types";
 
 interface UserBook {
   titulo: string;
@@ -14,17 +15,22 @@ interface UserBook {
   paginas: number;
   publisher: string;
   isbn: number;
+  precio?: number;
+  generoLiterario: { id: number; nombre: string }[];
 }
 
 const MyBooksComponent: React.FC = () => {
   const [books, setBooks] = useState<UserBook[]>([]);
   const [filteredBooks, setFilteredBooks] = useState<UserBook[]>([]);
+  const [genres, setGenres] = useState<Genre[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Estados para los filtros
+  // Filtros
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState<'titulo-asc' | 'titulo-desc' | 'fecha-asc' | 'fecha-desc' | 'valoracion-desc'>('titulo-asc');
+  const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
+  const [priceRange, setPriceRange] = useState({ min: '', max: '' });
 
   // Estados para agregar libro
   const [showAddModal, setShowAddModal] = useState(false);
@@ -41,13 +47,18 @@ const MyBooksComponent: React.FC = () => {
         setFilteredBooks(userData.libros || []);
         setLoading(false);
       } catch (err) {
-        console.error('Error fetching user books:', err);
         setError('Error al cargar tus libros');
         setLoading(false);
       }
     };
-
+    const fetchGenres = async () => {
+      try {
+        const genresData = await api.getGenres();
+        setGenres(genresData);
+      } catch {}
+    };
     fetchUserBooks();
+    fetchGenres();
   }, []);
 
   // Efecto para aplicar los filtros
@@ -61,6 +72,21 @@ const MyBooksComponent: React.FC = () => {
         book.titulo.toLowerCase().includes(term) ||
         book.autor.toLowerCase().includes(term)
       );
+    }
+
+    // Filtrar por géneros seleccionados
+    if (selectedGenres.length > 0) {
+      result = result.filter(book =>
+        book.generoLiterario && book.generoLiterario.some(genre => selectedGenres.includes(genre.id))
+      );
+    }
+
+    // Filtrar por rango de precio
+    if (priceRange.min) {
+      result = result.filter(book => (book.precio ?? 0) >= Number(priceRange.min));
+    }
+    if (priceRange.max) {
+      result = result.filter(book => (book.precio ?? 0) <= Number(priceRange.max));
     }
 
     // Aplicar ordenamiento
@@ -82,25 +108,29 @@ const MyBooksComponent: React.FC = () => {
     });
 
     setFilteredBooks(result);
-  }, [books, searchTerm, sortBy]);
+  }, [books, searchTerm, selectedGenres, priceRange, sortBy]);
 
   const clearFilters = () => {
     setSearchTerm('');
     setSortBy('titulo-asc');
+    setSelectedGenres([]);
+    setPriceRange({ min: '', max: '' });
+  };
+
+  const handleGenreToggle = (genreId: number) => {
+    setSelectedGenres(prev =>
+      prev.includes(genreId)
+        ? prev.filter(id => id !== genreId)
+        : [...prev, genreId]
+    );
   };
 
   return (
     <main className="min-h-[calc(100vh-96px-96px)] px-6 py-12 flex justify-center relative bg-white">
-      {/* Fondo decorativo */}
       <div className="absolute top-28 left-20 w-96 h-96 bg-coral-500/30 rounded-xl -z-10"></div>
 
       <div className="max-w-7xl w-full bg-white rounded-xl shadow-lg p-8">
-        {/* Botón para abrir modal */}
-
-
         <div className="flex gap-10">
-
-          {/* Contenido principal */}
           <section className="flex-1">
             <div className="flex justify-between items-center text-sm text-gray-800 mb-8 mt-5">
               <div className="flex items-center gap-4">
@@ -129,7 +159,6 @@ const MyBooksComponent: React.FC = () => {
                 Mostrando {filteredBooks.length} resultados
               </div>
             </div>
-
 
             {loading ? (
               <div className="flex flex-col items-center justify-center py-12">

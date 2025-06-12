@@ -13,7 +13,7 @@ const FAQComp: React.FC = () => {
         {/* Introducción */}
         <div className="mb-16 text-center">
           <p className="text-lg text-gray-700 leading-relaxed max-w-2xl mx-auto">
-            En **Libroly**, nos preocupamos por brindarte la mejor experiencia en la compra y alquiler de libros. A continuación, podrás encontrar respuestas a las preguntas más comunes. Si necesitas más información, no dudes en ponerte en contacto con nuestro equipo.
+            En Libroly, nos preocupamos por brindarte la mejor experiencia en la compra y alquiler de libros. A continuación, podrás encontrar respuestas a las preguntas más comunes. Si necesitas más información, no dudes en ponerte en contacto con nuestro equipo.
           </p>
         </div>
 
@@ -24,7 +24,7 @@ const FAQComp: React.FC = () => {
           <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
             <h2 className="text-2xl font-semibold text-gray-900">1. ¿Cómo puedo crear una cuenta?</h2>
             <p className="text-lg text-gray-600 mt-3">
-              Crear una cuenta en **Libroly** es muy sencillo. Solo debes hacer clic en el botón "Registrarse" en la página de inicio, ingresar tu correo electrónico y crear una contraseña. Después, recibirás un correo de confirmación para activar tu cuenta.
+              Crear una cuenta en Libroly es muy sencillo. Solo debes hacer clic en el botón "Registrarse" en la página de inicio, ingresar tu correo electrónico y crear una contraseña. Después, recibirás un correo de confirmación para activar tu cuenta.
             </p>
           </div>
 
@@ -64,7 +64,7 @@ const FAQComp: React.FC = () => {
           <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
             <h2 className="text-2xl font-semibold text-gray-900">6. ¿El servicio es seguro?</h2>
             <p className="text-lg text-gray-600 mt-3">
-              Sí, en **Libroly** utilizamos encriptación avanzada y seguimos los más altos estándares de seguridad para proteger tus datos personales y de pago, asegurando que tu experiencia sea completamente segura.
+              Sí, en Libroly utilizamos encriptación avanzada y seguimos los más altos estándares de seguridad para proteger tus datos personales y de pago, asegurando que tu experiencia sea completamente segura.
             </p>
           </div>
 
@@ -75,11 +75,6 @@ const FAQComp: React.FC = () => {
               Si tienes alguna otra duda, puedes ponerte en contacto con nosotros a través del correo electrónico <strong>soporte@libroly.com</strong>. Estaremos encantados de ayudarte con cualquier consulta.
             </p>
           </div>
-        </div>
-
-        {/* Footer */}
-        <div className="mt-16 text-center text-sm text-gray-500">
-          <p>&copy; 2025 **Libroly**. Todos los derechos reservados.</p>
         </div>
       </div>
     </div>

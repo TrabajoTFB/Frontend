@@ -34,7 +34,7 @@ const AboutUs: React.FC = () => {
       </div>
       <div className="max-w-3xl mx-auto mb-8">
         <h2 className="text-2xl font-bold text-coral-500 mb-2 text-center">Nuestro compromiso con los Objetivos de Desarrollo Sostenible (ODS)</h2>
-        <p className="text-gray-700 text-center mb-2">TFB Books contribuye activamente a los siguientes ODS de la ONU:</p>
+        <p className="text-gray-700 text-center mb-2"> <strong>Libroly</strong> contribuye activamente a los siguientes ODS de la ONU:</p>
         <ul className="list-disc list-inside text-gray-700 text-center">
           <li><span className="font-semibold text-coral-500">ODS 4:</span> Educación de calidad – Fomentamos el acceso a la lectura y el aprendizaje para todos.</li>
           <li><span className="font-semibold text-coral-500">ODS 12:</span> Producción y consumo responsables – Promovemos la reutilización y el reciclaje de libros.</li>

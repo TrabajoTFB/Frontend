@@ -28,11 +28,9 @@ import ChatBot from './components/ui/ChatBot';
 import CheckoutSuccess from "./pages/CheckoutSuccess";
 import AboutUs from './pages/AboutUs';
 import SubscriptionSuccess from './pages/SubscriptionSuccess';
-
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './App.css';
 import { CartProvider } from './contexts/CartContext';
-import MyOrders from './pages/MyOrders';
 
 function App() {
   return (

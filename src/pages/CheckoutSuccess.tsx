@@ -12,118 +12,77 @@ const CheckoutSuccess: React.FC = () => {
   const { cart, shipping } = checkoutData;
   const [added, setAdded] = useState(false);
   const [processing, setProcessing] = useState(false);
-  const [processed, setProcessed] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Verificar si ya se procesó o si ya se está procesando
-    if (processing || processed) return;
-
+    let isSubscribed = true;
     const processSuccessfulPayment = async () => {
+      if (processing || !isSubscribed) return;
       setProcessing(true);
-      setError(null);
-
-      const params = new URLSearchParams(window.location.search);
-      const sessionId = params.get('session_id');
-
-      if (!sessionId) {
-        navigate('/cart');
-        return;
-      }
 
       try {
-        // Verificar el estado del pago primero
-        const paymentStatus = await api.verifyPaymentSession(sessionId);
-        if (!paymentStatus.paid) {
-          throw new Error('El pago no ha sido confirmado');
-        }
-
-        // Obtener información del checkout
         const checkoutInfo = JSON.parse(localStorage.getItem('checkout_info') || '{}');
-        if (!checkoutInfo.cart?.items || checkoutInfo.cart.items.length === 0) {
-          throw new Error('No se encontraron items en el carrito');
-        }
-
         const idUsuario = Number(localStorage.getItem('usuario'));
-        if (!idUsuario) {
-          throw new Error('No se pudo identificar al usuario');
-        }
 
         // Paso 1: Añadir libros a la biblioteca del usuario
-        const userData = await api.getUserWithBooks();
-        const userIsbns = (userData.libros || []).map((l: any) => l.isbn);
-        const booksToAdd = checkoutInfo.cart.items.filter((item: any) => !userIsbns.includes(item.isbn));
+        try {
+          const userData = await api.getUserWithBooks();
+          const userIsbns = (userData.libros || []).map((l: any) => l.isbn);
+          const booksToAdd = checkoutInfo.cart.items.filter((item: any) => !userIsbns.includes(item.isbn));
 
-        for (const item of booksToAdd) {
-          try {
-            await api.addBookByIsbn({ idUsuario, isbn: item.isbn });
-          } catch (err) {
-            console.error(`Error añadiendo libro ${item.isbn}:`, err);
-            // Continuar con los siguientes libros incluso si hay error en uno
+          for (const item of booksToAdd) {
+            try {
+              await api.addBookByIsbn({ idUsuario, isbn: item.isbn });
+            } catch (err) {
+              console.error(`Error añadiendo libro ${item.isbn}:`, err);
+            }
           }
+          setAdded(true);
+        } catch (err) {
+          console.error('Error obteniendo libros del usuario:', err);
         }
-        setAdded(true);
 
         // Paso 2: Registrar la compra
-        const detallesCompra = checkoutInfo.cart.items.map((item: any) => {
-          const [_isbn, vendedorId] = item.id.split('-');
-          return {
-            idVendedor: Number(vendedorId),
-            isbn: item.isbn
-          };
-        });
+        try {
+          const detallesCompra = checkoutInfo.cart.items.map((item: any) => {
+            const [_isbn, vendedorId] = item.id.split('-');
+            return {
+              idVendedor: Number(vendedorId),
+              isbn: item.isbn
+            };
+          });
 
-        const precioFinal = (
-          checkoutInfo.cart.total - 
-          (checkoutInfo.cart.total * 0.1) + 
-          (checkoutInfo.cart.total > 50 ? 0 : 5.99)
-        );
+          const precioFinal = (
+            checkoutInfo.cart.total - 
+            (checkoutInfo.cart.total * 0.1) + 
+            (checkoutInfo.cart.total > 50 ? 0 : 5.99)
+          );
 
-        await api.createPurchase({
-          compradorId: idUsuario,
-          detalles: detallesCompra,
-          precioFinal: precioFinal
-        });
+          await api.createPurchase({
+            compradorId: idUsuario,
+            detalles: detallesCompra,
+            precioFinal: precioFinal
+          });
+        } catch (err) {
+          console.error('Error creando la compra:', err);
+        }
 
-        // Limpiar solo si todo fue exitoso
+        // Limpiar carrito
         localStorage.removeItem('cart');
         localStorage.removeItem('checkout_info');
         if ((window as any).__clearCart) (window as any).__clearCart();
-
-        setProcessed(true);
       } catch (err) {
-        console.error('Error procesando el pago:', err);
-        setError(err instanceof Error ? err.message : 'Ocurrió un error al procesar tu compra');
-        // No navegar automáticamente para mostrar el error al usuario
+        console.error('Error general:', err);
       } finally {
         setProcessing(false);
       }
     };
 
     processSuccessfulPayment();
-
+    
     return () => {
-      // Limpieza si el componente se desmonta
+      isSubscribed = false;
     };
-  }, [navigate, processing, processed]);
-
-  if (error) {
-    return (
-      <main className="min-h-screen flex flex-col items-center justify-center bg-gray-50 py-12 px-4">
-        <div className="bg-white rounded-xl shadow-lg p-8 max-w-xl w-full flex flex-col items-center">
-          <img src="/images/logo.png" alt="Logo" className="w-16 mb-4" />
-          <h1 className="text-3xl font-bold text-red-600 mb-2 text-center">Error en el pago</h1>
-          <p className="text-gray-700 text-center mb-6">{error}</p>
-          <button
-            className="bg-coral-500 hover:bg-coral-600 text-white px-6 py-2 rounded-md font-semibold transition-colors"
-            onClick={() => navigate('/cart')}
-          >
-            Volver al carrito
-          </button>
-        </div>
-      </main>
-    );
-  }
+  }, []);
 
   if (processing) {
     return (

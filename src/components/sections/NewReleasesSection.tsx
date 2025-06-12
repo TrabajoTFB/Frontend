@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import BookCard from '../ui/BookCard';
 import { api } from '../../services/api';
 import type { Book } from '../../types';
+import { Link } from 'react-router-dom';
 
 const NewReleasesSection: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
@@ -46,9 +47,9 @@ const NewReleasesSection: React.FC = () => {
           </div>
 
           <div className="text-center mt-12">
-            <button className="bg-coral-500 text-white px-8 py-3 rounded-md hover:bg-coral-600 transition-colors">
+            <Link to='/books' className="bg-coral-500 text-white px-8 py-3 rounded-md hover:bg-coral-600 transition-colors">
               Ver más novedades
-            </button>
+            </Link>
           </div>
         </div>
       </div>

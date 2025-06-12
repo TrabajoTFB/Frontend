@@ -19,7 +19,7 @@ const NewsletterSection: React.FC = () => {
           <p className="text-white/90 mb-8 max-w-xl mx-auto">
             ¡Mantente conectado! Suscríbete a nuestro boletín para recibir recomendaciones de libros y enterarte de todas nuestras novedades.
           </p>
-          <form onSubmit={handleSubmit} className="max-w-md mx-auto flex">
+          <form className="max-w-md mx-auto flex">
             <input
               type="email"
               value={email}

@@ -131,9 +131,6 @@ const MyBooksComponent: React.FC = () => {
 
       <div className="max-w-7xl w-full bg-white rounded-xl shadow-lg p-8">
         <div className="flex gap-10">
-          {/* Sidebar de filtros */}
-
-
           <section className="flex-1">
             <div className="flex justify-between items-center text-sm text-gray-800 mb-8 mt-5">
               <div className="flex items-center gap-4">

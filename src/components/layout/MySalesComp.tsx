@@ -192,7 +192,6 @@ const MySalesComp: React.FC<BooksCompProps> = ({ initialGenreId }) => {
       <div className="absolute top-28 left-20 w-96 h-96 bg-coral-500/30 rounded-xl -z-10"></div>
 
       <div className="max-w-7xl w-full bg-white rounded-xl shadow-lg p-8 flex gap-10">
-        {/* Sidebar filtros */}
 
         <section className="flex-1">
           {/* Barra opciones */}

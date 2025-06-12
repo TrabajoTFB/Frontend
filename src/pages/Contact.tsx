@@ -33,7 +33,7 @@ const Contact: React.FC = () => {
         subject: '',
         message: ''
       });
-    }, 3000);
+    }, 5000);
   };
 
   const subjectOptions = [
@@ -166,7 +166,7 @@ const Contact: React.FC = () => {
               <i className="fas fa-phone text-coral-500 text-xl"></i>
             </div>
             <h3 className="font-semibold text-gray-900 mb-2">Teléfono</h3>
-            <p className="text-gray-600">+34 912 345 678<br />Lun-Vie: 9:00-18:00</p>
+            <p className="text-gray-600">+34 600 123 456<br />Lun-Vie: 9:00-18:00</p>
           </div>
 
           <div className="text-center p-6 bg-white rounded-xl shadow-md">

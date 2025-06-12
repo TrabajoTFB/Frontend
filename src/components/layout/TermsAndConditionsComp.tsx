@@ -14,7 +14,7 @@ const TermsAndConditions: React.FC = () => {
         {/* Introducción */}
         <div className="mb-16 text-center">
           <p className="text-lg text-gray-700 leading-relaxed max-w-2xl mx-auto">
-            Bienvenido a **Libroly**, nuestra plataforma dedicada a la venta y alquiler de libros. Al acceder y utilizar nuestros servicios, aceptas cumplir con los siguientes términos y condiciones. Te invitamos a leer cuidadosamente este documento antes de hacer uso de nuestros servicios.
+            Bienvenido a Libroly, nuestra plataforma dedicada a la venta y alquiler de libros. Al acceder y utilizar nuestros servicios, aceptas cumplir con los siguientes términos y condiciones. Te invitamos a leer cuidadosamente este documento antes de hacer uso de nuestros servicios.
           </p>
         </div>
 
@@ -31,7 +31,7 @@ const TermsAndConditions: React.FC = () => {
           <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
             <h2 className="text-2xl font-semibold text-gray-900">2. Uso del Servicio</h2>
             <p className="text-lg text-gray-600 mt-3">
-              **Libroly** está destinado a usuarios mayores de 18 años. Al utilizar nuestros servicios, te comprometes a no violar ninguna ley local, estatal, nacional o internacional aplicable. El acceso a nuestra plataforma es bajo tu propio riesgo y responsabilidad.
+              Libroly está destinado a usuarios mayores de 18 años. Al utilizar nuestros servicios, te comprometes a no violar ninguna ley local, estatal, nacional o internacional aplicable. El acceso a nuestra plataforma es bajo tu propio riesgo y responsabilidad.
             </p>
           </div>
 
@@ -55,7 +55,7 @@ const TermsAndConditions: React.FC = () => {
           <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
             <h2 className="text-2xl font-semibold text-gray-900">5. Propiedad Intelectual</h2>
             <p className="text-lg text-gray-600 mt-3">
-              Todos los contenidos disponibles en nuestra plataforma, incluidos textos, imágenes, logotipos y marcas registradas, son propiedad de **Libroly** o de nuestros licenciantes. Queda prohibida la reproducción, distribución o modificación sin la debida autorización.
+              Todos los contenidos disponibles en nuestra plataforma, incluidos textos, imágenes, logotipos y marcas registradas, son propiedad de Libroly o de nuestros licenciantes. Queda prohibida la reproducción, distribución o modificación sin la debida autorización.
             </p>
           </div>
 
@@ -71,7 +71,7 @@ const TermsAndConditions: React.FC = () => {
           <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
             <h2 className="text-2xl font-semibold text-gray-900">7. Limitación de Responsabilidad</h2>
             <p className="text-lg text-gray-600 mt-3">
-              **Libroly** no será responsable por daños directos, indirectos, incidentales o consecuentes derivados del uso de nuestros servicios, incluyendo, sin limitación, pérdidas de datos, interrupciones del servicio o fallos técnicos.
+              Libroly no será responsable por daños directos, indirectos, incidentales o consecuentes derivados del uso de nuestros servicios, incluyendo, sin limitación, pérdidas de datos, interrupciones del servicio o fallos técnicos.
             </p>
           </div>
 
@@ -87,7 +87,7 @@ const TermsAndConditions: React.FC = () => {
           <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
             <h2 className="text-2xl font-semibold text-gray-900">9. Terminación</h2>
             <p className="text-lg text-gray-600 mt-3">
-              **Libroly** puede suspender o terminar tu acceso a nuestros servicios en cualquier momento si consideramos que has violado estos términos o que estás utilizando nuestros servicios de manera indebida.
+              Libroly puede suspender o terminar tu acceso a nuestros servicios en cualquier momento si consideramos que has violado estos términos o que estás utilizando nuestros servicios de manera indebida.
             </p>
           </div>
 
@@ -108,10 +108,6 @@ const TermsAndConditions: React.FC = () => {
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="mt-16 text-center text-sm text-gray-500">
-          <p>&copy; 2025 Libroly. Todos los derechos reservados.</p>
-        </div>
       </div>
     </div>
   );

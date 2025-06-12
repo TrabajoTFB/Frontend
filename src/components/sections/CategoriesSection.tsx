@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CategoryCard from '../ui/CategoryCard';
 import { api } from '../../services/api';
 import type { Genre } from '../../types';
+import { Link } from 'react-router-dom';
 
 const CategoriesSection: React.FC = () => {
   const [categories, setCategories] = useState<Genre[]>([]);
@@ -46,9 +47,9 @@ const CategoriesSection: React.FC = () => {
           </div>
 
           <div className="text-center mt-12">
-            <button className="bg-coral-500 text-white px-8 py-3 rounded-md hover:bg-coral-600 transition-colors">
+            <Link to='/books' className="bg-coral-500 text-white px-8 py-3 rounded-md hover:bg-coral-600 transition-colors">
               Ver todas las categorías
-            </button>
+            </Link>
           </div>
         </div>
       </div>

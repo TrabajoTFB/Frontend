@@ -30,6 +30,7 @@ import AboutUs from './pages/AboutUs';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './App.css';
 import { CartProvider } from './contexts/CartContext';
+import MyOrders from './pages/MyOrders';
 
 function App() {
   return (
@@ -58,6 +59,11 @@ function App() {
                 </PrivateRoute>
               } 
             />
+            <Route path='/my-orders' element={
+              <PrivateRoute>
+                <MyOrders />
+              </PrivateRoute>
+            } />
             <Route path='/my-books' element={<MyBooks />} />
             <Route path='/my-sales' element={<MySales />} />
             <Route path="/blog" element={<Blog />} />

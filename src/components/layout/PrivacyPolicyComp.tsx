@@ -14,7 +14,7 @@ const PrivacyPolicy: React.FC = () => {
         {/* Introducción */}
         <div className="mb-16 text-center">
           <p className="text-lg text-gray-700 leading-relaxed max-w-2xl mx-auto">
-            En **Libroly**, nos comprometemos a proteger tu privacidad. Esta Política de Privacidad explica cómo recopilamos, utilizamos y protegemos tus datos personales cuando interactúas con nuestros servicios. Te invitamos a leer esta política con atención.
+            En Libroly, nos comprometemos a proteger tu privacidad. Esta Política de Privacidad explica cómo recopilamos, utilizamos y protegemos tus datos personales cuando interactúas con nuestros servicios. Te invitamos a leer esta política con atención.
           </p>
         </div>
 
@@ -104,10 +104,6 @@ const PrivacyPolicy: React.FC = () => {
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="mt-16 text-center text-sm text-gray-500">
-          <p>&copy; 2025 **Libroly**. Todos los derechos reservados.</p>
-        </div>
       </div>
     </div>
   );
